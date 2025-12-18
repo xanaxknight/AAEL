@@ -1,0 +1,78 @@
+{%- comment -%}
+  AAEL Main Page
+  Standard page template
+{%- endcomment -%}
+
+<section class="page-content section">
+  <div class="page-content__inner grid">
+    <div class="page-content__header col-2 col-mobile-full">
+      <h1 class="page-content__title">{{ page.title }}</h1>
+    </div>
+
+    <div class="page-content__body col-2 col-mobile-full">
+      {{ page.content }}
+    </div>
+  </div>
+</section>
+
+<style>
+  .page-content__title {
+    font-size: var(--text-2xl);
+    font-weight: 400;
+    margin-bottom: var(--space-6);
+  }
+
+  .page-content__body {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+  }
+
+  .page-content__body h2 {
+    font-size: var(--text-lg);
+    font-weight: 400;
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-3);
+  }
+
+  .page-content__body h3 {
+    font-size: var(--text-base);
+    font-weight: 500;
+    margin-top: var(--space-5);
+    margin-bottom: var(--space-2);
+  }
+
+  .page-content__body p {
+    margin-bottom: var(--space-4);
+  }
+
+  .page-content__body a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .page-content__body ul,
+  .page-content__body ol {
+    margin-bottom: var(--space-4);
+    padding-left: var(--space-5);
+  }
+
+  .page-content__body li {
+    margin-bottom: var(--space-2);
+  }
+
+  .page-content__body ul li {
+    list-style-type: disc;
+  }
+
+  .page-content__body ol li {
+    list-style-type: decimal;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Page",
+  "settings": []
+}
+{% endschema %}
+

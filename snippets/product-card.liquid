@@ -1,0 +1,126 @@
+{%- comment -%}
+  AAEL Product Card
+  Displays product image, title, edition, price, and add-to-bag action
+
+  Accepts:
+  - product: Product object (or blank for placeholder)
+
+  Usage:
+  {% render 'product-card', product: product %}
+{%- endcomment -%}
+
+{%- liquid
+  if product != blank
+    assign product_url = product.url
+    assign product_title = product.title
+    assign product_price = product.price | money
+    assign product_image = product.featured_media
+    assign product_second_image = product.media[1]
+    
+    # Get variant info for edition display (e.g., "Prototype" or limited edition)
+    assign variant_title = product.selected_or_first_available_variant.title
+    if variant_title == 'Default Title'
+      assign variant_title = ''
+    endif
+    
+    # Check for metafields for edition info
+    assign edition_current = product.metafields.custom.edition_current | default: 1
+    assign edition_total = product.metafields.custom.edition_total | default: 10
+  else
+    assign product_url = '#'
+    assign product_title = 'Product Title'
+    assign product_price = '€180'
+    assign variant_title = 'Prototype'
+    assign edition_current = 1
+    assign edition_total = 10
+  endif
+-%}
+
+<article class="product-card">
+  <a href="{{ product_url }}" class="product-card__link">
+    <div class="product-card__media">
+      {%- if product != blank and product_image -%}
+        <img
+          src="{{ product_image | image_url: width: 800 }}"
+          srcset="
+            {{ product_image | image_url: width: 400 }} 400w,
+            {{ product_image | image_url: width: 600 }} 600w,
+            {{ product_image | image_url: width: 800 }} 800w,
+            {{ product_image | image_url: width: 1000 }} 1000w
+          "
+          sizes="(min-width: 769px) calc((100vw - 48px) / var(--columns, 4)), 50vw"
+          alt="{{ product_image.alt | escape | default: product_title }}"
+          width="{{ product_image.width }}"
+          height="{{ product_image.height }}"
+          loading="lazy"
+          class="product-card__image"
+        >
+        {%- if product_second_image -%}
+          <img
+            src="{{ product_second_image | image_url: width: 800 }}"
+            alt="{{ product_second_image.alt | escape | default: product_title }}"
+            width="{{ product_second_image.width }}"
+            height="{{ product_second_image.height }}"
+            loading="lazy"
+            class="product-card__image product-card__image--hover"
+          >
+        {%- endif -%}
+      {%- else -%}
+        {%- comment -%} Placeholder {%- endcomment -%}
+        <div class="product-card__placeholder">
+          {{ 'product-1' | placeholder_svg_tag }}
+        </div>
+      {%- endif -%}
+    </div>
+  </a>
+
+  <div class="product-card__info">
+    <h3 class="product-card__title">
+      <a href="{{ product_url }}">{{ product_title }}</a>
+    </h3>
+    
+    {%- if variant_title != blank -%}
+      <p class="product-card__subtitle">{{ variant_title }}</p>
+    {%- endif -%}
+    
+    {%- if edition_total -%}
+      <p class="product-card__edition">{{ edition_current }} / {{ edition_total }}</p>
+    {%- endif -%}
+    
+    <p class="product-card__price">{{ product_price }}</p>
+    
+    {%- if product != blank -%}
+      <button 
+        type="button" 
+        class="product-card__action"
+        data-add-to-cart="{{ product.selected_or_first_available_variant.id }}"
+      >
+        Add to Bag
+      </button>
+    {%- else -%}
+      <span class="product-card__action">Add to Bag</span>
+    {%- endif -%}
+  </div>
+</article>
+
+<style>
+  .product-card__link {
+    display: block;
+  }
+
+  .product-card__placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--color-bg-alt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .product-card__placeholder svg {
+    width: 50%;
+    height: 50%;
+    fill: var(--color-border);
+  }
+</style>
+

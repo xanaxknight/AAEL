@@ -1,0 +1,26 @@
+{
+  "current": {
+    "color_bg_light": "#ffffff",
+    "color_bg_alt_light": "#f5f5f5",
+    "color_text_light": "#1a1a1a",
+    "color_bg_dark": "#0f0f0f",
+    "color_bg_alt_dark": "#1a1a1a",
+    "color_text_dark": "#f0f0f0",
+    "cart_type": "page",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "collection_label": "C 2 4"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "show_payment_icons": false
+        }
+      }
+    }
+  }
+}
+

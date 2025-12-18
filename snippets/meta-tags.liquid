@@ -1,0 +1,36 @@
+{%- comment -%}
+  Meta tags for SEO and social sharing
+{%- endcomment -%}
+
+<meta property="og:site_name" content="{{ shop.name }}">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:title" content="{{ page_title }}">
+<meta property="og:type" content="website">
+
+{%- if page_description -%}
+  <meta property="og:description" content="{{ page_description | escape }}">
+{%- endif -%}
+
+{%- if template.name == 'product' -%}
+  <meta property="og:type" content="product">
+  <meta property="og:price:amount" content="{{ product.price | money_without_currency }}">
+  <meta property="og:price:currency" content="{{ shop.currency }}">
+  {%- if product.featured_media -%}
+    <meta property="og:image" content="https:{{ product.featured_media | image_url: width: 1200 }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="1200">
+  {%- endif -%}
+{%- elsif template.name == 'collection' and collection.image -%}
+  <meta property="og:image" content="https:{{ collection.image | image_url: width: 1200 }}">
+{%- endif -%}
+
+{%- comment -%} Twitter Card {%- endcomment -%}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page_title }}">
+
+{%- if page_description -%}
+  <meta name="twitter:description" content="{{ page_description | escape }}">
+{%- endif -%}
+
+<link rel="canonical" href="{{ canonical_url }}">
+

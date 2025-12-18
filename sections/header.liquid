@@ -1,0 +1,230 @@
+{%- comment -%}
+  AAEL Header
+  - Logo (left)
+  - Theme toggle + Collection name (center)
+  - Column switcher (center-right)
+  - Cart/Bag (right)
+{%- endcomment -%}
+
+<header class="header">
+  <div class="header__inner grid">
+    {%- comment -%} Logo {%- endcomment -%}
+    <div class="header__logo">
+      <a href="{{ routes.root_url }}" class="header__logo-link">
+        {%- if section.settings.logo != blank -%}
+          <img 
+            src="{{ section.settings.logo | image_url: width: 200 }}"
+            alt="{{ shop.name }}"
+            width="{{ section.settings.logo_width }}"
+            height="auto"
+            loading="eager"
+          >
+        {%- else -%}
+          <span class="header__logo-text">{{ shop.name | upcase | split: '' | join: ' ' }}</span>
+        {%- endif -%}
+      </a>
+    </div>
+
+    {%- comment -%} Center: Theme Toggle + Collection {%- endcomment -%}
+    <div class="header__center">
+      <button 
+        type="button" 
+        class="header__theme-toggle" 
+        data-theme-toggle
+        aria-label="{{ 'accessibility.toggle_theme' | t }}"
+      >
+        <span class="header__theme-icon header__theme-icon--light" aria-hidden="true">☼</span>
+        <span class="header__theme-icon header__theme-icon--dark" aria-hidden="true">☽</span>
+      </button>
+      
+      {%- if section.settings.collection_label != blank -%}
+        <span class="header__collection">{{ section.settings.collection_label }}</span>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Column Switcher {%- endcomment -%}
+    <nav class="header__columns" aria-label="{{ 'accessibility.grid_columns' | t }}">
+      <button 
+        type="button"
+        class="header__col-btn" 
+        data-columns="2"
+        aria-label="2 columns"
+      >02</button>
+      <button 
+        type="button"
+        class="header__col-btn active" 
+        data-columns="4"
+        aria-label="4 columns"
+      >04</button>
+      <button 
+        type="button"
+        class="header__col-btn" 
+        data-columns="6"
+        aria-label="6 columns"
+      >06</button>
+      <button 
+        type="button"
+        class="header__col-btn" 
+        data-columns="8"
+        aria-label="8 columns"
+      >08</button>
+    </nav>
+
+    {%- comment -%} Cart/Bag {%- endcomment -%}
+    <div class="header__bag">
+      <a href="{{ routes.cart_url }}" class="header__bag-link">
+        BAG(<span data-cart-count>{{ cart.item_count }}</span>)
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-header);
+    background: transparent;
+    padding: var(--space-5) 0;
+  }
+
+  .header__inner {
+    align-items: center;
+  }
+
+  /* Logo */
+  .header__logo {
+    grid-column: span 1;
+  }
+
+  .header__logo-link {
+    display: inline-block;
+  }
+
+  .header__logo-text {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.3em;
+  }
+
+  /* Center section */
+  .header__center {
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+  }
+
+  .header__theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1);
+  }
+
+  .header__theme-icon {
+    font-size: var(--text-base);
+    transition: opacity var(--duration-normal);
+  }
+
+  .header__theme-icon--light {
+    opacity: 1;
+  }
+
+  .header__theme-icon--dark {
+    opacity: 0.35;
+  }
+
+  [data-theme="dark"] .header__theme-icon--light {
+    opacity: 0.35;
+  }
+
+  [data-theme="dark"] .header__theme-icon--dark {
+    opacity: 1;
+  }
+
+  .header__collection {
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-wider);
+    color: var(--color-text);
+  }
+
+  /* Column switcher */
+  .header__columns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+  }
+
+  .header__col-btn {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    padding: var(--space-1) var(--space-2);
+    transition: color var(--duration-fast);
+  }
+
+  .header__col-btn:hover {
+    color: var(--color-text);
+  }
+
+  .header__col-btn.active {
+    color: var(--color-text);
+  }
+
+  /* Bag */
+  .header__bag {
+    text-align: right;
+  }
+
+  .header__bag-link {
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-wide);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header__center {
+      grid-column: span 1;
+    }
+
+    .header__columns {
+      display: none;
+    }
+
+    .header__collection {
+      display: none;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "default": 100,
+      "unit": "px"
+    },
+    {
+      "type": "text",
+      "id": "collection_label",
+      "label": "Collection label",
+      "default": "C 2 4"
+    }
+  ]
+}
+{% endschema %}
+

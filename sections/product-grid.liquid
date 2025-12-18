@@ -1,0 +1,99 @@
+{%- comment -%}
+  AAEL Product Grid
+  Displays products in a responsive column grid
+{%- endcomment -%}
+
+{%- liquid
+  assign collection = section.settings.collection
+  assign products_to_show = section.settings.products_count
+-%}
+
+<section class="product-grid-section section">
+  <div class="product-grid grid">
+    {%- if collection != blank -%}
+      {%- for product in collection.products limit: products_to_show -%}
+        <div class="product-grid__item col-1">
+          {% render 'product-card', product: product %}
+        </div>
+      {%- endfor -%}
+    {%- else -%}
+      {%- comment -%} Placeholder products for theme editor {%- endcomment -%}
+      {%- for i in (1..products_to_show) -%}
+        <div class="product-grid__item col-1">
+          {% render 'product-card', product: blank %}
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  .product-grid-section {
+    padding-top: 0;
+  }
+
+  .product-grid__item {
+    transition: opacity var(--duration-normal) var(--ease-out);
+  }
+
+  /* Staggered animation on load */
+  .product-grid__item {
+    opacity: 0;
+    animation: fadeInUp 0.6s var(--ease-out) forwards;
+  }
+
+  .product-grid__item:nth-child(1) { animation-delay: 0.05s; }
+  .product-grid__item:nth-child(2) { animation-delay: 0.1s; }
+  .product-grid__item:nth-child(3) { animation-delay: 0.15s; }
+  .product-grid__item:nth-child(4) { animation-delay: 0.2s; }
+  .product-grid__item:nth-child(5) { animation-delay: 0.25s; }
+  .product-grid__item:nth-child(6) { animation-delay: 0.3s; }
+  .product-grid__item:nth-child(7) { animation-delay: 0.35s; }
+  .product-grid__item:nth-child(8) { animation-delay: 0.4s; }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .product-grid__item {
+      animation: none;
+      opacity: 1;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Product Grid",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_count",
+      "label": "Products to show",
+      "min": 2,
+      "max": 24,
+      "step": 1,
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Grid"
+    }
+  ]
+}
+{% endschema %}
+

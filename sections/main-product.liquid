@@ -1,0 +1,271 @@
+{%- comment -%}
+  AAEL Main Product
+  Product detail page with gallery and purchase form
+{%- endcomment -%}
+
+<section class="product section">
+  <div class="product__inner grid">
+    {%- comment -%} Product Gallery {%- endcomment -%}
+    <div class="product__gallery col-2 col-mobile-full">
+      {%- if product.media.size > 0 -%}
+        <div class="product__media-list">
+          {%- for media in product.media -%}
+            <div class="product__media-item">
+              {%- case media.media_type -%}
+                {%- when 'image' -%}
+                  <img
+                    src="{{ media | image_url: width: 1200 }}"
+                    srcset="
+                      {{ media | image_url: width: 600 }} 600w,
+                      {{ media | image_url: width: 900 }} 900w,
+                      {{ media | image_url: width: 1200 }} 1200w
+                    "
+                    sizes="(min-width: 769px) 50vw, 100vw"
+                    alt="{{ media.alt | escape | default: product.title }}"
+                    width="{{ media.width }}"
+                    height="{{ media.height }}"
+                    loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                  >
+                {%- when 'video' -%}
+                  {{ media | video_tag: autoplay: true, loop: true, muted: true }}
+                {%- when 'external_video' -%}
+                  {{ media | external_video_tag }}
+              {%- endcase -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <div class="product__media-placeholder">
+          {{ 'product-1' | placeholder_svg_tag }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Product Info {%- endcomment -%}
+    <div class="product__info col-2 col-mobile-full">
+      <div class="product__info-inner">
+        <h1 class="product__title">{{ product.title }}</h1>
+        
+        {%- if product.selected_or_first_available_variant.title != 'Default Title' -%}
+          <p class="product__variant-title">{{ product.selected_or_first_available_variant.title }}</p>
+        {%- endif -%}
+
+        {%- comment -%} Edition info from metafields {%- endcomment -%}
+        {%- if product.metafields.custom.edition_total -%}
+          <p class="product__edition">
+            {{ product.metafields.custom.edition_current | default: 1 }} / {{ product.metafields.custom.edition_total }}
+          </p>
+        {%- endif -%}
+
+        <p class="product__price">
+          {{ product.selected_or_first_available_variant.price | money }}
+        </p>
+
+        {%- comment -%} Product Form {%- endcomment -%}
+        {%- form 'product', product, class: 'product__form' -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+          {%- unless product.has_only_default_variant -%}
+            <div class="product__variants">
+              {%- for option in product.options_with_values -%}
+                <div class="product__option">
+                  <label class="product__option-label" for="Option-{{ option.name | handleize }}">
+                    {{ option.name }}
+                  </label>
+                  <select 
+                    class="product__option-select input"
+                    id="Option-{{ option.name | handleize }}"
+                    name="options[{{ option.name }}]"
+                  >
+                    {%- for value in option.values -%}
+                      <option 
+                        value="{{ value }}"
+                        {% if option.selected_value == value %}selected{% endif %}
+                      >
+                        {{ value }}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                </div>
+              {%- endfor -%}
+            </div>
+          {%- endunless -%}
+
+          <button 
+            type="submit"
+            class="product__submit btn btn--primary"
+            {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+          >
+            {%- if product.selected_or_first_available_variant.available -%}
+              {{ 'products.product.add_to_cart' | t }}
+            {%- else -%}
+              {{ 'products.product.sold_out' | t }}
+            {%- endif -%}
+          </button>
+        {%- endform -%}
+
+        {%- if product.description != blank -%}
+          <div class="product__description">
+            {{ product.description }}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .product__gallery {
+    position: relative;
+  }
+
+  .product__media-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .product__media-item img,
+  .product__media-item video {
+    width: 100%;
+    height: auto;
+  }
+
+  .product__media-placeholder {
+    aspect-ratio: 1;
+    background: var(--color-bg-alt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .product__media-placeholder svg {
+    width: 50%;
+    fill: var(--color-border);
+  }
+
+  .product__info {
+    position: relative;
+  }
+
+  .product__info-inner {
+    position: sticky;
+    top: calc(var(--space-5) * 2 + 40px); /* Below header */
+    padding-top: var(--space-5);
+  }
+
+  .product__title {
+    font-size: var(--text-lg);
+    font-weight: 400;
+    margin-bottom: var(--space-2);
+  }
+
+  .product__variant-title {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-1);
+  }
+
+  .product__edition {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-4);
+  }
+
+  .product__price {
+    font-size: var(--text-base);
+    margin-bottom: var(--space-5);
+  }
+
+  .product__form {
+    margin-bottom: var(--space-6);
+  }
+
+  .product__variants {
+    margin-bottom: var(--space-4);
+  }
+
+  .product__option {
+    margin-bottom: var(--space-3);
+  }
+
+  .product__option-label {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-2);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+  }
+
+  .product__option-select {
+    width: 100%;
+  }
+
+  .product__submit {
+    width: 100%;
+  }
+
+  .product__description {
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-secondary);
+  }
+
+  .product__description p {
+    margin-bottom: var(--space-3);
+  }
+
+  @media (max-width: 768px) {
+    .product__info-inner {
+      position: static;
+      padding-top: var(--space-5);
+    }
+  }
+</style>
+
+<script>
+  // Variant selector
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('.product__form');
+    if (!form) return;
+
+    const selects = form.querySelectorAll('.product__option-select');
+    const productJson = {{ product.variants | json }};
+
+    selects.forEach(select => {
+      select.addEventListener('change', function() {
+        const selectedOptions = Array.from(selects).map(s => s.value);
+        const variant = productJson.find(v => {
+          return v.options.every((opt, i) => opt === selectedOptions[i]);
+        });
+
+        if (variant) {
+          form.querySelector('[name="id"]').value = variant.id;
+          
+          const submitBtn = form.querySelector('.product__submit');
+          if (variant.available) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = '{{ "products.product.add_to_cart" | t }}';
+          } else {
+            submitBtn.disabled = true;
+            submitBtn.textContent = '{{ "products.product.sold_out" | t }}';
+          }
+
+          // Update URL
+          const url = new URL(window.location.href);
+          url.searchParams.set('variant', variant.id);
+          window.history.replaceState({}, '', url);
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Product information",
+  "settings": []
+}
+{% endschema %}
+

@@ -1,0 +1,71 @@
+{%- comment -%}
+  AAEL Hero
+  Brand statement / tagline section
+{%- endcomment -%}
+
+<section class="hero section">
+  <div class="hero__inner grid">
+    <div class="hero__content col-2 col-mobile-full">
+      {%- if section.settings.heading != blank -%}
+        <h1 class="hero__heading">
+          {{ section.settings.heading }}
+        </h1>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-top: var(--space-9);
+    padding-bottom: var(--space-9);
+  }
+
+  .hero__content {
+    grid-column-start: 1;
+  }
+
+  .hero__heading {
+    font-size: var(--text-2xl);
+    font-weight: 400;
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  @media (min-width: 769px) {
+    .hero__heading {
+      font-size: var(--text-3xl);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding-top: var(--space-7);
+      padding-bottom: var(--space-7);
+    }
+
+    .hero__heading {
+      font-size: var(--text-xl);
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "AAEL creates limited series of interior artefacts primarily out of metal."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}
+

@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "heading": "AAEL creates limited series of interior artefacts primarily out of metal."
+      }
+    },
+    "product-grid": {
+      "type": "product-grid",
+      "settings": {
+        "products_count": 8
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "product-grid"
+  ]
+}
+

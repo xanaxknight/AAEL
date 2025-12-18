@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="">
+
+  <title>
+    {{ page_title }}
+    {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+    {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
+
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  {% render 'meta-tags' %}
+
+  {{ 'reset.css' | asset_url | stylesheet_tag }}
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  {{ 'grid.css' | asset_url | stylesheet_tag }}
+  {{ 'components.css' | asset_url | stylesheet_tag }}
+
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+  {%- endif -%}
+
+  {%- unless settings.type_body_font.system? -%}
+    <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+  {%- endunless -%}
+
+  {{ settings.type_body_font | font_face: font_display: 'swap' }}
+  {{ settings.type_heading_font | font_face: font_display: 'swap' }}
+
+  {{ content_for_header }}
+
+  <script>
+    // Prevent FOUC - apply saved theme immediately
+    (function() {
+      const saved = localStorage.getItem('aael-theme');
+      if (saved) document.documentElement.dataset.theme = saved;
+      
+      const cols = localStorage.getItem('aael-columns');
+      if (cols) document.documentElement.style.setProperty('--columns', cols);
+    })();
+  </script>
+</head>
+
+<body class="template-{{ template.name }}">
+  <a class="skip-to-content" href="#main">{{ 'accessibility.skip_to_content' | t }}</a>
+
+  <div class="page" id="page">
+    {% section 'header' %}
+
+    <main id="main" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% section 'footer' %}
+  </div>
+
+  <script src="{{ 'main.js' | asset_url }}" defer></script>
+</body>
+</html>
+

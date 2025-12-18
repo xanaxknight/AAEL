@@ -1,0 +1,121 @@
+{%- comment -%}
+  AAEL Main Collection
+  Displays collection products in the adaptive grid
+{%- endcomment -%}
+
+<section class="collection section">
+  {%- if collection.description != blank -%}
+    <div class="collection__header grid">
+      <div class="collection__description col-2 col-mobile-full">
+        {{ collection.description }}
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="collection__products grid">
+    {%- paginate collection.products by 24 -%}
+      {%- for product in collection.products -%}
+        <div class="collection__item col-1">
+          {% render 'product-card', product: product %}
+        </div>
+      {%- else -%}
+        <div class="collection__empty col-full">
+          <p>{{ 'collections.general.no_matches' | t }}</p>
+        </div>
+      {%- endfor -%}
+
+      {%- if paginate.pages > 1 -%}
+        <div class="collection__pagination col-full">
+          <nav class="pagination" role="navigation" aria-label="Pagination">
+            {%- if paginate.previous -%}
+              <a href="{{ paginate.previous.url }}" class="pagination__link pagination__link--prev">
+                ← Previous
+              </a>
+            {%- endif -%}
+            
+            <span class="pagination__current">
+              {{ paginate.current_page }} / {{ paginate.pages }}
+            </span>
+            
+            {%- if paginate.next -%}
+              <a href="{{ paginate.next.url }}" class="pagination__link pagination__link--next">
+                Next →
+              </a>
+            {%- endif -%}
+          </nav>
+        </div>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+<style>
+  .collection__header {
+    padding-bottom: var(--space-7);
+  }
+
+  .collection__description {
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+  }
+
+  .collection__item {
+    opacity: 0;
+    animation: fadeInUp 0.6s var(--ease-out) forwards;
+  }
+
+  .collection__item:nth-child(1) { animation-delay: 0.05s; }
+  .collection__item:nth-child(2) { animation-delay: 0.1s; }
+  .collection__item:nth-child(3) { animation-delay: 0.15s; }
+  .collection__item:nth-child(4) { animation-delay: 0.2s; }
+  .collection__item:nth-child(5) { animation-delay: 0.25s; }
+  .collection__item:nth-child(6) { animation-delay: 0.3s; }
+  .collection__item:nth-child(7) { animation-delay: 0.35s; }
+  .collection__item:nth-child(8) { animation-delay: 0.4s; }
+
+  .collection__empty {
+    padding: var(--space-9) 0;
+    text-align: center;
+    color: var(--color-text-muted);
+  }
+
+  .collection__pagination {
+    padding-top: var(--space-8);
+  }
+
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-5);
+    font-size: var(--text-sm);
+  }
+
+  .pagination__link {
+    color: var(--color-text-secondary);
+    transition: color var(--duration-fast);
+  }
+
+  .pagination__link:hover {
+    color: var(--color-text);
+  }
+
+  .pagination__current {
+    color: var(--color-text-muted);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .collection__item {
+      animation: none;
+      opacity: 1;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Collection products",
+  "settings": []
+}
+{% endschema %}
+

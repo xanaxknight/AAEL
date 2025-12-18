@@ -1,0 +1,49 @@
+{
+  "general": {
+    "continue_shopping": "Continue shopping",
+    "search": "Search"
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content",
+    "toggle_theme": "Toggle light/dark theme",
+    "grid_columns": "Grid column options",
+    "close": "Close",
+    "loading": "Loading"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Bag",
+      "added": "Added!",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "quantity": "Quantity",
+      "price": "Price",
+      "description": "Description"
+    }
+  },
+  "collections": {
+    "general": {
+      "no_matches": "No products found",
+      "items_count": {
+        "one": "{{ count }} product",
+        "other": "{{ count }} products"
+      }
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Bag",
+      "empty": "Your bag is empty",
+      "subtotal": "Subtotal",
+      "checkout": "Checkout",
+      "continue_shopping": "Continue shopping",
+      "remove": "Remove"
+    }
+  },
+  "404": {
+    "title": "Page not found",
+    "subtext": "The page you're looking for doesn't exist.",
+    "link": "Return home"
+  }
+}
+

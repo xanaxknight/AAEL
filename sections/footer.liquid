@@ -1,0 +1,86 @@
+{%- comment -%}
+  AAEL Footer
+  Minimal footer with copyright and optional links
+{%- endcomment -%}
+
+<footer class="footer section">
+  <div class="footer__inner grid">
+    <div class="footer__copyright col-2">
+      <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+    </div>
+    
+    {%- if section.settings.show_payment_icons -%}
+      <div class="footer__payment col-2">
+        <ul class="footer__payment-icons">
+          {%- for type in shop.enabled_payment_types -%}
+            <li class="footer__payment-icon">
+              {{ type | payment_type_svg_tag }}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding-top: var(--space-9);
+    padding-bottom: var(--space-6);
+    margin-top: auto;
+  }
+
+  .footer__inner {
+    align-items: center;
+  }
+
+  .footer__copyright {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  .footer__payment {
+    justify-self: end;
+  }
+
+  .footer__payment-icons {
+    display: flex;
+    gap: var(--space-2);
+    align-items: center;
+  }
+
+  .footer__payment-icon {
+    opacity: 0.5;
+  }
+
+  .footer__payment-icon svg {
+    height: 24px;
+    width: auto;
+  }
+
+  @media (max-width: 768px) {
+    .footer__copyright,
+    .footer__payment {
+      grid-column: span 1;
+    }
+
+    .footer__payment {
+      justify-self: start;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": false
+    }
+  ]
+}
+{% endschema %}
+
