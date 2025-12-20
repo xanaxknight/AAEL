@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AAEL — Preview</title>
+  
+  <!-- Theme CSS -->
+  <link rel="stylesheet" href="assets/reset.css">
+  <link rel="stylesheet" href="assets/base.css">
+  <link rel="stylesheet" href="assets/grid.css">
+  <link rel="stylesheet" href="assets/components.css">
+  
+  <style>
+    /* Preview-specific styles */
+    .preview-badge {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--color-text);
+      color: var(--color-bg);
+      padding: 8px 16px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      z-index: 9999;
+      opacity: 0.7;
+    }
+    
+    /* Placeholder images */
+    .placeholder-image {
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-border) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-muted);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page" id="page">
+    
+    <!-- ═══════════════════════════════════════════════════════════════
+         HEADER
+         ═══════════════════════════════════════════════════════════════ -->
+    <header class="header">
+      <div class="header__inner grid">
+        <!-- Logo - 1 column -->
+        <div class="header__logo col-1">
+          <a href="#" class="header__logo-link">
+            <div class="header__logo-text">
+              <span class="header__logo-part">AAEL </span>
+              <span class="header__logo-part">C24</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Theme Toggle - 1 column -->
+        <div class="header__theme-section col-1">
+          <button type="button" class="header__theme-toggle" data-theme-toggle>
+            <svg class="icon icon-lights-on header__theme-icon header__theme-icon--light" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle class="icon__circle" cx="12" cy="12" r="11.25" stroke="currentColor" stroke-width="1.5"/>
+              <rect class="icon__inner" x="11" y="7" width="2" height="10" rx="1" fill="currentColor"/>
+            </svg>
+            <svg class="icon icon-lights-off-ring header__theme-icon header__theme-icon--dark" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle class="icon__circle" cx="12" cy="12" r="11.25" stroke="currentColor" stroke-width="1.5"/>
+              <circle class="icon__inner" cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Column Switcher - 1 column -->
+        <nav class="header__columns col-1">
+          <button type="button" class="header__col-btn" data-columns="2">02</button>
+          <button type="button" class="header__col-btn" data-columns="4">04</button>
+          <button type="button" class="header__col-btn active" data-columns="6">06</button>
+          <button type="button" class="header__col-btn" data-columns="8">08</button>
+        </nav>
+
+        <!-- Bag - 1 column -->
+        <div class="header__bag col-1">
+          <a href="#" class="header__bag-link">BAG(<span data-cart-count>0</span>)</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         MAIN CONTENT
+         ═══════════════════════════════════════════════════════════════ -->
+    <main id="main">
+      
+      <!-- Hero Section -->
+      <section class="hero section">
+        <div class="hero__inner grid">
+          <div class="hero__content col-full col-mobile-full">
+            <h1 class="hero__heading col-width-2-5 col-width-center">
+              AAEL creates limited series of interior artifacts primarily out of metal.
+            </h1>
+          </div>
+        </div>
+      </section>
+
+      <!-- Product Showcase Section -->
+      <section class="product-showcase section">
+        <div class="product-showcase__wrapper grid">
+          <div class="product-showcase__container col-full">
+            <div class="product-showcase__media product-showcase__media--placeholder">
+              <div class="placeholder-image" style="height: 100%; min-height: 60vh;">Product Showcase Image</div>
+            </div>
+            <div class="product-showcase__info">
+              <div class="product-showcase__content">
+                <h2 class="product-showcase__title">AMO — 01</h2>
+                <p class="product-showcase__subtitle">Prototype</p>
+                <p class="product-showcase__edition">3 / 10</p>
+                <p class="product-showcase__price">€2,400</p>
+                <button type="button" class="product-showcase__action">Add to Bag</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         FOOTER
+         ═══════════════════════════════════════════════════════════════ -->
+    <footer class="footer section">
+      <div class="footer__inner grid">
+        <!-- Logo - 1 column -->
+        <div class="footer__logo col-1">
+          <a href="#" class="footer__logo-link">
+            <div class="footer__logo-text">
+              <span class="footer__logo-part">AAEL </span>
+              <span class="footer__logo-part">C24</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- About Link - 1 column -->
+        <div class="footer__nav-item col-1">
+          <a href="#" class="footer__link">ABOUT</a>
+        </div>
+
+        <!-- Contact Link - 1 column -->
+        <div class="footer__nav-item col-1">
+          <a href="#" class="footer__link">CONTACT</a>
+        </div>
+
+        <!-- Copyright - 1 column -->
+        <div class="footer__copyright col-1">
+          <span class="footer__copyright-text">© 2025</span>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Preview Badge -->
+  <div class="preview-badge">Preview Mode</div>
+
+  <!-- Header Styles (inline for preview) -->
+  <style>
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: var(--z-header);
+      background: transparent;
+      padding: var(--space-3) 0;
+      width: 100%;
+    }
+
+    .header__inner {
+      /* Uses .grid class for layout */
+      align-items: center;
+    }
+
+    /* Each header section fills its column and centers content */
+    .header__logo,
+    .header__theme-section,
+    .header__columns,
+    .header__bag {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+    }
+
+    /* Logo - left-aligned within its column */
+    .header__logo {
+      justify-content: flex-start;
+      width: 100%;
+    }
+
+    .header__logo-link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      vertical-align: middle;
+      align-self: stretch;
+      width: 100%;
+      padding: var(--space-5) var(--space-5);
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(1, 1fr);
+    }
+
+    .header__logo-text {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      font-size: var(--text-base);
+      font-weight: 400;
+      letter-spacing: var(--tracking-widest, 0.3em);
+      line-height: var(--leading-tight, 0.75);
+    }
+
+    .header__logo-part {
+      display: flex;
+      text-align: right;
+      justify-content: flex-start;
+      align-items: center;
+      width: 100%;
+      line-height: var(--leading-tight, 0.75);
+    }
+
+    /* Theme toggle section - centered */
+    .header__theme-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-2);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    .header__theme-icon {
+      width: 24px;
+      height: 24px;
+      transition: opacity var(--duration-normal);
+    }
+
+    .header__theme-icon--light {
+      opacity: 1;
+      display: block;
+    }
+
+    .header__theme-icon--dark {
+      opacity: var(--opacity-muted, 0.3);
+      display: none;
+    }
+
+    [data-theme="dark"] .header__theme-icon--light {
+      opacity: var(--opacity-muted, 0.3);
+      display: none;
+    }
+
+    [data-theme="dark"] .header__theme-icon--dark {
+      opacity: 1;
+      display: block;
+    }
+
+    /* Column switcher - centered */
+    .header__columns {
+      gap: var(--space-2);
+    }
+
+    .header__col-btn {
+      font-size: var(--text-base);
+      font-weight: 400;
+      letter-spacing: var(--tracking-wide, 0.05em);
+      line-height: var(--leading-normal, 1.08);
+      padding: var(--space-2) var(--space-3);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--color-text);
+      opacity: var(--opacity-muted, 0.3);
+      transition: opacity var(--duration-fast);
+    }
+
+    .header__col-btn:hover {
+      opacity: var(--opacity-active, 0.8);
+    }
+
+    .header__col-btn.active {
+      opacity: var(--opacity-active, 0.8);
+    }
+
+    /* Bag - centered within its column */
+    .header__bag {
+      justify-content: center;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .header__bag-link {
+      font-size: var(--text-base);
+      font-weight: 400;
+      letter-spacing: var(--tracking-wide, 0.05em);
+      line-height: var(--leading-normal, 1.08);
+      padding: var(--space-2) var(--space-4);
+      color: var(--color-text);
+      opacity: var(--opacity-active, 0.8);
+    }
+
+    /* Hero */
+    .hero {
+      padding-top: var(--space-6-figma, 150px);
+      padding-bottom: var(--space-6-figma, 150px);
+    }
+
+    .hero__content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero__heading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      font-size: var(--text-hero);
+      font-weight: 400;
+      line-height: var(--leading-normal);
+      letter-spacing: var(--tracking-tight);
+      text-align: center;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding-top: var(--space-5);
+        padding-bottom: var(--space-5);
+      }
+
+      .hero__heading {
+        font-size: var(--text-xl);
+      }
+    }
+
+    /* Product Showcase */
+    .product-showcase {
+      padding-top: 0;
+      padding-bottom: 0;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .product-showcase__wrapper {
+      /* Uses .grid class for layout - constrains to 4 columns */
+      max-width: var(--content-max-width);
+    }
+
+    .product-showcase__container {
+      position: relative;
+      min-height: 60vh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+
+    .product-showcase__media {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .product-showcase__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .product-showcase__media--placeholder {
+      background: var(--color-bg-alt);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-showcase__info {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding: var(--space-4-figma, 42px);
+    }
+
+    .product-showcase__content {
+      font-size: var(--text-base);
+      line-height: var(--leading-normal);
+      letter-spacing: var(--tracking-tight);
+      color: var(--color-text);
+    }
+
+    .product-showcase__title,
+    .product-showcase__subtitle,
+    .product-showcase__edition,
+    .product-showcase__price {
+      font-size: var(--text-base);
+      font-weight: 400;
+      margin: 0;
+      line-height: var(--leading-normal);
+    }
+
+    .product-showcase__action {
+      font-size: var(--text-base);
+      font-weight: 400;
+      margin: 0;
+      color: var(--color-text);
+      background: transparent;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: opacity var(--duration-fast);
+      line-height: var(--leading-normal);
+    }
+
+    .product-showcase__action:hover {
+      opacity: var(--opacity-active);
+    }
+
+    @media (min-width: 769px) {
+      .product-showcase__container {
+        min-height: 1713px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .product-showcase__container {
+        min-height: 50vh;
+      }
+
+      .product-showcase__info {
+        padding: var(--space-3);
+      }
+    }
+
+    /* Footer */
+    .footer {
+      padding-top: var(--space-3);
+      padding-bottom: var(--space-3);
+      margin-top: auto;
+    }
+
+    .footer__inner {
+      align-items: center;
+    }
+
+    /* Logo styling - matches header logo */
+    .footer__logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer__logo-link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: var(--space-2) var(--space-5);
+      width: 100%;
+    }
+
+    .footer__logo-text {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      font-size: var(--text-base);
+      font-weight: 400;
+      letter-spacing: var(--tracking-widest, 0.3em);
+      line-height: var(--leading-tight, 0.75);
+    }
+
+    .footer__logo-part {
+      display: flex;
+      text-align: right;
+      justify-content: flex-start;
+      align-items: center;
+      width: 100%;
+      line-height: var(--leading-tight, 0.75);
+    }
+
+    /* Navigation items */
+    .footer__nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer__link {
+      font-size: var(--text-base);
+      font-weight: 400;
+      letter-spacing: var(--tracking-wide, 0.05em);
+      line-height: var(--leading-normal, 1.08);
+      padding: var(--space-2) var(--space-3);
+      color: var(--color-text);
+      opacity: var(--opacity-muted, 0.5);
+      transition: opacity var(--duration-fast);
+    }
+
+    .footer__link:hover {
+      opacity: var(--opacity-active, 0.8);
+    }
+
+    /* Copyright */
+    .footer__copyright {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer__copyright-text {
+      font-size: var(--text-base);
+      font-weight: 400;
+      letter-spacing: var(--tracking-wide, 0.05em);
+      line-height: var(--leading-normal, 1.08);
+      padding: var(--space-2) var(--space-3);
+      color: var(--color-text);
+      opacity: var(--opacity-active, 0.8);
+    }
+
+    /* Responsive - on mobile, header adapts to 2 columns */
+    @media (max-width: 768px) {
+      .header__columns {
+        display: none;
+      }
+
+      .header__theme-section {
+        justify-content: flex-end;
+      }
+
+      .header__logo-link {
+        padding: var(--space-3);
+      }
+
+      /* Footer responsive */
+      .footer__logo,
+      .footer__copyright {
+        grid-column: span 1;
+      }
+
+      .footer__nav-item {
+        display: none;
+      }
+
+      .footer__logo {
+        justify-content: flex-start;
+      }
+
+      .footer__copyright {
+        justify-content: flex-end;
+      }
+
+      .footer__logo-link {
+        padding: var(--space-2) var(--space-3);
+      }
+    }
+  </style>
+
+  <!-- JavaScript -->
+  <script>
+    // Theme Toggle
+    const themeToggle = document.querySelector('[data-theme-toggle]');
+    themeToggle?.addEventListener('click', () => {
+      const current = document.documentElement.dataset.theme || 'light';
+      const next = current === 'light' ? 'dark' : 'light';
+      document.documentElement.dataset.theme = next;
+      localStorage.setItem('aael-theme', next);
+    });
+
+    // Apply saved theme
+    const savedTheme = localStorage.getItem('aael-theme');
+    if (savedTheme) {
+      document.documentElement.dataset.theme = savedTheme;
+    }
+
+    // Column Switcher
+    const columnButtons = document.querySelectorAll('[data-columns]');
+    const savedColumns = localStorage.getItem('aael-columns');
+
+    // Map visual columns to content max columns
+    const contentMaxMap = {
+      '2': 2,
+      '4': 4,
+      '6': 4,
+      '8': 6
+    };
+
+    if (savedColumns) {
+      document.documentElement.style.setProperty('--columns', savedColumns);
+      document.documentElement.style.setProperty('--content-max-columns', contentMaxMap[savedColumns]);
+      columnButtons.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.columns === savedColumns);
+      });
+    }
+
+    columnButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cols = btn.dataset.columns;
+        const contentCols = contentMaxMap[cols];
+        
+        document.documentElement.style.setProperty('--columns', cols);
+        document.documentElement.style.setProperty('--content-max-columns', contentCols);
+        localStorage.setItem('aael-columns', cols);
+        
+        columnButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    // Add to Bag simulation
+    let cartCount = 0;
+    document.querySelectorAll('.product-card__action').forEach(btn => {
+      btn.addEventListener('click', () => {
+        cartCount++;
+        document.querySelector('[data-cart-count]').textContent = cartCount;
+        btn.textContent = 'Added!';
+        setTimeout(() => btn.textContent = 'Add to Bag', 1500);
+      });
+    });
+  </script>
+
+</body>
+</html>
+
