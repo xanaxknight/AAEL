@@ -9,18 +9,11 @@
     "product-showcase": {
       "type": "product-showcase",
       "settings": {}
-    },
-    "product-grid": {
-      "type": "product-grid",
-      "settings": {
-        "products_count": 8
-      }
     }
   },
   "order": [
     "hero",
-    "product-showcase",
-    "product-grid"
+    "product-showcase"
   ]
 }
 
