@@ -54,6 +54,57 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   ICONS
+   ═══════════════════════════════════════════════════════════════ */
+.icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  color: #000000;
+  transition: opacity var(--duration-fast) var(--ease-out);
+  flex-shrink: 0;
+}
+
+/* Dark theme: white icons */
+[data-theme="dark"] .icon {
+  color: #ffffff;
+}
+
+/* Icon parts: circle (stroke) and inner element (line/dot) have different opacities */
+.icon__circle {
+  opacity: 0.3;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.icon__inner {
+  opacity: 1;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+/* Hover state: both circle and inner at 100% */
+.icon:hover .icon__circle,
+button:hover .icon .icon__circle,
+a:hover .icon .icon__circle {
+  opacity: 1;
+}
+
+/* Active state: both at 100% */
+.icon.active .icon__circle,
+button.active .icon .icon__circle,
+button[aria-pressed="true"] .icon .icon__circle {
+  opacity: 1;
+}
+
+/* Disabled state: both at 30% */
+.icon.disabled .icon__circle,
+.icon.disabled .icon__inner,
+button:disabled .icon .icon__circle,
+button:disabled .icon .icon__inner {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════
    LINKS
    ═══════════════════════════════════════════════════════════════ */
 .link {

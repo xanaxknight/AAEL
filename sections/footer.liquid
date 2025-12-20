@@ -1,32 +1,55 @@
 {%- comment -%}
   AAEL Footer
-  Minimal footer with copyright and optional links
+  Logo, navigation links, and copyright
 {%- endcomment -%}
 
 <footer class="footer section">
   <div class="footer__inner grid">
-    <div class="footer__copyright col-2">
-      <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+    {%- comment -%} Logo - 1 column {%- endcomment -%}
+    <div class="footer__logo col-1">
+      <a href="{{ routes.root_url }}" class="footer__logo-link">
+        <div class="footer__logo-text">
+          <span class="footer__logo-part">AAEL </span>
+          <span class="footer__logo-part">C24</span>
+        </div>
+      </a>
     </div>
-    
-    {%- if section.settings.show_payment_icons -%}
-      <div class="footer__payment col-2">
-        <ul class="footer__payment-icons">
-          {%- for type in shop.enabled_payment_types -%}
-            <li class="footer__payment-icon">
-              {{ type | payment_type_svg_tag }}
-            </li>
-          {%- endfor -%}
-        </ul>
-      </div>
-    {%- endif -%}
+
+    {%- comment -%} About Link - 1 column {%- endcomment -%}
+    <div class="footer__nav-item col-1">
+      {%- if section.settings.about_link != blank -%}
+        <a href="{{ section.settings.about_link }}" class="footer__link">
+          {{ section.settings.about_text | default: 'ABOUT' }}
+        </a>
+      {%- else -%}
+        <span class="footer__link">{{ section.settings.about_text | default: 'ABOUT' }}</span>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Contact Link - 1 column {%- endcomment -%}
+    <div class="footer__nav-item col-1">
+      {%- if section.settings.contact_link != blank -%}
+        <a href="{{ section.settings.contact_link }}" class="footer__link">
+          {{ section.settings.contact_text | default: 'CONTACT' }}
+        </a>
+      {%- else -%}
+        <span class="footer__link">{{ section.settings.contact_text | default: 'CONTACT' }}</span>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Copyright - 1 column {%- endcomment -%}
+    <div class="footer__copyright col-1">
+      <span class="footer__copyright-text">
+        &copy; {{ 'now' | date: '%Y' }}
+      </span>
+    </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    padding-top: var(--space-9);
-    padding-bottom: var(--space-6);
+    padding-top: var(--space-3);
+    padding-bottom: var(--space-3);
     margin-top: auto;
   }
 
@@ -34,38 +57,101 @@
     align-items: center;
   }
 
-  .footer__copyright {
-    font-size: var(--text-xs);
-    color: var(--color-text-muted);
-  }
-
-  .footer__payment {
-    justify-self: end;
-  }
-
-  .footer__payment-icons {
+  /* Logo styling - matches header logo */
+  .footer__logo {
     display: flex;
-    gap: var(--space-2);
     align-items: center;
+    justify-content: center;
   }
 
-  .footer__payment-icon {
-    opacity: 0.5;
+  .footer__logo-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-2) var(--space-5);
+    width: 100%;
   }
 
-  .footer__payment-icon svg {
-    height: 24px;
-    width: auto;
+  .footer__logo-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: var(--text-base);
+    font-weight: 400;
+    letter-spacing: var(--tracking-widest, 0.3em);
+    line-height: var(--leading-tight, 0.75);
   }
 
+  .footer__logo-part {
+    display: flex;
+    text-align: right;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    line-height: var(--leading-tight, 0.75);
+  }
+
+  /* Navigation items */
+  .footer__nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer__link {
+    font-size: var(--text-base);
+    font-weight: 400;
+    letter-spacing: var(--tracking-wide, 0.05em);
+    line-height: var(--leading-normal, 1.08);
+    padding: var(--space-2) var(--space-3);
+    color: var(--color-text);
+    opacity: var(--opacity-muted, 0.5);
+    transition: opacity var(--duration-fast);
+  }
+
+  .footer__link:hover {
+    opacity: var(--opacity-active, 0.8);
+  }
+
+  /* Copyright */
+  .footer__copyright {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer__copyright-text {
+    font-size: var(--text-base);
+    font-weight: 400;
+    letter-spacing: var(--tracking-wide, 0.05em);
+    line-height: var(--leading-normal, 1.08);
+    padding: var(--space-2) var(--space-3);
+    color: var(--color-text);
+    opacity: var(--opacity-active, 0.8);
+  }
+
+  /* Responsive - on mobile, adapt to 2 columns */
   @media (max-width: 768px) {
-    .footer__copyright,
-    .footer__payment {
+    .footer__logo,
+    .footer__copyright {
       grid-column: span 1;
     }
 
-    .footer__payment {
-      justify-self: start;
+    .footer__nav-item {
+      display: none;
+    }
+
+    .footer__logo {
+      justify-content: flex-start;
+    }
+
+    .footer__copyright {
+      justify-content: flex-end;
+    }
+
+    .footer__logo-link {
+      padding: var(--space-2) var(--space-3);
     }
   }
 </style>
@@ -75,10 +161,26 @@
   "name": "Footer",
   "settings": [
     {
-      "type": "checkbox",
-      "id": "show_payment_icons",
-      "label": "Show payment icons",
-      "default": false
+      "type": "text",
+      "id": "about_text",
+      "label": "About link text",
+      "default": "ABOUT"
+    },
+    {
+      "type": "url",
+      "id": "about_link",
+      "label": "About link URL"
+    },
+    {
+      "type": "text",
+      "id": "contact_text",
+      "label": "Contact link text",
+      "default": "CONTACT"
+    },
+    {
+      "type": "url",
+      "id": "contact_link",
+      "label": "Contact link URL"
     }
   ]
 }

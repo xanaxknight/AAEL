@@ -5,9 +5,9 @@
 
 <section class="hero section">
   <div class="hero__inner grid">
-    <div class="hero__content col-2 col-mobile-full">
+    <div class="hero__content col-full col-mobile-full">
       {%- if section.settings.heading != blank -%}
-        <h1 class="hero__heading">
+        <h1 class="hero__heading {{ section.settings.heading_width }} col-width-center">
           {{ section.settings.heading }}
         </h1>
       {%- endif -%}
@@ -17,31 +17,43 @@
 
 <style>
   .hero {
-    padding-top: var(--space-9);
-    padding-bottom: var(--space-9);
+    padding-top: var(--space-6-figma, 150px);
+    padding-bottom: var(--space-6-figma, 150px);
   }
 
   .hero__content {
-    grid-column-start: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
 
   .hero__heading {
-    font-size: var(--text-2xl);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: var(--text-hero);
     font-weight: 400;
-    line-height: var(--leading-tight);
+    line-height: var(--leading-normal);
     letter-spacing: var(--tracking-tight);
+    text-align: center;
+    margin: 0;
   }
 
   @media (min-width: 769px) {
-    .hero__heading {
-      font-size: var(--text-3xl);
+    .hero {
+      padding-left: var(--space-7-figma, 190px);
+      padding-right: var(--space-7-figma, 190px);
     }
   }
 
   @media (max-width: 768px) {
     .hero {
-      padding-top: var(--space-7);
-      padding-bottom: var(--space-7);
+      padding-top: var(--space-5);
+      padding-bottom: var(--space-5);
+      padding-left: var(--margin);
+      padding-right: var(--margin);
     }
 
     .hero__heading {
@@ -59,6 +71,22 @@
       "id": "heading",
       "label": "Heading",
       "default": "AAEL creates limited series of interior artefacts primarily out of metal."
+    },
+    {
+      "type": "select",
+      "id": "heading_width",
+      "label": "Heading Width",
+      "options": [
+        { "value": "col-width-1", "label": "1 column" },
+        { "value": "col-width-1-5", "label": "1.5 columns" },
+        { "value": "col-width-2", "label": "2 columns" },
+        { "value": "col-width-2-5", "label": "2.5 columns" },
+        { "value": "col-width-3", "label": "3 columns" },
+        { "value": "col-width-3-5", "label": "3.5 columns" },
+        { "value": "col-width-4", "label": "4 columns (full)" },
+        { "value": "", "label": "No constraint" }
+      ],
+      "default": "col-width-2-5"
     }
   ],
   "presets": [

@@ -7,17 +7,34 @@
   /* ═══════════════════════════════════════════════════════════
      GRID SYSTEM
      ═══════════════════════════════════════════════════════════ */
-  --columns: 4;
+  --columns: 6; /* Visual grid: total columns with stripes */
+  --content-max-columns: 4; /* Content constraint: max columns for content */
   --gutter: 0px;
-  --margin: 24px;
-  --column-width: calc((100vw - var(--margin) * 2) / var(--columns));
+  --margin: 0px;
+  
+  /* Column constraints - narrower to fit 6 columns */
+  --column-min-width: 150px;
+  --column-max-width: 260px;
+  
+  /* Computed column width: clamped between min and max */
+  --column-width: clamp(
+    var(--column-min-width),
+    calc(100vw / var(--columns)),
+    var(--column-max-width)
+  );
+  
+  /* Total visual grid width (all columns with stripes) */
+  --content-width: calc(var(--column-width) * var(--columns));
+  
+  /* Content area width (center columns only) */
+  --content-max-width: calc(var(--column-width) * var(--content-max-columns));
 
   /* ═══════════════════════════════════════════════════════════
      COLORS - Light Theme (default)
      ═══════════════════════════════════════════════════════════ */
   --color-bg: #ffffff;
-  --color-bg-alt: #f5f5f5;
-  --color-text: #1a1a1a;
+  --color-bg-alt: #f9f9f9;  /* Updated from Figma */
+  --color-text: #000000;     /* Updated from Figma */
   --color-text-secondary: #666666;
   --color-text-muted: #999999;
   --color-border: #e5e5e5;
@@ -26,29 +43,30 @@
   /* ═══════════════════════════════════════════════════════════
      TYPOGRAPHY
      ═══════════════════════════════════════════════════════════ */
-  --font-body: var(--font-body-family, "Helvetica Neue", "Helvetica", "Arial", sans-serif);
-  --font-heading: var(--font-heading-family, "Helvetica Neue", "Helvetica", "Arial", sans-serif);
+  --font-body: var(--font-body-family, "Neue Haas Grotesk Display Pro", -apple-system, "Roboto", "Helvetica Neue", "Helvetica", "Arial", sans-serif);
+  --font-heading: var(--font-heading-family, "Neue Haas Grotesk Display Pro", -apple-system, "Roboto", "Helvetica Neue", "Helvetica", "Arial", sans-serif);
   
   /* Scale */
   --text-xs: 0.6875rem;   /* 11px */
   --text-sm: 0.8125rem;   /* 13px */
-  --text-base: 0.9375rem; /* 15px */
+  --text-base: 1.5rem;    /* 24px - Updated from Figma */
   --text-lg: 1.125rem;    /* 18px */
   --text-xl: 1.5rem;      /* 24px */
   --text-2xl: 2rem;       /* 32px */
   --text-3xl: 2.5rem;     /* 40px */
+  --text-hero: 3rem;      /* 48px - From Figma */
   
   /* Line heights */
-  --leading-tight: 1.1;
-  --leading-normal: 1.5;
+  --leading-tight: 0.75;     /* 18px for 24px text - From Figma */
+  --leading-normal: 1.08;    /* 26px for 24px text - Updated from Figma */
   --leading-relaxed: 1.7;
   
   /* Letter spacing */
-  --tracking-tight: -0.02em;
-  --tracking-normal: 0;
-  --tracking-wide: 0.04em;
+  --tracking-tight: 0.02em;   /* 0.48px - Updated from Figma */
+  --tracking-normal: 0.04em;  /* 0.96px - Updated from Figma */
+  --tracking-wide: 0.05em;    /* 1.2px - Updated from Figma */
   --tracking-wider: 0.1em;
-  --tracking-widest: 0.2em;
+  --tracking-widest: 0.3em;   /* 7.2px - Updated from Figma */
 
   /* ═══════════════════════════════════════════════════════════
      SPACING
@@ -63,6 +81,12 @@
   --space-8: 64px;
   --space-9: 96px;
   --space-10: 128px;
+  
+  /* Additional spacing from Figma */
+  --space-4-figma: 42px;     /* Product grid padding */
+  --space-5-figma: 54px;    /* Logo horizontal padding */
+  --space-6-figma: 150px;   /* Hero vertical padding */
+  --space-7-figma: 190px;   /* Hero horizontal padding */
 
   /* ═══════════════════════════════════════════════════════════
      TRANSITIONS
@@ -84,6 +108,11 @@
   --z-overlay: 300;
   --z-modal: 400;
   --z-toast: 500;
+  
+  /* Opacity values from Figma */
+  --opacity-muted: 0.3;
+  --opacity-secondary: 0.5;
+  --opacity-active: 0.8;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -147,16 +176,44 @@ body {
 /* ═══════════════════════════════════════════════════════════════
    RESPONSIVE BREAKPOINTS
    ═══════════════════════════════════════════════════════════════ */
+
+/* Mobile: 2 columns */
 @media (max-width: 768px) {
   :root {
-    --columns: 2 !important;
-    --margin: 16px;
+    --columns: 2;
+    --content-max-columns: 2;
+    --column-min-width: 150px;
+    --column-max-width: 50vw;
   }
 }
 
-@media (min-width: 769px) and (max-width: 1024px) {
+/* Tablet: 4 columns */
+@media (min-width: 769px) and (max-width: 1200px) {
   :root {
-    --margin: 20px;
+    --columns: 4;
+    --content-max-columns: 4;
+    --column-min-width: 180px;
+    --column-max-width: 300px;
+  }
+}
+
+/* Desktop: 6 columns (content uses center 4) */
+@media (min-width: 1201px) and (max-width: 1800px) {
+  :root {
+    --columns: 6;
+    --content-max-columns: 4;
+    --column-min-width: 150px;
+    --column-max-width: 260px;
+  }
+}
+
+/* Ultra-wide: 8 columns (content uses center 6) */
+@media (min-width: 1801px) {
+  :root {
+    --columns: 8;
+    --content-max-columns: 6;
+    --column-min-width: 150px;
+    --column-max-width: 240px;
   }
 }
 

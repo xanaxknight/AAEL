@@ -9,9 +9,11 @@
 .page {
   min-height: 100vh;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Alternating column stripes */
+/* Alternating column stripes - edge to edge, all columns */
 .page::before {
   content: '';
   position: fixed;
@@ -21,6 +23,8 @@
   bottom: 0;
   z-index: -1;
   pointer-events: none;
+  
+  /* Stripe pattern: each stripe is exactly --column-width wide */
   background-image: repeating-linear-gradient(
     to right,
     var(--color-bg) 0,
@@ -28,29 +32,26 @@
     var(--color-bg-alt) var(--column-width),
     var(--color-bg-alt) calc(var(--column-width) * 2)
   );
-  background-position: var(--margin) 0;
-  background-size: calc(100% - var(--margin) * 2) 100%;
-  background-repeat: no-repeat;
+  
+  /* Centered pattern that extends edge-to-edge */
+  background-size: calc(var(--column-width) * 2) 100%;
+  background-position: center top;
+  
   transition: 
-    background-image var(--duration-slow) var(--ease-out),
-    background-position var(--duration-normal) var(--ease-out);
+    background-image var(--duration-slow) var(--ease-out);
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   GRID CONTAINER
+   GRID CONTAINER - Centered with clamped columns
    ═══════════════════════════════════════════════════════════════ */
 .grid {
   display: grid;
-  grid-template-columns: repeat(var(--columns), 1fr);
+  grid-template-columns: repeat(var(--content-max-columns), var(--column-width));
   gap: var(--gutter);
-  padding-left: var(--margin);
-  padding-right: var(--margin);
-}
-
-/* Full-width grid (no side padding) */
-.grid--full {
-  padding-left: 0;
-  padding-right: 0;
+  justify-content: center; /* Center the grid horizontally */
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin: 0 auto; /* Center the content grid */
 }
 
 /* Grid with gap */
@@ -79,7 +80,33 @@
 .col-start-5 { grid-column-start: 5; }
 
 /* ═══════════════════════════════════════════════════════════════
-   RESPONSIVE COLUMN SPANS
+   COLUMN WIDTH UTILITIES (supports fractional widths)
+   Use these for precise width control independent of grid spans
+   ═══════════════════════════════════════════════════════════════ */
+.col-width-1 { max-width: calc(var(--column-width) * 1); }
+.col-width-1-5 { max-width: calc(var(--column-width) * 1.5); }
+.col-width-2 { max-width: calc(var(--column-width) * 2); }
+.col-width-2-5 { max-width: calc(var(--column-width) * 2.5); }
+.col-width-3 { max-width: calc(var(--column-width) * 3); }
+.col-width-3-5 { max-width: calc(var(--column-width) * 3.5); }
+.col-width-4 { max-width: calc(var(--column-width) * 4); }
+.col-width-4-5 { max-width: calc(var(--column-width) * 4.5); }
+.col-width-5 { max-width: calc(var(--column-width) * 5); }
+.col-width-5-5 { max-width: calc(var(--column-width) * 5.5); }
+.col-width-6 { max-width: calc(var(--column-width) * 6); }
+.col-width-6-5 { max-width: calc(var(--column-width) * 6.5); }
+.col-width-7 { max-width: calc(var(--column-width) * 7); }
+.col-width-7-5 { max-width: calc(var(--column-width) * 7.5); }
+.col-width-8 { max-width: calc(var(--column-width) * 8); }
+
+/* Center elements with width utilities */
+.col-width-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE COLUMN SPANS & WIDTHS
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
   .col-1, .col-2, .col-3, .col-4,
@@ -91,6 +118,17 @@
   .col-mobile-full { grid-column: 1 / -1; }
   .col-mobile-1 { grid-column: span 1; }
   .col-mobile-2 { grid-column: span 2; }
+  
+  /* Mobile width utilities - adapt to 2-column layout */
+  .col-width-1,
+  .col-width-1-5,
+  .col-width-2,
+  .col-width-2-5,
+  .col-width-3,
+  .col-width-3-5,
+  .col-width-4 {
+    max-width: 100%; /* Full width on mobile */
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════

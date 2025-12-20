@@ -1,0 +1,257 @@
+{%- comment -%}
+  AAEL Product Showcase
+  Large featured product with background image and overlay info
+{%- endcomment -%}
+
+{%- liquid
+  assign product = section.settings.product
+  assign background_image = section.settings.background_image
+  
+  if product != blank
+    assign product_url = product.url
+    assign product_title = product.title
+    assign product_price = product.price | money
+    assign product_image = product.featured_media
+    
+    # Get variant info
+    assign variant_title = product.selected_or_first_available_variant.title
+    if variant_title == 'Default Title'
+      assign variant_title = ''
+    endif
+    
+    # Metafields for edition
+    assign edition_current = product.metafields.custom.edition_current | default: 1
+    assign edition_total = product.metafields.custom.edition_total | default: 10
+    
+    # Use product image if no background image set
+    if background_image == blank and product_image != blank
+      assign background_image = product_image
+    endif
+  else
+    assign product_url = '#'
+    assign product_title = 'AMO — 01'
+    assign product_price = '€2,400'
+    assign variant_title = 'Prototype'
+    assign edition_current = 3
+    assign edition_total = 10
+  endif
+-%}
+
+<section class="product-showcase section">
+  <div class="product-showcase__wrapper grid">
+    <div class="product-showcase__container col-full">
+    {%- if background_image != blank -%}
+      <div class="product-showcase__media">
+        <img
+          src="{{ background_image | image_url: width: 1440 }}"
+          srcset="
+            {{ background_image | image_url: width: 768 }} 768w,
+            {{ background_image | image_url: width: 1024 }} 1024w,
+            {{ background_image | image_url: width: 1440 }} 1440w,
+            {{ background_image | image_url: width: 1920 }} 1920w
+          "
+          sizes="100vw"
+          alt="{{ background_image.alt | escape | default: product_title }}"
+          width="{{ background_image.width }}"
+          height="{{ background_image.height }}"
+          loading="eager"
+          class="product-showcase__image"
+        >
+      </div>
+    {%- else -%}
+      <div class="product-showcase__media product-showcase__media--placeholder">
+        {{ 'lifestyle-1' | placeholder_svg_tag }}
+      </div>
+    {%- endif -%}
+    
+    <div class="product-showcase__info">
+      <div class="product-showcase__content">
+        {%- if product_title != blank -%}
+          <h2 class="product-showcase__title">{{ product_title }}</h2>
+        {%- endif -%}
+        
+        {%- if variant_title != blank -%}
+          <p class="product-showcase__subtitle">{{ variant_title }}</p>
+        {%- endif -%}
+        
+        {%- if edition_total > 0 -%}
+          <p class="product-showcase__edition">{{ edition_current }} / {{ edition_total }}</p>
+        {%- endif -%}
+        
+        {%- if product_price != blank -%}
+          <p class="product-showcase__price">{{ product_price }}</p>
+        {%- endif -%}
+        
+        {%- if product != blank -%}
+          <button
+            type="button"
+            class="product-showcase__action"
+            data-add-to-cart="{{ product.selected_or_first_available_variant.id }}"
+          >
+            {{ 'products.product.add_to_cart' | t | default: 'Add to Bag' }}
+          </button>
+        {%- else -%}
+          <span class="product-showcase__action">{{ 'products.product.add_to_cart' | t | default: 'Add to Bag' }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<style>
+  .product-showcase {
+    padding-top: 0;
+    padding-bottom: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .product-showcase__wrapper {
+    /* Uses .grid class for layout - constrains to 4 columns */
+    max-width: var(--content-max-width);
+  }
+
+  .product-showcase__container {
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+
+  .product-showcase__media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .product-showcase__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .product-showcase__media--placeholder {
+    background: var(--color-bg-alt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .product-showcase__media--placeholder svg {
+    width: 50%;
+    height: 50%;
+    fill: var(--color-border);
+  }
+
+  .product-showcase__info {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding: var(--space-4-figma, 42px);
+  }
+
+  .product-showcase__content {
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-text);
+  }
+
+  .product-showcase__title {
+    font-size: var(--text-base);
+    font-weight: 400;
+    margin: 0;
+    line-height: var(--leading-normal);
+  }
+
+  .product-showcase__subtitle {
+    font-size: var(--text-base);
+    font-weight: 400;
+    margin: 0;
+    line-height: var(--leading-normal);
+  }
+
+  .product-showcase__edition {
+    font-size: var(--text-base);
+    font-weight: 400;
+    margin: 0;
+    line-height: var(--leading-normal);
+  }
+
+  .product-showcase__price {
+    font-size: var(--text-base);
+    font-weight: 400;
+    margin: 0;
+    line-height: var(--leading-normal);
+  }
+
+  .product-showcase__action {
+    font-size: var(--text-base);
+    font-weight: 400;
+    margin: 0;
+    color: var(--color-text);
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: opacity var(--duration-fast);
+    line-height: var(--leading-normal);
+  }
+
+  .product-showcase__action:hover {
+    opacity: var(--opacity-active);
+  }
+
+  /* Desktop: Match Figma layout */
+  @media (min-width: 769px) {
+    .product-showcase__container {
+      min-height: 1713px;
+    }
+
+    .product-showcase__info {
+      padding: var(--space-4-figma, 42px);
+    }
+  }
+
+  /* Mobile: Responsive adjustments */
+  @media (max-width: 768px) {
+    .product-showcase__container {
+      min-height: 50vh;
+    }
+
+    .product-showcase__info {
+      padding: var(--space-3);
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Product Showcase",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image",
+      "info": "Optional. Uses product image if not set."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Showcase"
+    }
+  ]
+}
+{% endschema %}
+

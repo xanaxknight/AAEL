@@ -1,0 +1,21 @@
+{%- comment -%}
+  Icon: Lights Off (circle with dot)
+  States: default, hover, active, disabled
+  Works on both light and dark themes
+  
+  Usage: {% render 'icon-lights-off', class: 'my-class' %}
+{%- endcomment -%}
+
+<svg 
+  class="icon icon-lights-off{% if class %} {{ class }}{% endif %}" 
+  width="24" 
+  height="24" 
+  viewBox="0 0 24 24" 
+  fill="none" 
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+>
+  <circle class="icon__circle" cx="12" cy="12" r="11.25" stroke="currentColor" stroke-width="1.5"/>
+  <circle class="icon__inner" cx="12" cy="12" r="3" fill="currentColor"/>
+</svg>
+

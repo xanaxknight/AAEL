@@ -8,8 +8,8 @@
 
 <header class="header">
   <div class="header__inner grid">
-    {%- comment -%} Logo {%- endcomment -%}
-    <div class="header__logo">
+    {%- comment -%} Logo - 1 column {%- endcomment -%}
+    <div class="header__logo col-1">
       <a href="{{ routes.root_url }}" class="header__logo-link">
         {%- if section.settings.logo != blank -%}
           <img 
@@ -20,30 +20,29 @@
             loading="eager"
           >
         {%- else -%}
-          <span class="header__logo-text">{{ shop.name | upcase | split: '' | join: ' ' }}</span>
+          <div class="header__logo-text">
+            <span class="header__logo-part">AAEL </span>
+            <span class="header__logo-part">C24</span>
+          </div>
         {%- endif -%}
       </a>
     </div>
 
-    {%- comment -%} Center: Theme Toggle + Collection {%- endcomment -%}
-    <div class="header__center">
+    {%- comment -%} Theme Toggle - 1 column {%- endcomment -%}
+    <div class="header__theme-section col-1">
       <button 
         type="button" 
         class="header__theme-toggle" 
         data-theme-toggle
         aria-label="{{ 'accessibility.toggle_theme' | t }}"
       >
-        <span class="header__theme-icon header__theme-icon--light" aria-hidden="true">☼</span>
-        <span class="header__theme-icon header__theme-icon--dark" aria-hidden="true">☽</span>
+        {% render 'icon-lights-on', class: 'header__theme-icon header__theme-icon--light' %}
+        {% render 'icon-lights-off-ring', class: 'header__theme-icon header__theme-icon--dark' %}
       </button>
-      
-      {%- if section.settings.collection_label != blank -%}
-        <span class="header__collection">{{ section.settings.collection_label }}</span>
-      {%- endif -%}
     </div>
 
-    {%- comment -%} Column Switcher {%- endcomment -%}
-    <nav class="header__columns" aria-label="{{ 'accessibility.grid_columns' | t }}">
+    {%- comment -%} Column Switcher - 1 column {%- endcomment -%}
+    <nav class="header__columns col-1" aria-label="{{ 'accessibility.grid_columns' | t }}">
       <button 
         type="button"
         class="header__col-btn" 
@@ -70,8 +69,8 @@
       >08</button>
     </nav>
 
-    {%- comment -%} Cart/Bag {%- endcomment -%}
-    <div class="header__bag">
+    {%- comment -%} Cart/Bag - 1 column {%- endcomment -%}
+    <div class="header__bag col-1">
       <a href="{{ routes.cart_url }}" class="header__bag-link">
         BAG(<span data-cart-count>{{ cart.item_count }}</span>)
       </a>
@@ -85,116 +84,158 @@
     top: 0;
     z-index: var(--z-header);
     background: transparent;
-    padding: var(--space-5) 0;
+    padding: var(--space-3) 0;
+    width: 100%;
   }
 
   .header__inner {
+    /* Uses .grid class for layout */
     align-items: center;
   }
 
-  /* Logo */
-  .header__logo {
-    grid-column: span 1;
-  }
-
-  .header__logo-link {
-    display: inline-block;
-  }
-
-  .header__logo-text {
-    font-size: var(--text-sm);
-    font-weight: 500;
-    letter-spacing: 0.3em;
-  }
-
-  /* Center section */
-  .header__center {
-    grid-column: span 2;
+  /* Each header section fills its column and centers content */
+  .header__logo,
+  .header__theme-section,
+  .header__columns,
+  .header__bag {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-4);
+    min-height: 48px;
   }
 
+  /* Logo - left-aligned within its column */
+  .header__logo {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .header__logo-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    vertical-align: middle;
+    align-self: stretch;
+    width: 100%;
+    padding: var(--space-5) var(--space-5);
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+  }
+
+  .header__logo-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: var(--text-base);
+    font-weight: 400;
+    letter-spacing: var(--tracking-widest, 0.3em);
+    line-height: var(--leading-tight, 0.75);
+  }
+
+  .header__logo-part {
+    display: flex;
+    text-align: right;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    line-height: var(--leading-tight, 0.75);
+  }
+
+  /* Theme toggle section - centered */
   .header__theme-toggle {
     display: flex;
     align-items: center;
-    gap: var(--space-2);
-    padding: var(--space-1);
+    justify-content: center;
+    padding: var(--space-2);
+    background: transparent;
+    border: none;
+    cursor: pointer;
   }
 
   .header__theme-icon {
-    font-size: var(--text-base);
+    width: 24px;
+    height: 24px;
     transition: opacity var(--duration-normal);
   }
 
   .header__theme-icon--light {
     opacity: 1;
+    display: block;
   }
 
   .header__theme-icon--dark {
-    opacity: 0.35;
+    opacity: var(--opacity-muted, 0.3);
+    display: none;
   }
 
   [data-theme="dark"] .header__theme-icon--light {
-    opacity: 0.35;
+    opacity: var(--opacity-muted, 0.3);
+    display: none;
   }
 
   [data-theme="dark"] .header__theme-icon--dark {
     opacity: 1;
+    display: block;
   }
 
-  .header__collection {
-    font-size: var(--text-sm);
-    letter-spacing: var(--tracking-wider);
-    color: var(--color-text);
-  }
-
-  /* Column switcher */
+  /* Column switcher - centered, shows column options */
   .header__columns {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     gap: var(--space-2);
   }
 
   .header__col-btn {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    padding: var(--space-1) var(--space-2);
-    transition: color var(--duration-fast);
+    font-size: var(--text-base);
+    font-weight: 400;
+    letter-spacing: var(--tracking-wide, 0.05em);
+    line-height: var(--leading-normal, 1.08);
+    padding: var(--space-2) var(--space-3);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text);
+    opacity: var(--opacity-muted, 0.3);
+    transition: opacity var(--duration-fast);
   }
 
   .header__col-btn:hover {
-    color: var(--color-text);
+    opacity: var(--opacity-active, 0.8);
   }
 
   .header__col-btn.active {
-    color: var(--color-text);
+    opacity: var(--opacity-active, 0.8);
   }
 
-  /* Bag */
+  /* Bag - centered within its column */
   .header__bag {
-    text-align: right;
+    justify-content: center;
+    text-align: center;
+    vertical-align: middle;
   }
 
   .header__bag-link {
-    font-size: var(--text-sm);
-    letter-spacing: var(--tracking-wide);
+    font-size: var(--text-base);
+    font-weight: 400;
+    letter-spacing: var(--tracking-wide, 0.05em);
+    line-height: var(--leading-normal, 1.08);
+    padding: var(--space-2) var(--space-4);
+    color: var(--color-text);
+    opacity: var(--opacity-active, 0.8);
   }
 
-  /* Responsive */
+  /* Responsive - on mobile, header adapts to 2 columns */
   @media (max-width: 768px) {
-    .header__center {
-      grid-column: span 1;
-    }
-
     .header__columns {
       display: none;
     }
 
-    .header__collection {
-      display: none;
+    .header__theme-section {
+      justify-content: flex-end;
+    }
+
+    .header__logo-link {
+      padding: var(--space-3);
     }
   }
 </style>
@@ -227,4 +268,5 @@
   ]
 }
 {% endschema %}
+
 

@@ -1,0 +1,21 @@
+{%- comment -%}
+  Icon: Lights On (circle with vertical line)
+  States: default, hover, active, disabled
+  Works on both light and dark themes
+  
+  Usage: {% render 'icon-lights-on', class: 'my-class' %}
+{%- endcomment -%}
+
+<svg 
+  class="icon icon-lights-on{% if class %} {{ class }}{% endif %}" 
+  width="24" 
+  height="24" 
+  viewBox="0 0 24 24" 
+  fill="none" 
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+>
+  <circle class="icon__circle" cx="12" cy="12" r="11.25" stroke="currentColor" stroke-width="1.5"/>
+  <rect class="icon__inner" x="11" y="7" width="2" height="10" rx="1" fill="currentColor"/>
+</svg>
+

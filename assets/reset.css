@@ -4,9 +4,22 @@
  */
 
 *, *::before, *::after {
-  box-sizing: border-box;
+  box-sizing: content-box;
   margin: 0;
   padding: 0;
+}
+
+/* Override for specific elements that need border-box */
+body {
+  box-sizing: content-box;
+}
+
+#page {
+  box-sizing: content-box;
+}
+
+.header__inner {
+  box-sizing: content-box;
 }
 
 html {

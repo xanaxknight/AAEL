@@ -1,0 +1,13 @@
+{
+  "name": "aael-theme",
+  "version": "1.0.0",
+  "description": "AAEL Shopify theme",
+  "scripts": {
+    "dev": "http-server -p 8000 -o",
+    "preview": "http-server -p 8000 -o preview.html",
+    "serve": "http-server -p 8000"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
