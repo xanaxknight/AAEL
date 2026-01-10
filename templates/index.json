@@ -1,8 +1,26 @@
 {
   "layout": "theme.prelaunch",
   "sections": {
-    "prelaunch-main": {
-      "type": "prelaunch-main",
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo_text": "AAEL",
+        "collection_text": "C24",
+        "right_button_text": "Let me know",
+        "right_button_link": "#newsletter-form"
+      }
+    },
+    "hero": {
+      "type": "hero-lead",
+      "settings": {
+        "hero_text": "AAEL creates limited series of interior artifacts primarily out of metal.",
+        "max_width": 800,
+        "padding_top": 40,
+        "padding_bottom": 64
+      }
+    },
+    "product": {
+      "type": "product-carousel",
       "blocks": {
         "slide-1": {
           "type": "slide",
@@ -27,16 +45,27 @@
             "image_dark_url": "https://i.ibb.co/fmHHdcb/n-v3.webp",
             "alt_text": "AMO Desk Lamp"
           }
-        },
-        "footer-link-1": {
-          "type": "footer_link",
+        }
+      },
+      "block_order": ["slide-1", "slide-2", "slide-3"],
+      "settings": {
+        "variant": "prelaunch",
+        "max_width": 1440,
+        "padding_bottom": 80
+      }
+    },
+    "newsletter_footer": {
+      "type": "newsletter-footer",
+      "blocks": {
+        "link-1": {
+          "type": "link",
           "settings": {
             "label": "ABOUT",
             "link": "/pages/about"
           }
         },
-        "footer-link-2": {
-          "type": "footer_link",
+        "link-2": {
+          "type": "link",
           "settings": {
             "label": "INSTA",
             "link": "https://instagram.com",
@@ -44,26 +73,17 @@
           }
         }
       },
-      "block_order": [
-        "slide-1",
-        "slide-2",
-        "slide-3",
-        "footer-link-1",
-        "footer-link-2"
-      ],
+      "block_order": ["link-1", "link-2"],
       "settings": {
-        "logo_text": "AAEL",
-        "collection_text": "C24",
-        "cta_button_text": "Let me know",
-        "hero_text": "AAEL creates limited series of interior artifacts primarily out of metal.",
-        "slide_timings": "12000,6000",
         "newsletter_title": "Let me know when AMO is available",
-        "newsletter_placeholder": "Email",
-        "newsletter_button": "Send"
+        "padding_bottom": 120
       }
     }
   },
   "order": [
-    "prelaunch-main"
+    "header",
+    "hero",
+    "product",
+    "newsletter_footer"
   ]
 }
