@@ -72,9 +72,7 @@
 
     {%- comment -%} Fixed Header Wrapper {%- endcomment -%}
     <div class="fixed-header-wrapper" id="HeaderWrapper">
-      <div class="grid-container">
-        {% section 'header' %}
-      </div>
+      {% section 'header' %}
     </div>
 
     {%- comment -%} Main Content {%- endcomment -%}
@@ -83,7 +81,7 @@
     </main>
 
     {%- comment -%} Footer {%- endcomment -%}
-    <div class="grid-container" style="margin-top: auto;">
+    <div style="margin-top: auto;">
       {% section 'footer' %}
     </div>
   </div>

@@ -9,44 +9,53 @@
   assign copyright_text = section.settings.copyright_text
 -%}
 
-{%- comment -%} Logo Block {%- endcomment -%}
-<div 
-  class="grid-block footer-block"
-  style="
-    --span-s: span 1;
-    --start-s: auto;
-    --align-s: center;
-    --text-s: center;
-    --span-m: span 1;
-    --align-m: center;
-    --text-m: center;
-    --span-l: span 1;
-    --start-l: 2;
-    --align-l: flex-start;
-    --text-l: left;
-    --span-xl: span 1;
-    --start-xl: 3;
-    --align-xl: flex-start;
-    --text-xl: left;
-  "
->
-  <div class="logo-badge">
-    <span class="brand-text">{{ logo_text }}</span>
-    <span class="collection-text">{{ collection_text }}</span>
+<div class="grid-container" style="padding-bottom: 24px;">
+  {%- comment -%} Logo & Collection Block (Left) {%- endcomment -%}
+  <div 
+    class="grid-block footer-block"
+    style="
+      --span-s: span 1;
+      --start-s: 1;
+      --row-s: 1;
+      --align-s: flex-start;
+      --text-s: left;
+      --span-m: span 1;
+      --start-m: 1;
+      --row-m: 1;
+      --align-m: flex-start;
+      --text-m: left;
+      --span-l: span 1;
+      --start-l: 2;
+      --row-l: 1;
+      --align-l: flex-start;
+      --text-l: left;
+      --span-xl: span 1;
+      --start-xl: 3;
+      --row-xl: 1;
+      --align-xl: flex-start;
+      --text-xl: left;
+    "
+  >
+    <div class="logo-badge" style="justify-content: space-between; width: 100%; padding: 0 24px;">
+      <span class="brand-text" style="letter-spacing: 0.45rem;">{{ logo_text }}</span>
+      <span class="collection-text">{{ collection_text }}</span>
+    </div>
   </div>
-</div>
 
-{%- comment -%} Footer Links - Desktop Only {%- endcomment -%}
-{%- for block in section.blocks -%}
-  {%- case block.type -%}
-    {%- when 'link' -%}
+  {%- comment -%} Footer Links - Desktop Only {%- endcomment -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'link' -%}
       <div 
         class="grid-block footer-block desktop-only"
         style="
           --span-m: span 1;
+          --start-m: {{ forloop.index | plus: 1 }};
+          --row-m: 1;
           --align-m: center;
           --text-m: center;
           --span-l: span 1;
+          --start-l: {{ forloop.index | plus: 2 }};
+          --row-l: 1;
           --align-l: center;
           --text-l: center;
         "
@@ -63,37 +72,45 @@
           {{ block.settings.label }}
         </a>
       </div>
-  {%- endcase -%}
-{%- endfor -%}
-
-{%- comment -%} Copyright Block {%- endcomment -%}
-<div 
-  class="grid-block footer-block"
-  style="
-    --span-s: span 1;
-    --start-s: auto;
-    --align-s: center;
-    --text-s: center;
-    --span-m: span 1;
-    --align-m: center;
-    --text-m: center;
-    --span-l: span 1;
-    --start-l: 5;
-    --align-l: center;
-    --text-l: center;
-    --span-xl: span 1;
-    --start-xl: 6;
-    --align-xl: center;
-    --text-xl: center;
-  "
->
-  <span class="footer-text static-text">
-    {%- if copyright_text != blank -%}
-      {{ copyright_text }}
-    {%- else -%}
-      ©{{ 'now' | date: '%Y' }}
     {%- endif -%}
-  </span>
+  {%- endfor -%}
+
+  {%- comment -%} Copyright Block (Right) {%- endcomment -%}
+  <div 
+    class="grid-block footer-block"
+    style="
+      --span-s: span 1;
+      --start-s: 2;
+      --row-s: 1;
+      --align-s: flex-end;
+      --text-s: right;
+      --span-m: span 1;
+      --start-m: 4;
+      --row-m: 1;
+      --align-m: flex-end;
+      --text-m: right;
+      --span-l: span 1;
+      --start-l: 5;
+      --row-l: 1;
+      --align-l: flex-end;
+      --text-l: right;
+      --span-xl: span 1;
+      --start-xl: 6;
+      --row-xl: 1;
+      --align-xl: flex-end;
+      --text-xl: right;
+    "
+  >
+    <div style="padding: 0 24px;">
+      <span class="footer-text static-text">
+        {%- if copyright_text != blank -%}
+          {{ copyright_text }}
+        {%- else -%}
+          ©{{ 'now' | date: '%Y' }}
+        {%- endif -%}
+      </span>
+    </div>
+  </div>
 </div>
 
 {% schema %}

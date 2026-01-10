@@ -5,151 +5,121 @@
   assign right_button_link = section.settings.right_button_link
 -%}
 
-{%- comment -%} Logo & Collection Block (Left) {%- endcomment -%}
-<div 
-  class="grid-block header-block"
-  style="
-    --span-s: span 1;
-    --start-s: auto;
-    --row-s: 1;
-    --align-s: flex-start;
-    --text-s: left;
-    --span-m: span 1;
-    --start-m: auto;
-    --row-m: 1;
-    --align-m: flex-start;
-    --text-m: left;
-    --span-l: span 1;
-    --start-l: 2;
-    --row-l: 1;
-    --align-l: flex-start;
-    --text-l: left;
-    --span-xl: span 1;
-    --start-xl: 3;
-    --row-xl: 1;
-    --align-xl: flex-start;
-    --text-xl: left;
-  "
->
-  <div class="logo-badge" style="justify-content: flex-start; gap: 12px; padding: 0;">
-    <a href="{{ routes.root_url }}" class="brand-logo-link" aria-label="{{ shop.name }}">
-      {%- if section.settings.logo != blank -%}
-        {{ section.settings.logo | image_url: width: 300 | image_tag:
-          class: 'header__heading-logo',
-          widths: '50, 100, 150, 200, 250, 300',
-          height: section.settings.logo_width,
-          width: section.settings.logo.width,
-          alt: shop.name
-        }}
-      {%- else -%}
-        <h1 class="brand-text" style="letter-spacing: 0.45rem;">{{ section.settings.logo_text | default: shop.name }}</h1>
-      {%- endif -%}
-    </a>
-  </div>
-</div>
-
-{%- comment -%} Collection Text Block (Center-Left) {%- endcomment -%}
-<div 
-  class="grid-block header-block"
-  style="
-    --span-s: span 0;
-    --start-s: auto;
-    --row-s: 1;
-    --align-s: center;
-    --text-s: center;
-    --span-m: span 1;
-    --start-m: auto;
-    --row-m: 1;
-    --align-m: flex-start;
-    --text-m: left;
-    --span-l: span 1;
-    --start-l: 3;
-    --row-l: 1;
-    --align-l: flex-start;
-    --text-l: left;
-    --span-xl: span 1;
-    --start-xl: 4;
-    --row-xl: 1;
-    --align-xl: flex-start;
-    --text-xl: left;
-  "
->
-  {%- if collection_text != blank -%}
-    <span class="collection-text" style="display: block;">{{ collection_text }}</span>
-  {%- endif -%}
-</div>
-
-{%- comment -%} Theme Toggle (Center-Right) {%- endcomment -%}
-<div 
-  class="grid-block header-block desktop-only"
-  style="
-    --span-s: span 0;
-    --start-s: auto;
-    --row-s: 1;
-    --align-s: center;
-    --text-s: center;
-    --span-m: span 1;
-    --start-m: 3;
-    --row-m: 1;
-    --align-m: center;
-    --text-m: center;
-    --span-l: span 1;
-    --start-l: 4;
-    --row-l: 1;
-    --align-l: center;
-    --text-l: center;
-    --span-xl: span 1;
-    --start-xl: 5;
-    --row-xl: 1;
-    --align-xl: center;
-    --text-xl: center;
-  "
->
-  <button 
-    class="icon-btn js-theme-toggle" 
-    type="button"
-    aria-label="{{ 'general.theme.toggle' | t | default: 'Toggle theme' }}"
+<div class="grid-container">
+  {%- comment -%} Logo & Collection Block {%- endcomment -%}
+  <div 
+    class="grid-block header-block"
+    style="
+      --span-s: span 1;
+      --start-s: 1;
+      --row-s: 1;
+      --align-s: flex-start;
+      --text-s: left;
+      --span-m: span 1;
+      --start-m: 1;
+      --row-m: 1;
+      --align-m: flex-start;
+      --text-m: left;
+      --span-l: span 1;
+      --start-l: 2;
+      --row-l: 1;
+      --align-l: flex-start;
+      --text-l: left;
+      --span-xl: span 1;
+      --start-xl: 3;
+      --row-xl: 1;
+      --align-xl: flex-start;
+      --text-xl: left;
+    "
   >
-    {% render 'icon-theme' %}
-  </button>
-</div>
+    <div class="logo-badge" style="justify-content: space-between; width: 100%; padding: 0 24px;">
+      <a href="{{ routes.root_url }}" class="brand-logo-link" aria-label="{{ shop.name }}">
+        {%- if section.settings.logo != blank -%}
+          {{ section.settings.logo | image_url: width: 300 | image_tag:
+            class: 'header__heading-logo',
+            widths: '50, 100, 150, 200, 250, 300',
+            height: section.settings.logo_width,
+            width: section.settings.logo.width,
+            alt: shop.name
+          }}
+        {%- else -%}
+          <h1 class="brand-text" style="letter-spacing: 0.45rem;">{{ section.settings.logo_text | default: shop.name }}</h1>
+        {%- endif -%}
+      </a>
+      <span class="collection-text">{{ collection_text }}</span>
+    </div>
+  </div>
 
-{%- comment -%} Right Action Block (Right) {%- endcomment -%}
-<div 
-  class="grid-block header-block"
-  style="
-    --span-s: span 1;
-    --start-s: auto;
-    --row-s: 1;
-    --align-s: flex-end;
-    --text-s: right;
-    --span-m: span 1;
-    --start-m: 4;
-    --row-m: 1;
-    --align-m: flex-end;
-    --text-m: right;
-    --span-l: span 1;
-    --start-l: 5;
-    --row-l: 1;
-    --align-l: flex-end;
-    --text-l: right;
-    --span-xl: span 1;
-    --start-xl: 6;
-    --row-xl: 1;
-    --align-xl: flex-end;
-    --text-xl: right;
-  "
->
-  <div class="bag-container" style="padding: 0;">
-    {%- if right_button_text != blank and right_button_link != blank -%}
-      <a href="{{ right_button_link }}" class="pill-btn">
-        {{ right_button_text }}
-      </a>
-    {%- elsif show_bag -%}
-      <a href="{{ routes.cart_url }}" class="bag-btn" aria-label="{{ 'cart.title' | t }}">
-        BAG (<span class="cart-count">{{ cart.item_count }}</span>)
-      </a>
-    {%- endif -%}
+  {%- comment -%} Theme Toggle Block {%- endcomment -%}
+  <div 
+    class="grid-block header-block desktop-only"
+    style="
+      --span-s: span 0;
+      --start-s: auto;
+      --row-s: 1;
+      --span-m: span 2;
+      --start-m: 2;
+      --row-m: 1;
+      --align-m: center;
+      --text-m: center;
+      --span-l: span 2;
+      --start-l: 3;
+      --row-l: 1;
+      --align-l: center;
+      --text-l: center;
+      --span-xl: span 2;
+      --start-xl: 4;
+      --row-xl: 1;
+      --align-xl: center;
+      --text-xl: center;
+    "
+  >
+    <button 
+      class="icon-btn js-theme-toggle" 
+      type="button"
+      aria-label="{{ 'general.theme.toggle' | t | default: 'Toggle theme' }}"
+    >
+      {% render 'icon-theme' %}
+    </button>
+  </div>
+
+  {%- comment -%} Right Action Block (CTA) {%- endcomment -%}
+  <div 
+    class="grid-block header-block"
+    style="
+      --span-s: span 1;
+      --start-s: 2;
+      --row-s: 1;
+      --align-s: flex-end;
+      --text-s: right;
+      --span-m: span 1;
+      --start-m: 4;
+      --row-m: 1;
+      --align-m: flex-end;
+      --text-m: right;
+      --span-l: span 1;
+      --start-l: 5;
+      --row-l: 1;
+      --align-l: flex-end;
+      --text-l: right;
+      --span-xl: span 1;
+      --start-xl: 6;
+      --row-xl: 1;
+      --align-xl: flex-end;
+      --text-xl: right;
+    "
+  >
+    <div class="bag-container" style="padding: 0 24px;">
+      {%- if right_button_text != blank and right_button_link != blank -%}
+        <a href="{{ right_button_link }}" class="pill-btn">
+          {{ right_button_text }}
+        </a>
+      {%- elsif show_bag -%}
+        <a href="{{ routes.cart_url }}" class="bag-btn" aria-label="{{ 'cart.title' | t }}">
+          BAG (<span class="cart-count">{{ cart.item_count }}</span>)
+        </a>
+      {%- endif -%}
+    </div>
   </div>
 </div>
 

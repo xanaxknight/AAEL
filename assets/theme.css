@@ -266,12 +266,18 @@ body.mode-prelaunch {
   transform: translateY(calc(100vh - var(--header-height)));
 }
 
-.header-block,
-.footer-block {
+.header-block {
   padding-top: 24px;
   padding-bottom: 24px;
   justify-content: center;
   min-height: var(--header-height);
+  pointer-events: auto;
+}
+
+.footer-block {
+  padding-top: 24px;
+  padding-bottom: 0px;
+  justify-content: center;
   pointer-events: auto;
 }
 
