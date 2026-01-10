@@ -9,7 +9,7 @@
   assign copyright_text = section.settings.copyright_text
 -%}
 
-<div class="grid-container" style="padding-bottom: 24px;">
+<div class="grid-container">
   {%- comment -%} Logo & Collection Block (Left) {%- endcomment -%}
   <div 
     class="grid-block footer-block"
@@ -75,30 +75,30 @@
     {%- endif -%}
   {%- endfor -%}
 
-  {%- comment -%} Copyright Block (Right) {%- endcomment -%}
+  {%- comment -%} Copyright Block (Centered in Column) {%- endcomment -%}
   <div 
     class="grid-block footer-block"
     style="
       --span-s: span 1;
       --start-s: 2;
       --row-s: 1;
-      --align-s: flex-end;
-      --text-s: right;
+      --align-s: center;
+      --text-s: center;
       --span-m: span 1;
       --start-m: 4;
       --row-m: 1;
-      --align-m: flex-end;
-      --text-m: right;
+      --align-m: center;
+      --text-m: center;
       --span-l: span 1;
       --start-l: 5;
       --row-l: 1;
-      --align-l: flex-end;
-      --text-l: right;
+      --align-l: center;
+      --text-l: center;
       --span-xl: span 1;
       --start-xl: 6;
       --row-xl: 1;
-      --align-xl: flex-end;
-      --text-xl: right;
+      --align-xl: center;
+      --text-xl: center;
     "
   >
     <div style="padding: 0 24px;">
