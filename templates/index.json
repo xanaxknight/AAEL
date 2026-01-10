@@ -54,8 +54,15 @@
         "padding_bottom": 80
       }
     },
-    "newsletter_footer": {
-      "type": "newsletter-footer",
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "newsletter_title": "Let me know when AMO is available",
+        "padding_bottom": 80
+      }
+    },
+    "footer": {
+      "type": "footer",
       "blocks": {
         "link-1": {
           "type": "link",
@@ -75,8 +82,10 @@
       },
       "block_order": ["link-1", "link-2"],
       "settings": {
-        "newsletter_title": "Let me know when AMO is available",
-        "padding_bottom": 120
+        "logo_text": "AAEL",
+        "collection_text": "C24",
+        "padding_top": 24,
+        "padding_bottom": 24
       }
     }
   },
@@ -84,6 +93,7 @@
     "header",
     "hero",
     "product",
-    "newsletter_footer"
+    "newsletter",
+    "footer"
   ]
 }
