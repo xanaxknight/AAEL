@@ -1,0 +1,144 @@
+{%- comment -%}
+  Product Card Snippet
+  Renders a product card with slideshow functionality.
+  
+  Usage:
+  {% render 'product-card', 
+    product: product,
+    variant: 'portrait',
+    timings: '4000,4000,4000',
+    slides: slides_array
+  %}
+  
+  Parameters:
+  - product: The product object
+  - variant: 'portrait' | 'landscape' | 'prelaunch' (default: 'portrait')
+  - timings: Comma-separated durations in ms for each slide (default: '4000')
+  - slides: Array of slide objects with light_image and dark_image (optional, uses product images if not provided)
+  - max_width: Maximum width for the card (optional)
+{%- endcomment -%}
+
+{%- liquid
+  assign card_variant = variant | default: 'portrait'
+  assign slide_timings = timings | default: '4000'
+  assign card_max_width = max_width | default: ''
+  
+  if slides
+    assign slide_images = slides
+  elsif product.images.size > 0
+    assign slide_images = product.images
+  endif
+-%}
+
+<product-card 
+  class="product-card {{ card_variant }}"
+  data-timings="[{{ slide_timings }}]"
+  {%- if card_max_width != blank -%}
+    style="max-width: {{ card_max_width }};"
+  {%- endif -%}
+>
+  <div class="product-visual">
+    {%- if slide_images -%}
+      {%- for slide in slide_images -%}
+        <div class="slide-container{% if forloop.first %} active{% endif %}">
+          {%- comment -%} Handle both custom slide objects and product images {%- endcomment -%}
+          {%- if slide.light_image and slide.dark_image -%}
+            {%- comment -%} Custom slide with light/dark variants {%- endcomment -%}
+            {{- slide.light_image | image_url: width: 1440 | image_tag:
+              class: 'product-image img-light',
+              loading: 'lazy',
+              widths: '375, 550, 750, 1100, 1440',
+              sizes: '(min-width: 1440px) 1440px, 100vw',
+              alt: product.title
+            -}}
+            {{- slide.dark_image | image_url: width: 1440 | image_tag:
+              class: 'product-image img-dark',
+              loading: 'lazy',
+              widths: '375, 550, 750, 1100, 1440',
+              sizes: '(min-width: 1440px) 1440px, 100vw',
+              alt: product.title
+            -}}
+          {%- elsif slide.src -%}
+            {%- comment -%} Product image object {%- endcomment -%}
+            {{- slide | image_url: width: 1440 | image_tag:
+              class: 'product-image',
+              loading: 'lazy',
+              widths: '375, 550, 750, 1100, 1440',
+              sizes: '(min-width: 1440px) 1440px, 100vw',
+              alt: slide.alt | default: product.title
+            -}}
+          {%- else -%}
+            {%- comment -%} External URL slides {%- endcomment -%}
+            <img 
+              src="{{ slide.light | default: slide }}" 
+              alt="{{ product.title | default: 'Product image' }}"
+              class="product-image img-light"
+              loading="lazy"
+              draggable="false"
+              {%- if slide.style -%}
+                style="{{ slide.style }}"
+              {%- endif -%}
+            >
+            {%- if slide.dark -%}
+              <img 
+                src="{{ slide.dark }}" 
+                alt="{{ product.title | default: 'Product image' }}"
+                class="product-image img-dark"
+                loading="lazy"
+                draggable="false"
+                {%- if slide.style -%}
+                  style="{{ slide.style }}"
+                {%- endif -%}
+              >
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    {%- else -%}
+      {%- comment -%} Placeholder if no images {%- endcomment -%}
+      <div class="slide-container active">
+        <div class="product-image-placeholder">
+          {{ 'product-1' | placeholder_svg_tag: 'product-image' }}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+  
+  {%- comment -%} Card Controls {%- endcomment -%}
+  {%- assign slide_count = slide_images.size | default: 1 -%}
+  {%- if slide_count > 1 -%}
+    <div class="card-controls">
+      {%- comment -%} Play/Pause Button {%- endcomment -%}
+      <button 
+        class="control-btn" 
+        type="button"
+        aria-label="{{ 'products.card.pause' | t | default: 'Pause slideshow' }}"
+      >
+        <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor" class="icon-pause">
+          <rect width="3.5" height="12" rx="1.75" />
+          <rect x="6.5" width="3.5" height="12" rx="1.75" />
+        </svg>
+        <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor" class="icon-play u-hidden" style="transform: translateX(2px);">
+          <path d="M9.359 5.25391C9.88281 5.58984 9.88281 6.36328 9.359 6.69922L1.47461 11.7246C0.919922 12.0781 0.189453 11.6816 0.189453 11.0117V0.941406C0.189453 0.271484 0.919922 -0.125 1.47461 0.228516L9.359 5.25391Z" />
+        </svg>
+      </button>
+      
+      {%- comment -%} Dot Navigation {%- endcomment -%}
+      <div class="dotnav-container" role="tablist" aria-label="{{ 'products.card.slides' | t | default: 'Product slides' }}">
+        {%- for i in (1..slide_count) -%}
+          {%- assign index = forloop.index0 -%}
+          <button 
+            class="dotnav-item{% if forloop.first %} active{% endif %}"
+            type="button"
+            role="tab"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            aria-label="{{ 'products.card.slide' | t: index: forloop.index | default: 'Slide' | append: ' ' | append: forloop.index }}"
+            data-index="{{ index }}"
+          >
+            <div class="dot-progress"></div>
+          </button>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+</product-card>

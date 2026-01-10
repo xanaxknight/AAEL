@@ -1,0 +1,70 @@
+{
+  "current": {
+    "color_bg_light": "#ffffff",
+    "color_fg_light": "#000000",
+    "color_bg_dark": "#1E1E1E",
+    "color_fg_dark": "#f0f0f0",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo_text": "AAEL",
+          "collection_text": "C24",
+          "show_bag": true
+        }
+      },
+      "mobile-menu": {
+        "type": "mobile-menu",
+        "blocks": {
+          "menu-link-1": {
+            "type": "link",
+            "settings": {
+              "label": "ABOUT",
+              "link": "/pages/about"
+            }
+          },
+          "menu-link-2": {
+            "type": "link",
+            "settings": {
+              "label": "INSTA",
+              "link": "https://instagram.com",
+              "open_new_tab": true
+            }
+          }
+        },
+        "block_order": [
+          "menu-link-1",
+          "menu-link-2"
+        ]
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "footer-link-1": {
+            "type": "link",
+            "settings": {
+              "label": "ABOUT",
+              "link": "/pages/about"
+            }
+          },
+          "footer-link-2": {
+            "type": "link",
+            "settings": {
+              "label": "INSTA",
+              "link": "https://instagram.com",
+              "open_new_tab": true
+            }
+          }
+        },
+        "block_order": [
+          "footer-link-1",
+          "footer-link-2"
+        ],
+        "settings": {
+          "logo_text": "AAEL",
+          "collection_text": "C24"
+        }
+      }
+    }
+  }
+}

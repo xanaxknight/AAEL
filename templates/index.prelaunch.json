@@ -1,0 +1,69 @@
+{
+  "layout": "theme.prelaunch",
+  "sections": {
+    "prelaunch-main": {
+      "type": "prelaunch-main",
+      "blocks": {
+        "slide-1": {
+          "type": "slide",
+          "settings": {
+            "image_light_url": "https://i.ibb.co/YFqGLMGM/amo-5-d.webp",
+            "image_dark_url": "https://i.ibb.co/x8CZ1cNY/amo-5-n.webp",
+            "alt_text": "AMO Desk Lamp"
+          }
+        },
+        "slide-2": {
+          "type": "slide",
+          "settings": {
+            "image_light_url": "https://i.ibb.co/M5N8XTHW/amo-4-d.webp",
+            "image_dark_url": "https://i.ibb.co/PGdjc1mn/amo-4-n.webp",
+            "alt_text": "AMO Desk Lamp"
+          }
+        },
+        "slide-3": {
+          "type": "slide",
+          "settings": {
+            "image_light_url": "https://i.ibb.co/VWjW5STB/d-v3.webp",
+            "image_dark_url": "https://i.ibb.co/fmHHdcb/n-v3.webp",
+            "alt_text": "AMO Desk Lamp"
+          }
+        },
+        "footer-link-1": {
+          "type": "footer_link",
+          "settings": {
+            "label": "ABOUT",
+            "link": "/pages/about"
+          }
+        },
+        "footer-link-2": {
+          "type": "footer_link",
+          "settings": {
+            "label": "INSTA",
+            "link": "https://instagram.com",
+            "open_new_tab": true
+          }
+        }
+      },
+      "block_order": [
+        "slide-1",
+        "slide-2",
+        "slide-3",
+        "footer-link-1",
+        "footer-link-2"
+      ],
+      "settings": {
+        "logo_text": "AAEL",
+        "collection_text": "C24",
+        "cta_button_text": "Let me know",
+        "hero_text": "AAEL creates limited series of interior artifacts primarily out of metal.",
+        "slide_timings": "12000,6000",
+        "newsletter_title": "Let me know when AMO is available",
+        "newsletter_placeholder": "Email",
+        "newsletter_button": "Send"
+      }
+    }
+  },
+  "order": [
+    "prelaunch-main"
+  ]
+}

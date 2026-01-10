@@ -1,0 +1,172 @@
+{%- comment -%}
+  Footer Section
+  Logo, navigation links, and copyright
+{%- endcomment -%}
+
+{%- liquid
+  assign logo_text = section.settings.logo_text | default: shop.name
+  assign collection_text = section.settings.collection_text | default: 'C24'
+  assign copyright_text = section.settings.copyright_text
+-%}
+
+{%- comment -%} Logo Block {%- endcomment -%}
+<div 
+  class="grid-block footer-block"
+  style="
+    --span-s: span 1;
+    --start-s: auto;
+    --align-s: center;
+    --text-s: center;
+    --span-m: span 1;
+    --align-m: center;
+    --text-m: center;
+    --span-l: span 1;
+    --start-l: 2;
+    --align-l: flex-start;
+    --text-l: left;
+    --span-xl: span 1;
+    --start-xl: 3;
+    --align-xl: flex-start;
+    --text-xl: left;
+  "
+>
+  <div class="logo-badge">
+    <span class="brand-text">{{ logo_text }}</span>
+    <span class="collection-text">{{ collection_text }}</span>
+  </div>
+</div>
+
+{%- comment -%} Footer Links - Desktop Only {%- endcomment -%}
+{%- for block in section.blocks -%}
+  {%- case block.type -%}
+    {%- when 'link' -%}
+      <div 
+        class="grid-block footer-block desktop-only"
+        style="
+          --span-m: span 1;
+          --align-m: center;
+          --text-m: center;
+          --span-l: span 1;
+          --align-l: center;
+          --text-l: center;
+        "
+        {{ block.shopify_attributes }}
+      >
+        <a 
+          href="{{ block.settings.link }}" 
+          class="footer-text"
+          {%- if block.settings.open_new_tab -%}
+            target="_blank" 
+            rel="noopener noreferrer"
+          {%- endif -%}
+        >
+          {{ block.settings.label }}
+        </a>
+      </div>
+  {%- endcase -%}
+{%- endfor -%}
+
+{%- comment -%} Copyright Block {%- endcomment -%}
+<div 
+  class="grid-block footer-block"
+  style="
+    --span-s: span 1;
+    --start-s: auto;
+    --align-s: center;
+    --text-s: center;
+    --span-m: span 1;
+    --align-m: center;
+    --text-m: center;
+    --span-l: span 1;
+    --start-l: 5;
+    --align-l: center;
+    --text-l: center;
+    --span-xl: span 1;
+    --start-xl: 6;
+    --align-xl: center;
+    --text-xl: center;
+  "
+>
+  <span class="footer-text static-text">
+    {%- if copyright_text != blank -%}
+      {{ copyright_text }}
+    {%- else -%}
+      ©{{ 'now' | date: '%Y' }}
+    {%- endif -%}
+  </span>
+</div>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "section-footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "AAEL"
+    },
+    {
+      "type": "text",
+      "id": "collection_text",
+      "label": "Collection text",
+      "default": "C24",
+      "info": "Displayed next to logo on desktop"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright text",
+      "info": "Leave blank to use current year"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Footer link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "About"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_new_tab",
+          "label": "Open in new tab",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        {
+          "type": "link",
+          "settings": {
+            "label": "ABOUT",
+            "link": "/pages/about"
+          }
+        },
+        {
+          "type": "link",
+          "settings": {
+            "label": "INSTA",
+            "link": "https://instagram.com",
+            "open_new_tab": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,102 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "AAEL",
+    "theme_version": "1.0.0",
+    "theme_author": "AAEL",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://support.shopify.com/"
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "32 x 32px .png recommended"
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Light mode"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_light",
+        "label": "Background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_fg_light",
+        "label": "Foreground",
+        "default": "#000000"
+      },
+      {
+        "type": "header",
+        "content": "Dark mode"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_dark",
+        "label": "Background",
+        "default": "#1E1E1E"
+      },
+      {
+        "type": "color",
+        "id": "color_fg_dark",
+        "label": "Foreground",
+        "default": "#f0f0f0"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading font",
+        "default": "helvetica_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body font",
+        "default": "helvetica_n4"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social accounts"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram",
+        "info": "https://instagram.com/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "Twitter",
+        "info": "https://twitter.com/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook",
+        "info": "https://facebook.com/shopify"
+      }
+    ]
+  }
+]

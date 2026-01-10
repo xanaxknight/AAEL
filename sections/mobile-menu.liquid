@@ -1,0 +1,91 @@
+{%- comment -%}
+  Mobile Menu Section
+  Full-screen mobile navigation with links and theme toggle
+{%- endcomment -%}
+
+<div class="mobile-menu-container" id="MobileMenu" aria-hidden="true">
+  <nav class="mobile-nav" role="navigation" aria-label="{{ 'accessibility.nav.mobile' | t | default: 'Mobile navigation' }}">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'link' -%}
+          <a 
+            href="{{ block.settings.link }}" 
+            class="mobile-link"
+            style="transition-delay: {{ forloop.index | times: 100 }}ms;"
+            {{ block.shopify_attributes }}
+            {%- if block.settings.open_new_tab -%}
+              target="_blank" 
+              rel="noopener noreferrer"
+            {%- endif -%}
+          >
+            {{ block.settings.label }}
+          </a>
+      {%- endcase -%}
+    {%- endfor -%}
+  </nav>
+  
+  <div class="mobile-theme-toggle" style="transition-delay: {{ section.blocks.size | plus: 1 | times: 100 }}ms;">
+    <button 
+      class="icon-btn js-theme-toggle" 
+      type="button"
+      aria-label="{{ 'general.theme.toggle' | t | default: 'Toggle theme' }}"
+    >
+      {% render 'icon-theme' %}
+    </button>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Mobile Menu",
+  "class": "section-mobile-menu",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Menu link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "About"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_new_tab",
+          "label": "Open in new tab",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mobile Menu",
+      "blocks": [
+        {
+          "type": "link",
+          "settings": {
+            "label": "ABOUT",
+            "link": "/pages/about"
+          }
+        },
+        {
+          "type": "link",
+          "settings": {
+            "label": "INSTA",
+            "link": "https://instagram.com",
+            "open_new_tab": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

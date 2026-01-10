@@ -1,0 +1,209 @@
+{%- liquid
+  assign collection_text = section.settings.collection_text | default: 'C24'
+  assign show_bag = section.settings.show_bag
+  assign right_button_text = section.settings.right_button_text
+  assign right_button_link = section.settings.right_button_link
+-%}
+
+{%- comment -%} Logo & Collection Block {%- endcomment -%}
+<div 
+  class="grid-block header-block"
+  style="
+    --span-s: span 1;
+    --start-s: auto;
+    --row-s: 1;
+    --align-s: center;
+    --text-s: center;
+    --span-m: span 1;
+    --start-m: auto;
+    --row-m: 1;
+    --align-m: flex-start;
+    --text-m: left;
+    --span-l: span 1;
+    --start-l: 2;
+    --row-l: 1;
+    --align-l: flex-start;
+    --text-l: left;
+    --span-xl: span 1;
+    --start-xl: 3;
+    --row-xl: 1;
+    --align-xl: flex-start;
+    --text-xl: left;
+  "
+>
+  <div class="logo-badge">
+    <a href="{{ routes.root_url }}" class="brand-logo-link" aria-label="{{ shop.name }}">
+      {%- if section.settings.logo != blank -%}
+        {%- assign logo_alt = section.settings.logo.alt | default: shop.name | escape -%}
+        {{ section.settings.logo | image_url: width: 300 | image_tag:
+          class: 'header__heading-logo',
+          widths: '50, 100, 150, 200, 250, 300',
+          height: section.settings.logo_width,
+          width: section.settings.logo.width,
+          alt: logo_alt
+        }}
+      {%- else -%}
+        <h1 class="brand-text">{{ section.settings.logo_text | default: shop.name }}</h1>
+      {%- endif -%}
+    </a>
+    
+    {%- if collection_text != blank -%}
+      <span class="collection-text">{{ collection_text }}</span>
+    {%- endif -%}
+  </div>
+</div>
+
+{%- comment -%} Theme Toggle - Desktop Only {%- endcomment -%}
+<div 
+  class="grid-block header-block desktop-only"
+  style="
+    --span-s: span 0;
+    --start-s: auto;
+    --row-s: 1;
+    --align-s: center;
+    --text-s: center;
+    --span-m: span 2;
+    --start-m: auto;
+    --row-m: 1;
+    --align-m: center;
+    --text-m: center;
+    --span-l: span 2;
+    --start-l: 3;
+    --row-l: 1;
+    --align-l: center;
+    --text-l: center;
+    --span-xl: span 2;
+    --start-xl: 4;
+    --row-xl: 1;
+    --align-xl: center;
+    --text-xl: center;
+  "
+>
+  <button 
+    class="icon-btn js-theme-toggle" 
+    type="button"
+    aria-label="{{ 'general.theme.toggle' | t | default: 'Toggle theme' }}"
+  >
+    {% render 'icon-theme' %}
+  </button>
+</div>
+
+{%- comment -%} Mobile Menu Toggle - Mobile Only {%- endcomment -%}
+<div class="mobile-menu-absolute mobile-only">
+  <button 
+    class="icon-btn js-menu-toggle" 
+    type="button"
+    aria-label="{{ 'general.menu.open' | t | default: 'Open menu' }}"
+    aria-expanded="false"
+    aria-controls="MobileMenu"
+  >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="menu-toggle-icon">
+      <line x1="0" y1="2" x2="24" y2="2" class="menu-line menu-line-1" />
+      <line x1="0" y1="7" x2="24" y2="7" class="menu-line menu-line-2" />
+      <line x1="0" y1="12" x2="24" y2="12" class="menu-line menu-line-3" />
+      <line x1="0" y1="17" x2="24" y2="17" class="menu-line menu-line-4" />
+      <line x1="0" y1="22" x2="24" y2="22" class="menu-line menu-line-5" />
+    </svg>
+  </button>
+</div>
+
+{%- comment -%} Right Action Block (Bag or Custom Button) {%- endcomment -%}
+<div 
+  class="grid-block header-block"
+  style="
+    --span-s: span 1;
+    --start-s: auto;
+    --row-s: 1;
+    --align-s: center;
+    --text-s: center;
+    --span-m: span 1;
+    --start-m: 4;
+    --row-m: 1;
+    --align-m: flex-end;
+    --text-m: right;
+    --span-l: span 1;
+    --start-l: 5;
+    --row-l: 1;
+    --align-l: center;
+    --text-l: center;
+    --span-xl: span 1;
+    --start-xl: 6;
+    --row-xl: 1;
+    --align-xl: center;
+    --text-xl: center;
+  "
+>
+  <div class="bag-container">
+    {%- if right_button_text != blank and right_button_link != blank -%}
+      <a href="{{ right_button_link }}" class="pill-btn">
+        {{ right_button_text }}
+      </a>
+    {%- elsif show_bag -%}
+      <a href="{{ routes.cart_url }}" class="bag-btn" aria-label="{{ 'cart.title' | t }}">
+        BAG (<span class="cart-count">{{ cart.item_count }}</span>)
+      </a>
+    {%- else -%}
+      <button class="bag-btn" type="button">
+        BAG (<span class="cart-count">{{ cart.item_count }}</span>)
+      </button>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 250,
+      "step": 10,
+      "default": 100,
+      "unit": "px",
+      "label": "Custom logo width"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text (fallback)",
+      "default": "AAEL"
+    },
+    {
+      "type": "text",
+      "id": "collection_text",
+      "label": "Collection text",
+      "default": "C24",
+      "info": "Displayed next to logo on desktop"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bag",
+      "label": "Show cart bag",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Custom right button"
+    },
+    {
+      "type": "text",
+      "id": "right_button_text",
+      "label": "Button text",
+      "info": "Leave blank to show cart bag instead"
+    },
+    {
+      "type": "url",
+      "id": "right_button_link",
+      "label": "Button link"
+    }
+  ]
+}
+{% endschema %}

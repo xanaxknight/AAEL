@@ -1,0 +1,43 @@
+{%- comment -%}
+  Theme Toggle Icon
+  Renders the light/dark theme toggle icon SVG.
+  
+  Usage:
+  {% render 'icon-theme' %}
+{%- endcomment -%}
+
+<svg 
+  viewBox="0 0 24 24" 
+  fill="none" 
+  class="theme-icon"
+  aria-hidden="true"
+>
+  <circle 
+    cx="12" 
+    cy="12" 
+    r="11.25" 
+    stroke="currentColor" 
+    stroke-width="1.5"
+    class="theme-icon-circle"
+  />
+  {%- comment -%} Light mode indicator (vertical line) {%- endcomment -%}
+  <rect 
+    x="11.25" 
+    y="7" 
+    width="1.5" 
+    height="10" 
+    rx="0.75" 
+    fill="currentColor"
+    class="theme-icon-line theme-icon-line--light"
+  />
+  {%- comment -%} Dark mode indicator (inner circle) {%- endcomment -%}
+  <circle 
+    cx="12" 
+    cy="12" 
+    r="4" 
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    class="theme-icon-line theme-icon-line--dark"
+  />
+</svg>

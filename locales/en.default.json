@@ -1,0 +1,32 @@
+{
+  "general": {
+    "theme": {
+      "toggle": "Toggle theme"
+    },
+    "menu": {
+      "open": "Open menu",
+      "close": "Close menu"
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content",
+    "nav": {
+      "mobile": "Mobile navigation"
+    }
+  },
+  "cart": {
+    "title": "Cart"
+  },
+  "products": {
+    "card": {
+      "pause": "Pause slideshow",
+      "play": "Play slideshow",
+      "slides": "Product slides",
+      "slide": "Go to slide {{ index }}"
+    }
+  },
+  "newsletter": {
+    "success": "Thanks for subscribing!",
+    "error": "Please enter a valid email address"
+  }
+}
