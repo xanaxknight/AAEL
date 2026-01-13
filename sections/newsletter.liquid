@@ -22,11 +22,13 @@
         --text-xl: center;
       "
     >
-      <div id="newsletter-form" class="newsletter-wrapper" style="width: 100%; max-width: {{ section.settings.form_max_width }}px; margin: 0 auto; text-align: center;">
-        <h2 class="lead-text" style="margin-bottom: 32px;">
+      <div class="newsletter-text" style="width: 100%; margin: 0 auto; text-align: center; margin-bottom: 32px;">
+        <h2 class="lead-text">
           {{ section.settings.newsletter_title }}
         </h2>
-        
+      </div>
+      
+      <div id="newsletter-form" class="newsletter-wrapper" style="width: 100%; max-width: {{ section.settings.form_max_width }}px; margin: 0 auto; text-align: center;">
         {%- form 'customer', class: 'newsletter-form-prelaunch' -%}
           <input type="hidden" name="contact[tags]" value="newsletter,prelaunch">
           <div class="newsletter-input-group" style="display: flex; width: 100%; gap: 8px; align-items: center;">

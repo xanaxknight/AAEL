@@ -541,6 +541,8 @@ body.mode-prelaunch {
   align-items: var(--align-s, flex-start);
   text-align: var(--text-s, left);
   position: relative;
+  vertical-align: middle;
+  justify-content: center;
 }
 
 @media (min-width: 768px) {
@@ -882,7 +884,7 @@ body.mode-prelaunch .mobile-menu-absolute {
 
 .pill-btn {
   display: flex;
-  height: 36px;
+  height: 42px;
   padding: 8px 24px;
   justify-content: center;
   align-items: center;
@@ -990,6 +992,9 @@ html.dark body .theme-icon-line--dark {
   font-weight: 500;
   line-height: normal;
   letter-spacing: 0.96px;
+  vertical-align: bottom;
+  padding-left: 72px;
+  padding-right: 72px;
 }
 
 @media (max-width: 767px) {
@@ -1147,6 +1152,36 @@ html.dark body .product-image.img-light {
   backdrop-filter: blur(12.5px);
   border-radius: 999px;
   padding: 4px 6px;
+  position: relative;
+}
+
+/* iOS-style sliding background indicator with glass effect */
+.slider-theme-toggle::before {
+  content: '';
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.10);
+  border-radius: 50%;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+  z-index: 0;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 0.5px 1px 0 #FFF inset, 0 0 3px 0 rgba(0, 0, 0, 0.35) inset;
+  backdrop-filter: blur(12.5px);
+}
+
+/* Slide to light icon position (left) */
+body:not(.dark) .slider-theme-toggle::before {
+  transform: translateX(0) translateY(-50%);
+  box-shadow: 0 0.5px 1px 0 #FFF inset, 0 0 3px 0 rgba(0, 0, 0, 0.35) inset;
+}
+
+/* Slide to dark icon position (right) with dark theme glass effect */
+body.dark .slider-theme-toggle::before {
+  transform: translateX(32px) translateY(-50%);
+  box-shadow: 0 0.5px 1px 0 rgba(255, 255, 255, 0.5) inset, 0 0 3px 0 rgba(255, 255, 255, 0.2) inset;
 }
 
 .slider-theme-toggle .theme-icon {
@@ -1160,49 +1195,34 @@ html.dark body .product-image.img-light {
   background: transparent;
   cursor: pointer;
   color: var(--control-col);
-  transition: background 0.2s, color 0.2s, opacity 0.2s;
+  transition: opacity 0.3s ease, color 0.3s ease;
   opacity: 0.5;
+  position: relative;
+  z-index: 1;
 }
 
 .slider-theme-toggle .theme-icon:hover {
   opacity: 0.8;
 }
 
-.slider-theme-toggle .theme-icon.is-active {
-  background: rgba(255, 255, 255, 0.30);
-  opacity: 1;
-}
-
-body:not(.dark) .slider-theme-toggle .theme-icon--light.is-active,
-body.dark .slider-theme-toggle .theme-icon--dark.is-active {
-  background: rgba(255, 255, 255, 0.30);
-  opacity: 1;
-}
-
+/* Light theme: light icon is active (full opacity) */
 body:not(.dark) .slider-theme-toggle .theme-icon--light {
   opacity: 1;
-  border-radius: 1.125rem;
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0.5px 1px 0 #FFF inset, 0 0 2px 0 rgba(0, 0, 0, 0.35) inset;
-  backdrop-filter: blur(5px);
 }
 
+/* Dark theme: dark icon is active (full opacity) */
 body.dark .slider-theme-toggle .theme-icon--dark {
   opacity: 1;
-  border-radius: 1.125rem;
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0.5px 1px 0 #FFF inset, 0 0 2px 0 rgba(0, 0, 0, 0.35) inset;
-  backdrop-filter: blur(5px);
 }
 
+/* Light theme: dark icon is inactive (reduced opacity) */
 body:not(.dark) .slider-theme-toggle .theme-icon--dark {
   opacity: 0.4;
-  background: transparent;
 }
 
+/* Dark theme: light icon is inactive (reduced opacity) */
 body.dark .slider-theme-toggle .theme-icon--light {
   opacity: 0.4;
-  background: transparent;
 }
 
 .slider-theme-toggle .theme-icon svg {
@@ -1364,6 +1384,14 @@ body.dark .slider-theme-toggle .theme-icon--light {
 /* ========================================
    NEWSLETTER
    ======================================== */
+
+.section-hero-lead .grid-block {
+  height: 320px;
+}
+
+.newsletter-text h2.lead-text {
+  width: 100%;
+}
 
 .newsletter-form {
   display: flex;
