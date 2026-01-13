@@ -147,6 +147,7 @@ body.dark #CookieConsent .glass-card {
   font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: -0.01em;
+  padding: 0 8px;
 }
 
 .cookie-close-btn {
@@ -170,6 +171,7 @@ body.dark #CookieConsent .glass-card {
   line-height: 1.4;
   color: var(--fg);
   opacity: 0.7;
+  padding: 0 8px;
 }
 
 .cookie-actions {
@@ -210,23 +212,23 @@ body.dark #CookieConsent .glass-card {
 
 .cookie-pref-item {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
   width: 100%;
+  padding-left: 8px;
 }
 
 .cookie-pref-info {
   display: flex;
   gap: 0.75rem;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .cookie-pref-icon-wrapper {
-  width: 32px;
-  height: 32px;
+  width: 22px;
+  height: 22px;
   background: rgba(0, 0, 0, 0.05);
-  border-radius: 6px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -238,16 +240,12 @@ body.dark .cookie-pref-icon-wrapper {
 }
 
 .cookie-pref-icon-wrapper.is-empty {
-  background: rgba(0, 0, 0, 0.03);
-}
-
-body.dark .cookie-pref-icon-wrapper.is-empty {
-  background: rgba(255, 255, 255, 0.05);
+  display: none;
 }
 
 .cookie-pref-icon {
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   color: #000;
   opacity: 0.8;
 }
@@ -272,9 +270,10 @@ body.dark .cookie-pref-icon {
 /* Custom Checkbox */
 .cookie-checkbox-wrapper {
   position: relative;
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .cookie-checkbox-wrapper input {
@@ -289,12 +288,15 @@ body.dark .cookie-pref-icon {
   position: absolute;
   top: 0;
   left: 0;
-  height: 24px;
-  width: 24px;
+  height: 22px;
+  width: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: transparent;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 4px;
-  transition: all 0.2s;
+  transition: all 0.15s ease;
 }
 
 body.dark .cookie-checkmark {
@@ -302,8 +304,8 @@ body.dark .cookie-checkmark {
 }
 
 .cookie-checkbox-wrapper input:checked ~ .cookie-checkmark {
-  background-color: #000;
-  border-color: #000;
+  background: var(--text-bg-black, #000);
+  border-color: transparent;
 }
 
 body.dark .cookie-checkbox-wrapper input:checked ~ .cookie-checkmark {
@@ -315,13 +317,13 @@ body.dark .cookie-checkbox-wrapper input:checked ~ .cookie-checkmark {
   content: "";
   position: absolute;
   display: none;
-  left: 8px;
-  top: 4px;
-  width: 6px;
-  height: 10px;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 5px;
+  height: 9px;
   border: solid white;
   border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
 }
 
 body.dark .cookie-checkmark:after {

@@ -42,11 +42,6 @@
     </div>
 
     <div class="cookie-preferences-content">
-      <div class="cookie-prefs-intro">
-        <h4 class="cookie-prefs-subtitle">You control your data</h4>
-        <p class="cookie-text">Learn more about the cookies we use, and choose which cookies to allow.</p>
-      </div>
-
       <div class="cookie-prefs-list">
         {%- comment -%} Required {%- endcomment -%}
         <div class="cookie-pref-item">
@@ -61,54 +56,48 @@
               <p class="cookie-pref-desc">These cookies are necessary for the site to function properly, including capabilities like logging in and adding items to the cart.</p>
             </div>
           </div>
-          <div class="cookie-toggle-disabled">
-            <div class="cookie-checkbox-placeholder"></div>
-          </div>
         </div>
 
         {%- comment -%} Personalisation {%- endcomment -%}
         <div class="cookie-pref-item">
           <div class="cookie-pref-info">
-            <div class="cookie-pref-icon-wrapper is-empty"></div>
+            <label class="cookie-checkbox-wrapper">
+              <input type="checkbox" class="js-cookie-toggle" data-type="personalization" checked>
+              <span class="cookie-checkmark"></span>
+            </label>
             <div class="cookie-pref-text">
               <span class="cookie-pref-label">Personalisation</span>
               <p class="cookie-pref-desc">These cookies store details about your actions to personalize your next visit to the website.</p>
             </div>
           </div>
-          <label class="cookie-checkbox-wrapper">
-            <input type="checkbox" class="js-cookie-toggle" data-type="personalization" checked>
-            <span class="cookie-checkmark"></span>
-          </label>
         </div>
 
         {%- comment -%} Marketing {%- endcomment -%}
         <div class="cookie-pref-item">
           <div class="cookie-pref-info">
-            <div class="cookie-pref-icon-wrapper is-empty"></div>
+            <label class="cookie-checkbox-wrapper">
+              <input type="checkbox" class="js-cookie-toggle" data-type="marketing" checked>
+              <span class="cookie-checkmark"></span>
+            </label>
             <div class="cookie-pref-text">
               <span class="cookie-pref-label">Marketing</span>
               <p class="cookie-pref-desc">These cookies are used by us and our partners, including Shopify, to optimize marketing communications and show you ads on other websites.</p>
             </div>
           </div>
-          <label class="cookie-checkbox-wrapper">
-            <input type="checkbox" class="js-cookie-toggle" data-type="marketing" checked>
-            <span class="cookie-checkmark"></span>
-          </label>
         </div>
 
         {%- comment -%} Analytics {%- endcomment -%}
         <div class="cookie-pref-item">
           <div class="cookie-pref-info">
-            <div class="cookie-pref-icon-wrapper is-empty"></div>
+            <label class="cookie-checkbox-wrapper">
+              <input type="checkbox" class="js-cookie-toggle" data-type="analytics" checked>
+              <span class="cookie-checkmark"></span>
+            </label>
             <div class="cookie-pref-text">
               <span class="cookie-pref-label">Analytics</span>
               <p class="cookie-pref-desc">These cookies store details about your actions to personalize your next visit to the website.</p>
             </div>
           </div>
-          <label class="cookie-checkbox-wrapper">
-            <input type="checkbox" class="js-cookie-toggle" data-type="analytics" checked>
-            <span class="cookie-checkmark"></span>
-          </label>
         </div>
       </div>
     </div>
