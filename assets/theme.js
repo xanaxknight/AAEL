@@ -149,41 +149,43 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 function initCookieConsent() {
   const container = document.getElementById('CookieConsent');
-  const banner = document.getElementById('CookieBanner');
-  const prefs = document.getElementById('CookiePreferences');
   const storageKey = 'aael-cookie-consent';
 
-  // 1. Aggressively remove native Shopify banners
-  const killNativeBanner = () => {
-    const nativeSelectors = [
-      '#shopify-privacy-banner',
+  // 1. Extreme kill switch for native banners
+  const purgeNative = () => {
+    const selectors = [
       '#shopify-privacy-banner-container',
       '.shopify-privacy-banner-container',
-      '.shopify-policy-banner'
+      '#shopify-privacy-banner',
+      '.shopify-policy-banner',
+      'iframe[src*="privacy"]',
+      '#cookie-consent-banner'
     ];
-    nativeSelectors.forEach(sel => {
-      const el = document.querySelector(sel);
-      if (el) {
-        el.remove();
-        console.log('Removed native banner:', sel);
-      }
+    
+    selectors.forEach(s => {
+      document.querySelectorAll(s).forEach(el => {
+        if (el && el.id !== 'CookieConsent' && !el.closest('#CookieConsent')) {
+          el.style.setProperty('display', 'none', 'important');
+          el.remove();
+        }
+      });
     });
   };
 
-  // Check immediately and then on an interval for a few seconds
-  killNativeBanner();
-  const killInterval = setInterval(killNativeBanner, 500);
-  setTimeout(() => clearInterval(killInterval), 10000);
+  purgeNative();
+  setInterval(purgeNative, 200); // Check 5 times a second
 
-  // 2. Custom Banner Logic
+  // 2. Force show logic
   const savedConsent = localStorage.getItem(storageKey);
-  const isDebug = window.location.search.includes('debug_cookies') || true; // FORCE SHOW FOR TESTING
-  
-  if (savedConsent && !isDebug) return;
+  // Remove the '|| true' once you confirm it works!
+  if (savedConsent && !window.location.search.includes('debug')) return;
 
   setTimeout(() => {
-    if (container) container.classList.remove('is-hidden');
-  }, 1200);
+    if (container) {
+      container.classList.remove('is-hidden');
+      console.log('AAEL: Custom banner should be visible now.');
+    }
+  }, 1000);
 
   // Bind Banner Buttons
   container?.querySelector('.js-cookie-accept')?.addEventListener('click', () => setConsent({
