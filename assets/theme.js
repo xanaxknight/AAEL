@@ -177,7 +177,7 @@ function initCookieConsent() {
 
   // 2. Custom Banner Logic
   const savedConsent = localStorage.getItem(storageKey);
-  const isDebug = window.location.search.includes('debug_cookies');
+  const isDebug = window.location.search.includes('debug_cookies') || true; // FORCE SHOW FOR TESTING
   
   if (savedConsent && !isDebug) return;
 
