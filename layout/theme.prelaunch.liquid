@@ -58,6 +58,9 @@
   </a>
 
   <div class="app-container">
+    {%- comment -%} Cookie Consent Banner {%- endcomment -%}
+    {% section 'cookie-banner' %}
+
     <main id="MainContent" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>

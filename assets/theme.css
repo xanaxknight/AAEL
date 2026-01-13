@@ -62,10 +62,298 @@ html.dark body {
   --btn-shadow: 0 0.5px 1px 0 #ffffff9f inset, 0 0 2px 0 rgba(0, 0, 0, 0.35) inset;
 }
 
-/* --- Base Styles --- */
-html {
-  font-size: 16px;
+/* --- Cookie Consent --- */
+.cookie-consent-container {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  pointer-events: none;
 }
+
+.cookie-consent-container.is-hidden {
+  display: none;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 2.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+  pointer-events: auto;
+  width: 100%;
+  max-width: 1200px;
+  padding: 40px;
+  transition: all 0.3s ease;
+}
+
+body.dark .glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cookie-banner-wrapper.is-hidden,
+.cookie-preferences-wrapper.is-hidden {
+  display: none;
+}
+
+.cookie-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.cookie-title {
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.cookie-close-btn {
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.cookie-close-btn:hover {
+  opacity: 0.6;
+}
+
+.cookie-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--fg);
+  opacity: 0.8;
+  max-width: 1000px;
+}
+
+.cookie-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+  gap: 16px;
+}
+
+.cookie-actions-left,
+.cookie-actions-right {
+  display: flex;
+  gap: 12px;
+}
+
+/* Modal Specifics */
+.cookie-preferences-wrapper {
+  max-width: 1000px;
+}
+
+.cookie-prefs-intro {
+  margin-bottom: 32px;
+}
+
+.cookie-prefs-subtitle {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.cookie-prefs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.cookie-pref-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.cookie-pref-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.cookie-pref-icon-wrapper {
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+body.dark .cookie-pref-icon-wrapper {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.cookie-pref-icon-wrapper.is-empty {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+body.dark .cookie-pref-icon-wrapper.is-empty {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.cookie-pref-icon {
+  width: 20px;
+  height: 20px;
+  color: #000;
+  opacity: 0.8;
+}
+
+body.dark .cookie-pref-icon {
+  color: #fff;
+}
+
+.cookie-pref-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.cookie-pref-desc {
+  font-size: 12px;
+  opacity: 0.6;
+  line-height: 1.4;
+}
+
+/* Custom Checkbox */
+.cookie-checkbox-wrapper {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.cookie-checkbox-wrapper input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.cookie-checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 24px;
+  width: 24px;
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+body.dark .cookie-checkmark {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.cookie-checkbox-wrapper input:checked ~ .cookie-checkmark {
+  background-color: #000;
+  border-color: #000;
+}
+
+body.dark .cookie-checkbox-wrapper input:checked ~ .cookie-checkmark {
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.cookie-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 8px;
+  top: 4px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+body.dark .cookie-checkmark:after {
+  border-color: black;
+}
+
+.cookie-checkbox-wrapper input:checked ~ .cookie-checkmark:after {
+  display: block;
+}
+
+.cookie-checkbox-placeholder {
+  width: 24px;
+  height: 24px;
+}
+
+.pill-btn--dark {
+  background: #000 !important;
+  color: #fff !important;
+  backdrop-filter: none !important;
+}
+
+body.dark .pill-btn--dark {
+  background: #fff !important;
+  color: #000 !important;
+}
+
+.pill-btn--light {
+  background: rgba(0, 0, 0, 0.05) !important;
+  color: #000 !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  backdrop-filter: blur(5px) !important;
+}
+
+body.dark .pill-btn--light {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+@media (max-width: 767px) {
+  .cookie-consent-container {
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .glass-card {
+    border-radius: 1.5rem 1.5rem 0 0;
+    padding: 24px;
+  }
+
+  .cookie-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cookie-actions-left,
+  .cookie-actions-right {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .cookie-actions-left button,
+  .cookie-actions-right button,
+  .cookie-actions > button {
+    width: 100%;
+  }
+}
+
 
 body {
   background-color: var(--bg);

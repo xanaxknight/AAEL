@@ -1,0 +1,150 @@
+{%- comment -%}
+  Cookie Consent Section
+  Includes Default Banner and Preferences Modal
+{%- endcomment -%}
+
+<div id="CookieConsent" class="cookie-consent-container is-hidden" data-section-id="{{ section.id }}">
+  {%- comment -%} Default State (Banner) {%- endcomment -%}
+  <div id="CookieBanner" class="cookie-banner-wrapper glass-card">
+    <div class="cookie-header">
+      <h3 class="cookie-title">{{ section.settings.title | default: 'Cookie consent' }}</h3>
+      <button type="button" class="cookie-close-btn js-cookie-close" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="cookie-content">
+      <p class="cookie-text">
+        {{ section.settings.content | default: 'We and our partners, including Shopify, use cookies and other technologies to personalize your experience, show you ads, and perform analytics, and we will not use cookies and other technologies for these purposes unless you accept them. Learn more in our Privacy Policy' }}
+      </p>
+    </div>
+
+    <div class="cookie-actions">
+      <div class="cookie-actions-left">
+        <button type="button" class="pill-btn pill-btn--dark js-cookie-accept">Accept</button>
+        <button type="button" class="pill-btn pill-btn--light js-cookie-decline">Decline</button>
+      </div>
+      <button type="button" class="pill-btn pill-btn--light js-cookie-manage">Manage preferences</button>
+    </div>
+  </div>
+
+  {%- comment -%} Open State (Preferences Modal) {%- endcomment -%}
+  <div id="CookiePreferences" class="cookie-preferences-wrapper glass-card is-hidden">
+    <div class="cookie-header">
+      <h3 class="cookie-title">{{ section.settings.prefs_title | default: 'Cookie and privacy preferences' }}</h3>
+      <button type="button" class="cookie-close-btn js-cookie-close-prefs" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="cookie-preferences-content">
+      <div class="cookie-prefs-intro">
+        <h4 class="cookie-prefs-subtitle">You control your data</h4>
+        <p class="cookie-text">Learn more about the cookies we use, and choose which cookies to allow.</p>
+      </div>
+
+      <div class="cookie-prefs-list">
+        {%- comment -%} Required {%- endcomment -%}
+        <div class="cookie-pref-item">
+          <div class="cookie-pref-info">
+            <div class="cookie-pref-icon-wrapper">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="cookie-pref-icon">
+                <path d="M12 2C9.243 2 7 4.243 7 7V10H6C4.897 10 4 10.897 4 12V20C4 21.103 4.897 22 6 22H18C19.103 22 20 21.103 20 20V12C20 10.897 19.103 10 18 10H17V7C17 4.243 14.757 2 12 2ZM9 7C9 5.346 10.346 4 12 4C13.654 4 15 5.346 15 7V10H9V7Z"/>
+              </svg>
+            </div>
+            <div class="cookie-pref-text">
+              <span class="cookie-pref-label">Required</span>
+              <p class="cookie-pref-desc">These cookies are necessary for the site to function properly, including capabilities like logging in and adding items to the cart.</p>
+            </div>
+          </div>
+          <div class="cookie-toggle-disabled">
+            <div class="cookie-checkbox-placeholder"></div>
+          </div>
+        </div>
+
+        {%- comment -%} Personalisation {%- endcomment -%}
+        <div class="cookie-pref-item">
+          <div class="cookie-pref-info">
+            <div class="cookie-pref-icon-wrapper is-empty"></div>
+            <div class="cookie-pref-text">
+              <span class="cookie-pref-label">Personalisation</span>
+              <p class="cookie-pref-desc">These cookies store details about your actions to personalize your next visit to the website.</p>
+            </div>
+          </div>
+          <label class="cookie-checkbox-wrapper">
+            <input type="checkbox" class="js-cookie-toggle" data-type="personalization" checked>
+            <span class="cookie-checkmark"></span>
+          </label>
+        </div>
+
+        {%- comment -%} Marketing {%- endcomment -%}
+        <div class="cookie-pref-item">
+          <div class="cookie-pref-info">
+            <div class="cookie-pref-icon-wrapper is-empty"></div>
+            <div class="cookie-pref-text">
+              <span class="cookie-pref-label">Marketing</span>
+              <p class="cookie-pref-desc">These cookies are used by us and our partners, including Shopify, to optimize marketing communications and show you ads on other websites.</p>
+            </div>
+          </div>
+          <label class="cookie-checkbox-wrapper">
+            <input type="checkbox" class="js-cookie-toggle" data-type="marketing" checked>
+            <span class="cookie-checkmark"></span>
+          </label>
+        </div>
+
+        {%- comment -%} Analytics {%- endcomment -%}
+        <div class="cookie-pref-item">
+          <div class="cookie-pref-info">
+            <div class="cookie-pref-icon-wrapper is-empty"></div>
+            <div class="cookie-pref-text">
+              <span class="cookie-pref-label">Analytics</span>
+              <p class="cookie-pref-desc">These cookies store details about your actions to personalize your next visit to the website.</p>
+            </div>
+          </div>
+          <label class="cookie-checkbox-wrapper">
+            <input type="checkbox" class="js-cookie-toggle" data-type="analytics" checked>
+            <span class="cookie-checkmark"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="cookie-actions cookie-actions--prefs">
+      <button type="button" class="pill-btn pill-btn--light js-cookie-save-choices">Save my choices</button>
+      <div class="cookie-actions-right">
+        <button type="button" class="pill-btn pill-btn--light js-cookie-decline-all">Decline all</button>
+        <button type="button" class="pill-btn pill-btn--dark js-cookie-accept-all">Accept all</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cookie Consent",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Banner Title",
+      "default": "Cookie consent"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Banner Content",
+      "default": "We and our partners, including Shopify, use cookies and other technologies to personalize your experience, show you ads, and perform analytics, and we will not use cookies and other technologies for these purposes unless you accept them. Learn more in our Privacy Policy"
+    },
+    {
+      "type": "text",
+      "id": "prefs_title",
+      "label": "Preferences Title",
+      "default": "Cookie and privacy preferences"
+    }
+  ]
+}
+{% endschema %}

@@ -140,7 +140,90 @@ document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
   initMobileMenu();
   initSmoothScroll();
+  initCookieConsent();
 });
+
+/**
+ * Cookie Consent Functionality
+ * Handles banner visibility and preferences
+ */
+function initCookieConsent() {
+  const container = document.getElementById('CookieConsent');
+  if (!container) return;
+
+  const banner = document.getElementById('CookieBanner');
+  const prefs = document.getElementById('CookiePreferences');
+  const storageKey = 'aael-cookie-consent';
+
+  // Check if already consented
+  if (localStorage.getItem(storageKey)) return;
+
+  // Show banner after delay
+  setTimeout(() => {
+    container.classList.remove('is-hidden');
+  }, 1000);
+
+  // Bind Banner Buttons
+  container.querySelector('.js-cookie-accept')?.addEventListener('click', () => setConsent({
+    analytics: true,
+    marketing: true,
+    personalization: true
+  }));
+
+  container.querySelector('.js-cookie-decline')?.addEventListener('click', () => setConsent({
+    analytics: false,
+    marketing: false,
+    personalization: false
+  }));
+
+  container.querySelector('.js-cookie-manage')?.addEventListener('click', () => {
+    banner.classList.add('is-hidden');
+    prefs.classList.remove('is-hidden');
+  });
+
+  container.querySelector('.js-cookie-close')?.addEventListener('click', () => {
+    container.classList.add('is-hidden');
+  });
+
+  // Bind Prefs Buttons
+  container.querySelector('.js-cookie-close-prefs')?.addEventListener('click', () => {
+    prefs.classList.add('is-hidden');
+    banner.classList.remove('is-hidden');
+  });
+
+  container.querySelector('.js-cookie-save-choices')?.addEventListener('click', () => {
+    const choices = {};
+    container.querySelectorAll('.js-cookie-toggle').forEach(toggle => {
+      choices[toggle.dataset.type] = toggle.checked;
+    });
+    setConsent(choices);
+  });
+
+  container.querySelector('.js-cookie-decline-all')?.addEventListener('click', () => setConsent({
+    analytics: false,
+    marketing: false,
+    personalization: false
+  }));
+
+  container.querySelector('.js-cookie-accept-all')?.addEventListener('click', () => setConsent({
+    analytics: true,
+    marketing: true,
+    personalization: true
+  }));
+
+  function setConsent(choices) {
+    localStorage.setItem(storageKey, JSON.stringify(choices));
+    
+    // Shopify Privacy API
+    if (window.Shopify && window.Shopify.customerPrivacy) {
+      window.Shopify.customerPrivacy.setTrackingConsent(choices, () => {
+        console.log('Consent updated');
+      });
+    }
+
+    container.classList.add('is-hidden');
+  }
+}
 
 /**
  * Theme Toggle Functionality
