@@ -149,17 +149,25 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 function initCookieConsent() {
   const container = document.getElementById('CookieConsent');
+  console.log('Cookie Consent Init:', !!container);
   if (!container) return;
 
   const banner = document.getElementById('CookieBanner');
   const prefs = document.getElementById('CookiePreferences');
   const storageKey = 'aael-cookie-consent';
 
+  const savedConsent = localStorage.getItem(storageKey);
+  console.log('Saved Consent:', savedConsent);
+  
   // Check if already consented
-  if (localStorage.getItem(storageKey)) return;
+  if (savedConsent) {
+    console.log('Consent already exists, hiding.');
+    return;
+  }
 
   // Show banner after delay
   setTimeout(() => {
+    console.log('Showing custom cookie banner');
     container.classList.remove('is-hidden');
   }, 1000);
 
