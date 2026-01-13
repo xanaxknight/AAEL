@@ -149,6 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 function initCookieConsent() {
   const container = document.getElementById('CookieConsent');
+  const banner = document.getElementById('CookieBanner');
+  const prefs = document.getElementById('CookiePreferences');
   const storageKey = 'aael-cookie-consent';
 
   // 1. Extreme kill switch for native banners
