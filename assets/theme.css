@@ -193,6 +193,10 @@ body.dark #CookieConsent .glass-card {
   margin-top: 12px;
 }
 
+.cookie-actions .pill-btn {
+  height: 36px;
+}
+
 .cookie-actions-left,
 .cookie-actions-right {
   display: flex;
