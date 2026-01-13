@@ -63,6 +63,17 @@ html.dark body {
 }
 
 /* --- Cookie Consent --- */
+/* Hide Shopify's native privacy banner */
+#shopify-privacy-banner,
+.shopify-policy-banner,
+#shopify-privacy-banner-container,
+#shopify-section-cookie-banner + #shopify-privacy-banner {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 .cookie-consent-container {
   position: fixed;
   bottom: 24px;
