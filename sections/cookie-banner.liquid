@@ -17,16 +17,16 @@
     
     <div class="cookie-content">
       <p class="cookie-text">
-        {{ section.settings.content | default: 'We and our partners, including Shopify, use cookies and other technologies to personalize your experience, show you ads, and perform analytics, and we will not use cookies and other technologies for these purposes unless you accept them. Learn more in our Privacy Policy' }}
+        We and our partners, including Shopify, use cookies and other technologies to personalize your experience, show you ads, and perform analytics, and we will not use cookies or other technologies for these purposes unless you accept them. Learn more in our <a href="{{ section.settings.privacy_policy_url | default: '/policies/privacy-policy' }}" class="cookie-link">Privacy Policy</a>
       </p>
     </div>
 
     <div class="cookie-actions">
-      <div class="cookie-actions-left">
-        <button type="button" class="pill-btn pill-btn--dark js-cookie-accept">Accept</button>
-        <button type="button" class="pill-btn pill-btn--light js-cookie-decline">Decline</button>
-      </div>
       <button type="button" class="pill-btn pill-btn--light js-cookie-manage">Manage preferences</button>
+      <div class="cookie-actions-right">
+        <button type="button" class="pill-btn pill-btn--light js-cookie-decline">Decline</button>
+        <button type="button" class="pill-btn pill-btn--dark js-cookie-accept">Accept</button>
+      </div>
     </div>
   </div>
 
@@ -62,8 +62,12 @@
         <div class="cookie-pref-item">
           <div class="cookie-pref-info">
             <label class="cookie-checkbox-wrapper">
-              <input type="checkbox" class="js-cookie-toggle" data-type="personalization" checked>
-              <span class="cookie-checkmark"></span>
+              <input type="checkbox" class="js-cookie-toggle" data-type="personalization">
+              <span class="cookie-checkmark">
+                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="8" viewBox="0 0 11 8" fill="none">
+                  <path d="M0.75 4.25L3.75 7.25L10.25 0.75" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
             </label>
             <div class="cookie-pref-text">
               <span class="cookie-pref-label">Personalisation</span>
@@ -76,8 +80,12 @@
         <div class="cookie-pref-item">
           <div class="cookie-pref-info">
             <label class="cookie-checkbox-wrapper">
-              <input type="checkbox" class="js-cookie-toggle" data-type="marketing" checked>
-              <span class="cookie-checkmark"></span>
+              <input type="checkbox" class="js-cookie-toggle" data-type="marketing">
+              <span class="cookie-checkmark">
+                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="8" viewBox="0 0 11 8" fill="none">
+                  <path d="M0.75 4.25L3.75 7.25L10.25 0.75" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
             </label>
             <div class="cookie-pref-text">
               <span class="cookie-pref-label">Marketing</span>
@@ -90,8 +98,12 @@
         <div class="cookie-pref-item">
           <div class="cookie-pref-info">
             <label class="cookie-checkbox-wrapper">
-              <input type="checkbox" class="js-cookie-toggle" data-type="analytics" checked>
-              <span class="cookie-checkmark"></span>
+              <input type="checkbox" class="js-cookie-toggle" data-type="analytics">
+              <span class="cookie-checkmark">
+                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="8" viewBox="0 0 11 8" fill="none">
+                  <path d="M0.75 4.25L3.75 7.25L10.25 0.75" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
             </label>
             <div class="cookie-pref-text">
               <span class="cookie-pref-label">Analytics</span>
@@ -123,10 +135,9 @@
       "default": "Cookie consent"
     },
     {
-      "type": "textarea",
-      "id": "content",
-      "label": "Banner Content",
-      "default": "We and our partners, including Shopify, use cookies and other technologies to personalize your experience, show you ads, and perform analytics, and we will not use cookies and other technologies for these purposes unless you accept them. Learn more in our Privacy Policy"
+      "type": "url",
+      "id": "privacy_policy_url",
+      "label": "Privacy Policy URL"
     },
     {
       "type": "text",

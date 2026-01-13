@@ -153,6 +153,13 @@ function initCookieConsent() {
   const prefs = document.getElementById('CookiePreferences');
   const storageKey = 'aael-cookie-consent';
 
+  // Debug: add ?reset to URL to clear consent and test
+  if (window.location.search.includes('reset')) {
+    localStorage.removeItem(storageKey);
+    window.location.href = window.location.pathname;
+    return;
+  }
+
   // 1. Extreme kill switch for native banners
   const purgeNative = () => {
     const selectors = [
@@ -180,6 +187,7 @@ function initCookieConsent() {
   // 2. Force show logic
   const savedConsent = localStorage.getItem(storageKey);
   
+  // Skip if consent already given
   if (savedConsent) return;
 
   setTimeout(() => {
@@ -256,31 +264,47 @@ function initCookieConsent() {
  */
 function initThemeToggle() {
   const toggleBtns = document.querySelectorAll('.js-theme-toggle');
+  const lightBtns = document.querySelectorAll('.js-theme-light');
+  const darkBtns = document.querySelectorAll('.js-theme-dark');
+  
+  // Helper function to set theme
+  function setTheme(theme) {
+    document.body.classList.remove('light', 'dark');
+    document.body.classList.add(theme);
+    document.documentElement.classList.remove('light', 'dark');
+    document.documentElement.classList.add(theme);
+    localStorage.setItem('theme', theme);
+  }
   
   // Apply saved theme on load
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme) {
-    document.body.classList.remove('light', 'dark');
-    document.body.classList.add(savedTheme);
-    document.documentElement.classList.remove('light', 'dark');
-    document.documentElement.classList.add(savedTheme);
+    setTheme(savedTheme);
   } else {
     // Default to light if no saved preference
     document.body.classList.add('light');
     document.documentElement.classList.add('light');
   }
   
+  // Main toggle buttons (toggles between light/dark)
   toggleBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const isDark = document.body.classList.contains('dark');
-      const newTheme = isDark ? 'light' : 'dark';
-      
-      document.body.classList.remove('light', 'dark');
-      document.body.classList.add(newTheme);
-      document.documentElement.classList.remove('light', 'dark');
-      document.documentElement.classList.add(newTheme);
-      
-      localStorage.setItem('theme', newTheme);
+      setTheme(isDark ? 'light' : 'dark');
+    });
+  });
+  
+  // Explicit light theme buttons
+  lightBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      setTheme('light');
+    });
+  });
+  
+  // Explicit dark theme buttons
+  darkBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      setTheme('dark');
     });
   });
 }

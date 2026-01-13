@@ -110,8 +110,8 @@ iframe[src*="shopify-privacy-banner"] {
   border-radius: 2.25rem;
   background: rgba(255, 255, 255, 0.30);
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.35) inset;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(12.5px);
+  -webkit-backdrop-filter: blur(12.5px);
   transition: all 0.3s ease;
   margin: 0 24px;
 }
@@ -174,12 +174,23 @@ body.dark #CookieConsent .glass-card {
   padding: 0 8px;
 }
 
+.cookie-link {
+  color: var(--fg);
+  text-decoration: underline;
+  opacity: 1;
+}
+
+.cookie-link:hover {
+  opacity: 0.8;
+}
+
 .cookie-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   gap: 0.75rem;
+  margin-top: 12px;
 }
 
 .cookie-actions-left,
@@ -208,6 +219,8 @@ body.dark #CookieConsent .glass-card {
   flex-direction: column;
   gap: 1rem;
   width: 100%;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
 .cookie-pref-item {
@@ -225,10 +238,10 @@ body.dark #CookieConsent .glass-card {
 }
 
 .cookie-pref-icon-wrapper {
-  width: 22px;
-  height: 22px;
+  width: 32px;
+  height: 32px;
   background: rgba(0, 0, 0, 0.05);
-  border-radius: 4px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -240,12 +253,16 @@ body.dark .cookie-pref-icon-wrapper {
 }
 
 .cookie-pref-icon-wrapper.is-empty {
-  display: none;
+  background: rgba(0, 0, 0, 0.03);
+}
+
+body.dark .cookie-pref-icon-wrapper.is-empty {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .cookie-pref-icon {
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
   color: #000;
   opacity: 0.8;
 }
@@ -270,10 +287,30 @@ body.dark .cookie-pref-icon {
 /* Custom Checkbox */
 .cookie-checkbox-wrapper {
   position: relative;
-  width: 22px;
-  height: 22px;
+  width: 32px;
+  height: 32px;
   cursor: pointer;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  transition: background 0.15s ease;
+}
+
+body.dark .cookie-checkbox-wrapper {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.cookie-checkbox-wrapper:has(input:checked) {
+  background: #000;
+  border-radius: 6px;
+}
+
+body.dark .cookie-checkbox-wrapper:has(input:checked) {
+  background: #fff;
+  border-radius: 6px;
 }
 
 .cookie-checkbox-wrapper input {
@@ -285,54 +322,31 @@ body.dark .cookie-pref-icon {
 }
 
 .cookie-checkmark {
+  display: none;
+  width: 11px;
+  height: 8px;
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 22px;
-  width: 22px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-  transition: all 0.15s ease;
-}
-
-body.dark .cookie-checkmark {
-  border-color: rgba(255, 255, 255, 0.2);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .cookie-checkbox-wrapper input:checked ~ .cookie-checkmark {
-  background: var(--text-bg-black, #000);
-  border-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-body.dark .cookie-checkbox-wrapper input:checked ~ .cookie-checkmark {
-  background-color: #fff;
-  border-color: #fff;
-}
-
-.cookie-checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-  left: 50%;
-  top: 45%;
-  transform: translate(-50%, -50%) rotate(45deg);
-  width: 5px;
-  height: 9px;
-  border: solid white;
-  border-width: 0 2px 2px 0;
-}
-
-body.dark .cookie-checkmark:after {
-  border-color: black;
-}
-
-.cookie-checkbox-wrapper input:checked ~ .cookie-checkmark:after {
+.cookie-checkmark svg {
+  width: 11px;
+  height: 8px;
   display: block;
 }
+
+body.dark .cookie-checkmark svg path {
+  stroke: #000;
+}
+
 
 .cookie-checkbox-placeholder {
   width: 24px;
@@ -351,16 +365,43 @@ body.dark .pill-btn--dark {
 }
 
 .pill-btn--light {
-  background: rgba(0, 0, 0, 0.05) !important;
+  border-radius: 1.125rem !important;
+  border: none !important;
+  background: rgba(255, 255, 255, 0.10) !important;
+  box-shadow: 0 0.5px 1px 0 #FFF inset, 0 0 3px 0 rgba(0, 0, 0, 0.35) inset !important;
   color: #000 !important;
-  border: 1px solid rgba(0, 0, 0, 0.1) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: blur(12.5px) !important;
+}
+
+.pill-btn--light:hover {
+  border-radius: 1.125rem !important;
+  border: none !important;
+  background: rgba(255, 255, 255, 0.10) !important;
+  box-shadow: 0 -0.5px 1px 0 #FFF inset, 0 -0.5px 1px 0 rgba(0, 0, 0, 0.20) inset, 0 0 17px 0 rgba(0, 0, 0, 0.55) inset !important;
+}
+
+.pill-btn--light:disabled {
+  border-radius: 1.125rem !important;
+  background: rgba(255, 255, 255, 0.01) !important;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.35) inset !important;
+  color: rgba(0, 0, 0, 0.35) !important;
+  cursor: not-allowed;
 }
 
 body.dark .pill-btn--light {
-  background: rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.10) !important;
   color: #fff !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 0.5px 1px 0 rgba(255, 255, 255, 0.5) inset, 0 0 3px 0 rgba(255, 255, 255, 0.2) inset !important;
+}
+
+body.dark .pill-btn--light:hover {
+  box-shadow: 0 -0.5px 1px 0 rgba(255, 255, 255, 0.5) inset, 0 -0.5px 1px 0 rgba(255, 255, 255, 0.15) inset, 0 0 17px 0 rgba(255, 255, 255, 0.3) inset !important;
+}
+
+body.dark .pill-btn--light:disabled {
+  background: rgba(255, 255, 255, 0.01) !important;
+  color: rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 0 3px 0 rgba(255, 255, 255, 0.2) inset !important;
 }
 
 @media (max-width: 767px) {
@@ -719,6 +760,11 @@ body.mode-prelaunch {
   color: #ffffff;
 }
 
+/* Hide menu button on prelaunch page */
+body.mode-prelaunch .mobile-menu-absolute {
+  display: none !important;
+}
+
 .mobile-menu-absolute .icon-btn {
   color: #ffffff;
 }
@@ -836,7 +882,7 @@ body.mode-prelaunch {
 
 .pill-btn {
   display: flex;
-  height: 42px;
+  height: 36px;
   padding: 8px 24px;
   justify-content: center;
   align-items: center;
@@ -848,7 +894,7 @@ body.mode-prelaunch {
   box-shadow: var(--btn-shadow);
   backdrop-filter: blur(5px);
   font-family: var(--font-main);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -1090,9 +1136,83 @@ html.dark body .product-image.img-light {
   z-index: 20;
 }
 
-.control-btn {
+/* Slider Theme Toggle */
+.slider-theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  height: 42px;
+  background: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 0.5px 1px 0 #ffffff9f inset, 0 0 2px 0 rgba(0, 0, 0, 0.35) inset;
+  backdrop-filter: blur(12.5px);
+  border-radius: 999px;
+  padding: 4px 6px;
+}
+
+.slider-theme-toggle .theme-icon {
   width: 32px;
   height: 32px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--control-col);
+  transition: background 0.2s, color 0.2s, opacity 0.2s;
+  opacity: 0.5;
+}
+
+.slider-theme-toggle .theme-icon:hover {
+  opacity: 0.8;
+}
+
+.slider-theme-toggle .theme-icon.is-active {
+  background: rgba(255, 255, 255, 0.30);
+  opacity: 1;
+}
+
+body:not(.dark) .slider-theme-toggle .theme-icon--light.is-active,
+body.dark .slider-theme-toggle .theme-icon--dark.is-active {
+  background: rgba(255, 255, 255, 0.30);
+  opacity: 1;
+}
+
+body:not(.dark) .slider-theme-toggle .theme-icon--light {
+  opacity: 1;
+  border-radius: 1.125rem;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0.5px 1px 0 #FFF inset, 0 0 2px 0 rgba(0, 0, 0, 0.35) inset;
+  backdrop-filter: blur(5px);
+}
+
+body.dark .slider-theme-toggle .theme-icon--dark {
+  opacity: 1;
+  border-radius: 1.125rem;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0.5px 1px 0 #FFF inset, 0 0 2px 0 rgba(0, 0, 0, 0.35) inset;
+  backdrop-filter: blur(5px);
+}
+
+body:not(.dark) .slider-theme-toggle .theme-icon--dark {
+  opacity: 0.4;
+  background: transparent;
+}
+
+body.dark .slider-theme-toggle .theme-icon--light {
+  opacity: 0.4;
+  background: transparent;
+}
+
+.slider-theme-toggle .theme-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.control-btn {
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -1129,9 +1249,11 @@ html.dark body .product-image.img-light {
 
 .dotnav-container {
   display: flex;
-  padding: 0.75rem;
+  align-items: center;
+  height: 42px;
+  padding: 0 17px;
   gap: 0.5rem;
-  border-radius: 1.125rem;
+  border-radius: 21px;
   border: none;
   background: rgba(255, 255, 255, 0.10);
   box-shadow: 0 0.5px 1px 0 #ffffff9f inset, 0 0 2px 0 rgba(0, 0, 0, 0.35) inset;
