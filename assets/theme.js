@@ -177,8 +177,8 @@ function initCookieConsent() {
 
   // 2. Force show logic
   const savedConsent = localStorage.getItem(storageKey);
-  // Remove the '|| true' once you confirm it works!
-  if (savedConsent && !window.location.search.includes('debug')) return;
+  
+  if (savedConsent) return;
 
   setTimeout(() => {
     if (container) {
