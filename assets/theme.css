@@ -94,6 +94,10 @@ iframe[src*="shopify-privacy-banner"] {
   justify-content: center !important;
 }
 
+#CookieConsent.cookie-consent-container.is-hidden {
+  display: none !important;
+}
+
 #CookieConsent .glass-card {
   pointer-events: auto !important;
   display: flex;
