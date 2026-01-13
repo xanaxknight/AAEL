@@ -149,57 +149,71 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 function initCookieConsent() {
   const container = document.getElementById('CookieConsent');
-  console.log('Cookie Consent Init:', !!container);
-  if (!container) return;
-
   const banner = document.getElementById('CookieBanner');
   const prefs = document.getElementById('CookiePreferences');
   const storageKey = 'aael-cookie-consent';
 
-  const savedConsent = localStorage.getItem(storageKey);
-  console.log('Saved Consent:', savedConsent);
-  
-  // Check if already consented
-  if (savedConsent) {
-    console.log('Consent already exists, hiding.');
-    return;
-  }
+  // 1. Aggressively remove native Shopify banners
+  const killNativeBanner = () => {
+    const nativeSelectors = [
+      '#shopify-privacy-banner',
+      '#shopify-privacy-banner-container',
+      '.shopify-privacy-banner-container',
+      '.shopify-policy-banner'
+    ];
+    nativeSelectors.forEach(sel => {
+      const el = document.querySelector(sel);
+      if (el) {
+        el.remove();
+        console.log('Removed native banner:', sel);
+      }
+    });
+  };
 
-  // Show banner after delay
+  // Check immediately and then on an interval for a few seconds
+  killNativeBanner();
+  const killInterval = setInterval(killNativeBanner, 500);
+  setTimeout(() => clearInterval(killInterval), 10000);
+
+  // 2. Custom Banner Logic
+  const savedConsent = localStorage.getItem(storageKey);
+  const isDebug = window.location.search.includes('debug_cookies');
+  
+  if (savedConsent && !isDebug) return;
+
   setTimeout(() => {
-    console.log('Showing custom cookie banner');
-    container.classList.remove('is-hidden');
-  }, 1000);
+    if (container) container.classList.remove('is-hidden');
+  }, 1200);
 
   // Bind Banner Buttons
-  container.querySelector('.js-cookie-accept')?.addEventListener('click', () => setConsent({
+  container?.querySelector('.js-cookie-accept')?.addEventListener('click', () => setConsent({
     analytics: true,
     marketing: true,
     personalization: true
   }));
 
-  container.querySelector('.js-cookie-decline')?.addEventListener('click', () => setConsent({
+  container?.querySelector('.js-cookie-decline')?.addEventListener('click', () => setConsent({
     analytics: false,
     marketing: false,
     personalization: false
   }));
 
-  container.querySelector('.js-cookie-manage')?.addEventListener('click', () => {
-    banner.classList.add('is-hidden');
-    prefs.classList.remove('is-hidden');
+  container?.querySelector('.js-cookie-manage')?.addEventListener('click', () => {
+    banner?.classList.add('is-hidden');
+    prefs?.classList.remove('is-hidden');
   });
 
-  container.querySelector('.js-cookie-close')?.addEventListener('click', () => {
+  container?.querySelector('.js-cookie-close')?.addEventListener('click', () => {
     container.classList.add('is-hidden');
   });
 
   // Bind Prefs Buttons
-  container.querySelector('.js-cookie-close-prefs')?.addEventListener('click', () => {
-    prefs.classList.add('is-hidden');
-    banner.classList.remove('is-hidden');
+  container?.querySelector('.js-cookie-close-prefs')?.addEventListener('click', () => {
+    prefs?.classList.add('is-hidden');
+    banner?.classList.remove('is-hidden');
   });
 
-  container.querySelector('.js-cookie-save-choices')?.addEventListener('click', () => {
+  container?.querySelector('.js-cookie-save-choices')?.addEventListener('click', () => {
     const choices = {};
     container.querySelectorAll('.js-cookie-toggle').forEach(toggle => {
       choices[toggle.dataset.type] = toggle.checked;
@@ -207,13 +221,13 @@ function initCookieConsent() {
     setConsent(choices);
   });
 
-  container.querySelector('.js-cookie-decline-all')?.addEventListener('click', () => setConsent({
+  container?.querySelector('.js-cookie-decline-all')?.addEventListener('click', () => setConsent({
     analytics: false,
     marketing: false,
     personalization: false
   }));
 
-  container.querySelector('.js-cookie-accept-all')?.addEventListener('click', () => setConsent({
+  container?.querySelector('.js-cookie-accept-all')?.addEventListener('click', () => setConsent({
     analytics: true,
     marketing: true,
     personalization: true
@@ -222,14 +236,13 @@ function initCookieConsent() {
   function setConsent(choices) {
     localStorage.setItem(storageKey, JSON.stringify(choices));
     
-    // Shopify Privacy API
     if (window.Shopify && window.Shopify.customerPrivacy) {
       window.Shopify.customerPrivacy.setTrackingConsent(choices, () => {
         console.log('Consent updated');
       });
     }
 
-    container.classList.add('is-hidden');
+    if (container) container.classList.add('is-hidden');
   }
 }
 

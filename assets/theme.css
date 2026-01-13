@@ -63,13 +63,14 @@ html.dark body {
 }
 
 /* --- Cookie Consent --- */
-/* Hide Shopify's native privacy banner - aggressive selectors */
+/* Aggressively hide Shopify's native privacy banner */
 #shopify-privacy-banner,
-.shopify-policy-banner,
 #shopify-privacy-banner-container,
 .shopify-privacy-banner-container,
+.shopify-policy-banner,
 [id*="shopify-privacy-banner"],
-[class*="shopify-privacy-banner"] {
+[class*="shopify-privacy-banner"],
+iframe[src*="shopify-privacy-banner"] {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
@@ -79,6 +80,8 @@ html.dark body {
   overflow: hidden !important;
   position: absolute !important;
   top: -9999px !important;
+  left: -9999px !important;
+  z-index: -1 !important;
 }
 
 .cookie-consent-container {
