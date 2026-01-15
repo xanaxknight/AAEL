@@ -1,0 +1,53 @@
+{
+  "sections": {
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo_text": "AAEL",
+        "collection_text": "C24",
+        "show_bag": true
+      }
+    },
+    "main": {
+      "type": "page-content",
+      "settings": {
+        "show_title": true,
+        "max_width": 800,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "link-1": {
+          "type": "link",
+          "settings": {
+            "label": "ABOUT",
+            "link": "/pages/about"
+          }
+        },
+        "link-2": {
+          "type": "link",
+          "settings": {
+            "label": "INSTA",
+            "link": "https://instagram.com",
+            "open_new_tab": true
+          }
+        }
+      },
+      "block_order": ["link-1", "link-2"],
+      "settings": {
+        "logo_text": "AAEL",
+        "collection_text": "C24",
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    }
+  },
+  "order": [
+    "header",
+    "main",
+    "footer"
+  ]
+}

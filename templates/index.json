@@ -19,15 +19,17 @@
         "padding_bottom": 64
       }
     },
-    "product": {
-      "type": "product-carousel",
+    "hero-carousel": {
+      "type": "hero-carousel",
       "blocks": {
         "slide-1": {
           "type": "slide",
           "settings": {
             "image_light_url": "https://i.ibb.co/YFqGLMGM/amo-5-d.webp",
             "image_dark_url": "https://i.ibb.co/x8CZ1cNY/amo-5-n.webp",
-            "alt_text": "AMO Desk Lamp"
+            "alt_text": "AMO Desk Lamp",
+            "align_horizontal": "center",
+            "align_vertical": "center"
           }
         },
         "slide-2": {
@@ -35,7 +37,9 @@
           "settings": {
             "image_light_url": "https://i.ibb.co/M5N8XTHW/amo-4-d.webp",
             "image_dark_url": "https://i.ibb.co/PGdjc1mn/amo-4-n.webp",
-            "alt_text": "AMO Desk Lamp"
+            "alt_text": "AMO Desk Lamp",
+            "align_horizontal": "center",
+            "align_vertical": "center"
           }
         },
         "slide-3": {
@@ -43,14 +47,16 @@
           "settings": {
             "image_light_url": "https://i.ibb.co/VWjW5STB/d-v3.webp",
             "image_dark_url": "https://i.ibb.co/fmHHdcb/n-v3.webp",
-            "alt_text": "AMO Desk Lamp"
+            "alt_text": "AMO Desk Lamp",
+            "align_horizontal": "center",
+            "align_vertical": "center"
           }
         }
       },
       "block_order": ["slide-1", "slide-2", "slide-3"],
       "settings": {
-        "variant": "prelaunch",
-        "max_width": 1440,
+        "max_width": 1920,
+        "slide_timings": "12000,6000",
         "padding_bottom": 80
       }
     },
@@ -92,7 +98,7 @@
   "order": [
     "header",
     "hero",
-    "product",
+    "hero-carousel",
     "newsletter",
     "footer"
   ]

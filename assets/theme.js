@@ -133,6 +133,135 @@ if (!customElements.get('product-card')) {
 }
 
 /* ========================================
+   HERO CARD WEB COMPONENT
+   ======================================== */
+
+class HeroCard extends HTMLElement {
+  constructor() {
+    super();
+    this.slides = this.querySelectorAll('.slide-container');
+    this.dots = this.querySelectorAll('.dotnav-item');
+    this.playBtn = this.querySelector('.control-btn');
+    this.timings = JSON.parse(this.getAttribute('data-timings') || '[12000]');
+    
+    this.state = {
+      currentSlide: 0,
+      isPlaying: true
+    };
+    
+    this.timer = null;
+  }
+
+  connectedCallback() {
+    // Bind Controls
+    if (this.playBtn) {
+      this.playBtn.addEventListener('click', () => this.togglePlay());
+    }
+    
+    this.dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => this.goToSlide(index));
+    });
+
+    // Only auto-start if we have multiple slides
+    if (this.slides.length > 1) {
+      this.startTimer();
+    }
+  }
+
+  disconnectedCallback() {
+    this.stopTimer();
+  }
+
+  getCurrentDuration() {
+    const t = this.timings;
+    if (Array.isArray(t)) {
+      return t[this.state.currentSlide] || t[t.length - 1];
+    }
+    return t;
+  }
+
+  goToSlide(index) {
+    this.stopTimer();
+    this.state.currentSlide = index;
+    this.renderState();
+    if (this.state.isPlaying) this.startTimer();
+  }
+
+  togglePlay() {
+    this.state.isPlaying = !this.state.isPlaying;
+    this.renderState();
+    
+    if (this.state.isPlaying) {
+      this.startTimer();
+    } else {
+      this.stopTimer();
+    }
+  }
+
+  renderState() {
+    // Update Slides
+    this.slides.forEach((s, i) => {
+      s.classList.toggle('active', i === this.state.currentSlide);
+    });
+
+    // Update Dots
+    this.dots.forEach((d, i) => {
+      const isActive = i === this.state.currentSlide;
+      d.classList.toggle('active', isActive);
+      d.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      
+      const progress = d.querySelector('.dot-progress');
+      if (progress) {
+        progress.style.animation = 'none';
+        d.offsetHeight; // Trigger reflow
+        
+        if (isActive && this.state.isPlaying) {
+          const duration = this.getCurrentDuration();
+          progress.style.animation = `progress-fill ${duration}ms linear forwards`;
+        }
+      }
+    });
+    
+    // Update Play Button
+    if (this.playBtn) {
+      this.playBtn.classList.toggle('paused', !this.state.isPlaying);
+      this.playBtn.setAttribute('aria-label', this.state.isPlaying ? 'Pause slideshow' : 'Play slideshow');
+    }
+  }
+
+  startTimer() {
+    this.stopTimer();
+    if (!this.state.isPlaying || this.slides.length <= 1) return;
+
+    this.renderState();
+
+    const duration = this.getCurrentDuration();
+    this.timer = setTimeout(() => {
+      const next = (this.state.currentSlide + 1) % this.slides.length;
+      this.goToSlide(next);
+    }, duration);
+  }
+
+  stopTimer() {
+    if (this.timer) {
+      clearTimeout(this.timer);
+      this.timer = null;
+    }
+    
+    // Pause animation visually
+    const activeDot = this.querySelector('.dotnav-item.active .dot-progress');
+    if (activeDot) {
+      activeDot.style.animationPlayState = 'paused';
+    }
+  }
+}
+
+// Define custom element
+if (!customElements.get('hero-card')) {
+  customElements.define('hero-card', HeroCard);
+}
+
+/* ========================================
    GLOBAL UI LOGIC
    ======================================== */
 
@@ -263,7 +392,7 @@ function initCookieConsent() {
  * Switches between light and dark themes
  */
 function initThemeToggle() {
-  const toggleBtns = document.querySelectorAll('.js-theme-toggle');
+  const toggleBtns = document.querySelectorAll('.js-theme-toggle, .js-theme-toggle-slider');
   const lightBtns = document.querySelectorAll('.js-theme-light');
   const darkBtns = document.querySelectorAll('.js-theme-dark');
   
@@ -429,5 +558,6 @@ function updateCartCount() {
 // Expose to global scope for Shopify theme customization
 window.AAEL = {
   updateCartCount,
-  ProductCard
+  ProductCard,
+  HeroCard
 };
