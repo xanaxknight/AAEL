@@ -1,11 +1,22 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "layout": "theme.prelaunch",
   "sections": {
     "header": {
       "type": "header",
       "settings": {
+        "logo_width": 100,
         "logo_text": "AAEL",
         "collection_text": "C24",
+        "show_bag": true,
         "right_button_text": "Let me know",
         "right_button_link": "#newsletter-form"
       }
@@ -16,7 +27,12 @@
         "hero_text": "AAEL creates limited series of interior artifacts primarily out of metal.",
         "max_width": 800,
         "padding_top": 40,
-        "padding_bottom": 64
+        "padding_bottom": 64,
+        "align_s": "center",
+        "span_s": 2,
+        "span_m": 4,
+        "span_l": 6,
+        "span_xl": 8
       }
     },
     "hero-carousel": {
@@ -25,9 +41,11 @@
         "slide-1": {
           "type": "slide",
           "settings": {
-            "image_light_url": "https://i.ibb.co/YFqGLMGM/amo-5-d.webp",
+            "image_light": "shopify://shop_images/day_Camera_5.webp",
+            "image_dark": "shopify://shop_images/day_Camera_5n.webp",
+            "image_light_url": "",
             "image_dark_url": "https://i.ibb.co/x8CZ1cNY/amo-5-n.webp",
-            "alt_text": "AMO Desk Lamp",
+            "alt_text": "AMO Desk Light",
             "align_horizontal": "center",
             "align_vertical": "center"
           }
@@ -53,17 +71,30 @@
           }
         }
       },
-      "block_order": ["slide-1", "slide-2", "slide-3"],
+      "block_order": [
+        "slide-1",
+        "slide-2",
+        "slide-3"
+      ],
       "settings": {
         "max_width": 1920,
         "slide_timings": "12000,6000",
-        "padding_bottom": 80
+        "padding_top": 0,
+        "padding_bottom": 80,
+        "span_s": 2,
+        "span_m": 4,
+        "span_l": 6,
+        "span_xl": 8
       }
     },
     "newsletter": {
       "type": "newsletter",
       "settings": {
         "newsletter_title": "Let me know when AMO is available",
+        "newsletter_placeholder": "Email",
+        "newsletter_button": "Send",
+        "form_max_width": 400,
+        "padding_top": 40,
         "padding_bottom": 80
       }
     },
@@ -74,7 +105,8 @@
           "type": "link",
           "settings": {
             "label": "ABOUT",
-            "link": "/pages/about"
+            "link": "/pages/about",
+            "open_new_tab": false
           }
         },
         "link-2": {
@@ -86,10 +118,14 @@
           }
         }
       },
-      "block_order": ["link-1", "link-2"],
+      "block_order": [
+        "link-1",
+        "link-2"
+      ],
       "settings": {
         "logo_text": "AAEL",
         "collection_text": "C24",
+        "copyright_text": "",
         "padding_top": 24,
         "padding_bottom": 24
       }
