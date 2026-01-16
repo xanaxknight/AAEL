@@ -54,7 +54,7 @@
             "image_light_url": "https://i.ibb.co/pr91svry/day-Camera-4.webp",
             "image_dark_url": "https://i.ibb.co/MD5DSRgr/day-Camera-4n.webp",
             "alt_text": "AMO Desk Lamp",
-            "align_horizontal": "center",
+            "align_horizontal": "left",
             "align_vertical": "center"
           }
         },
@@ -68,14 +68,14 @@
             "align_vertical": "bottom"
           }
         },
-        "slide-3": {
+        "slide-5": {
           "type": "slide",
           "settings": {
-            "image_light_url": "https://i.ibb.co/pr91svry/day-Camera-4.webp",
-            "image_dark_url": "https://i.ibb.co/MD5DSRgr/day-Camera-4n.webp",
+            "image_light_url": "https://i.ibb.co/Q725pN0W/day-Camera-2.webp",
+            "image_dark_url": "https://i.ibb.co/JW9VjLKj/day-Camera-2n.webp",
             "alt_text": "AMO Desk Lamp",
-            "align_horizontal": "left",
-            "align_vertical": "center"
+            "align_horizontal": "center",
+            "align_vertical": "bottom"
           }
         },
         "slide-4": {
@@ -87,25 +87,14 @@
             "align_horizontal": "right",
             "align_vertical": "center"
           }
-        },
-        "slide-5": {
-          "type": "slide",
-          "settings": {
-            "image_light_url": "https://i.ibb.co/Q725pN0W/day-Camera-2.webp",
-            "image_dark_url": "https://i.ibb.co/JW9VjLKj/day-Camera-2n.webp",
-            "alt_text": "AMO Desk Lamp",
-            "align_horizontal": "center",
-            "align_vertical": "bottom"
-          }
         }
       },
       "block_order": [
         "slide_8qkLe9",
         "slide-2",
         "slide_89neN3",
-        "slide-3",
-        "slide-4",
-        "slide-5"
+        "slide-5",
+        "slide-4"
       ],
       "settings": {
         "max_width": 1920,
