@@ -569,41 +569,107 @@ window.AAEL = {
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.newsletter-form-prelaunch').forEach((form) => {
     const input = form.querySelector('.newsletter-input-prelaunch');
+    const button = form.querySelector('button[type="submit"]');
     const error = form.querySelector('.newsletter-error-message');
     const errorText = error ? error.querySelector('span:last-child') : null;
 
-    if (!input) return;
+    if (!input || !button) return;
 
-    const showError = (message) => {
-      if (error) {
-        error.classList.add('visible');
-        input.classList.add('error');
-        if (errorText) errorText.textContent = message;
+    let fieldTouched = false;
+    let currentError = '';
+    let errorShown = false; // Track if error has been shown via hover
+
+    // Email validation regex - basic but comprehensive
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const validateEmail = (email) => {
+      const trimmed = email.trim();
+      
+      if (!trimmed) {
+        return { valid: false, message: 'Please enter an email address' };
       }
+      
+      if (!trimmed.includes('@')) {
+        return { valid: false, message: "Please include an '@' in the email address" };
+      }
+      
+      if (!emailRegex.test(trimmed)) {
+        return { valid: false, message: 'Please enter a valid email address' };
+      }
+      
+      return { valid: true, message: '' };
     };
 
-    const clearError = () => {
-      if (error) {
-        error.classList.remove('visible');
-        input.classList.remove('error');
-      }
-    };
-
-    form.addEventListener('submit', (event) => {
-      clearError();
+    const updateButtonState = () => {
       const value = input.value.trim();
+      const validation = validateEmail(value);
       
-      // Only prevent submission if validation fails
-      if (!value || !value.includes('@')) {
-        event.preventDefault();
-        event.stopPropagation();
-        showError("Please include an '@' in the email address.");
-        return false;
+      if (!fieldTouched && !value) {
+        // Initial state - button enabled
+        button.disabled = false;
+        currentError = '';
+        errorShown = false;
+        if (error) error.classList.remove('error-persist');
+      } else if (validation.valid) {
+        // Valid email - enable button
+        button.disabled = false;
+        currentError = '';
+        errorShown = false;
+        if (error) error.classList.remove('error-persist');
+      } else {
+        // Invalid email - disable button
+        button.disabled = true;
+        currentError = validation.message;
       }
-      
-      // Valid email - let form submit to Shopify
+
+      // Update error message text
+      if (errorText) {
+        errorText.textContent = currentError;
+      }
+    };
+
+    // On focus: Mark as touched and validate
+    input.addEventListener('focus', () => {
+      fieldTouched = true;
+      updateButtonState();
     });
 
-    input.addEventListener('input', clearError);
+    // On input: Real-time validation
+    input.addEventListener('input', () => {
+      if (fieldTouched) {
+        updateButtonState();
+      }
+      
+      // Clear server-side error message if visible
+      if (error) {
+        error.classList.remove('visible');
+      }
+    });
+
+    // On submit: Final validation
+    form.addEventListener('submit', (event) => {
+      const validation = validateEmail(input.value);
+      
+      if (!validation.valid) {
+        event.preventDefault();
+        event.stopPropagation();
+        fieldTouched = true;
+        updateButtonState();
+        return false;
+      }
+    });
+
+    // Show error persistently when hovering over disabled button
+    button.addEventListener('mouseenter', () => {
+      if (button.disabled && currentError && !errorShown) {
+        errorShown = true;
+        if (error) {
+          error.classList.add('error-persist');
+        }
+      }
+    });
+
+    // Initial state
+    updateButtonState();
   });
 });

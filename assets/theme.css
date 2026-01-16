@@ -1542,6 +1542,80 @@ body.dark .newsletter-input-prelaunch.error {
   font-weight: 600;
 }
 
+/* Newsletter Button Wrapper */
+.newsletter-button-wrapper {
+  position: relative;
+  display: flex;
+}
+
+/* Newsletter input group positioning */
+.newsletter-input-group {
+  position: relative;
+}
+
+/* Apply error state to input when hovering disabled button OR when error persists */
+.newsletter-input-group:has(button:disabled:hover) .newsletter-input-prelaunch,
+.newsletter-input-group:has(.error-persist) .newsletter-input-prelaunch {
+  border-radius: 1.375rem;
+  background: rgba(255, 255, 255, 0.50);
+  box-shadow: 0 0 12px 0 rgba(255, 119, 119, 0.35) inset;
+}
+
+body.dark .newsletter-input-group:has(button:disabled:hover) .newsletter-input-prelaunch,
+body.dark .newsletter-input-group:has(.error-persist) .newsletter-input-prelaunch {
+  background: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 0 12px 0 rgba(255, 119, 119, 0.50) inset;
+}
+
+/* Show error message when hovering over disabled button OR when error-persist class is set */
+.newsletter-input-group:has(button:disabled:hover) .newsletter-error-message,
+.newsletter-error-message.error-persist {
+  display: flex !important;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+/* Newsletter Captcha Styling */
+body #main-content .h-captcha,
+body #main-content iframe[src*="hcaptcha"],
+body #MainContent .h-captcha,
+body #MainContent iframe[src*="hcaptcha"],
+.newsletter-form-prelaunch .h-captcha,
+.newsletter-form-prelaunch iframe[src*="hcaptcha"] {
+  margin: 24px auto 16px !important;
+  display: flex !important;
+  justify-content: center !important;
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
+}
+
+/* Captcha challenge wrapper */
+.newsletter-wrapper .g-recaptcha,
+.newsletter-wrapper .h-captcha {
+  display: flex;
+  justify-content: center;
+  margin: 24px auto 16px;
+  position: relative;
+}
+
+/* Shopify challenge page positioning */
+body[class*="challenge"] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 120px;
+}
+
+body[class*="challenge"] .h-captcha {
+  margin: 24px auto !important;
+}
+
 .newsletter-input {
   flex-grow: 1;
   background: none;

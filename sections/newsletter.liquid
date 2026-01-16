@@ -22,41 +22,63 @@
         --text-xl: center;
       "
     >
-      <div class="newsletter-text" style="width: 100%; margin: 0 auto; text-align: center; margin-bottom: 32px;">
-        <h2 class="lead-text">
-          {{ section.settings.newsletter_title }}
-        </h2>
-      </div>
+      {%- form 'contact', id: 'contact_form', class: 'newsletter-form-prelaunch', novalidate: 'novalidate' -%}
+        {%- if form.posted_successfully? -%}
+          <div class="newsletter-text" style="width: 100%; margin: 0 auto; text-align: center;">
+            {%- if section.settings.newsletter_subtitle != blank -%}
+              <p style="font-size: 16px; color: var(--fg); opacity: 0.5; margin-bottom: 16px; letter-spacing: 0.5px;">
+                {{ section.settings.newsletter_subtitle }}
+              </p>
+            {%- endif -%}
+            <h2 class="lead-text" style="margin-bottom: 16px;">
+              Confirmed
+            </h2>
+            <p style="font-size: 16px; color: var(--fg); opacity: 0.5; letter-spacing: 0.3px;">
+              48-hour early notice for AMO is set.
+            </p>
+          </div>
+        {%- else -%}
+          <div class="newsletter-text" style="width: 100%; margin: 0 auto; text-align: center; margin-bottom: 32px;">
+            {%- if section.settings.newsletter_subtitle != blank -%}
+              <p style="font-size: 16px; color: var(--fg); opacity: 0.5; margin-bottom: 16px; letter-spacing: 0.5px;">
+                {{ section.settings.newsletter_subtitle }}
+              </p>
+            {%- endif -%}
+            <h2 class="lead-text" style="white-space: pre-line;">{{ section.settings.newsletter_title }}</h2>
+          </div>
+        {%- endif -%}
       
-      <div id="newsletter-form" class="newsletter-wrapper" style="width: 100%; max-width: {{ section.settings.form_max_width }}px; margin: 0 auto; text-align: center;">
-        {%- form 'contact', id: 'contact_form', class: 'newsletter-form-prelaunch', novalidate: 'novalidate' -%}
+      {%- unless form.posted_successfully? -%}
+        <div id="newsletter-form" class="newsletter-wrapper" style="width: 100%; max-width: 600px; margin: 0 auto; text-align: center;">
           {%- assign email_error = false -%}
           {%- if form.errors and form.errors.messages.email != blank -%}
             {%- assign email_error = true -%}
           {%- endif -%}
 
           <input type="hidden" name="contact[tags]" value="newsletter,prelaunch">
-          <div class="newsletter-input-group" style="display: flex; width: 100%; gap: 8px; align-items: center;">
+          <input type="hidden" name="return_to" value="{{ request.path }}#newsletter-form">
+          <div class="newsletter-input-group" style="display: flex; width: 100%; max-width: {{ section.settings.form_max_width }}px; margin: 0 auto; gap: 8px; align-items: center;">
             <input 
               type="email" 
               name="contact[email]"
               class="newsletter-input-prelaunch{% if email_error %} error{% endif %}"
               placeholder="{{ section.settings.newsletter_placeholder }}"
               required
+              aria-describedby="newsletter-error"
             >
-            <button type="submit" class="pill-btn">
-              {{ section.settings.newsletter_button }}
-            </button>
+            <div class="newsletter-button-wrapper">
+              <button type="submit" class="pill-btn" aria-describedby="newsletter-error">
+                {{ section.settings.newsletter_button }}
+              </button>
+            </div>
+            <div class="newsletter-error-message{% if email_error %} visible{% endif %}" id="newsletter-error" role="alert">
+              <span class="newsletter-error-icon" aria-hidden="true">􀁟</span>
+              <span>{% if email_error %}{{ form.errors.messages.email | default: "Please include an '@' in the email address." }}{% else %}Please include an '@' in the email address.{% endif %}</span>
+            </div>
           </div>
-          <div class="newsletter-error-message{% if email_error %} visible{% endif %}" role="alert">
-            <span class="newsletter-error-icon" aria-hidden="true">􀁟</span>
-            <span>{% if email_error %}{{ form.errors.messages.email | default: "Please include an '@' in the email address." }}{% else %}Please include an '@' in the email address.{% endif %}</span>
-          </div>
-          {%- if form.posted_successfully? -%}
-            <div class="newsletter-success" style="margin-top: 12px;">{{ 'newsletter.success' | t | default: 'Thanks for subscribing!' }}</div>
-          {%- endif -%}
+        </div>
+      {%- endunless -%}
         {%- endform -%}
-      </div>
     </div>
   </div>
 </div>
@@ -69,9 +91,15 @@
   "settings": [
     {
       "type": "text",
+      "id": "newsletter_subtitle",
+      "label": "Newsletter subtitle",
+      "default": "Spring 2026"
+    },
+    {
+      "type": "text",
       "id": "newsletter_title",
       "label": "Newsletter title",
-      "default": "Let me know when AMO is available"
+      "default": "First object. Base product line.\nLimited to 10 pieces."
     },
     {
       "type": "text",
@@ -83,7 +111,7 @@
       "type": "text",
       "id": "newsletter_button",
       "label": "Submit button text",
-      "default": "Send"
+      "default": "Notify me"
     },
     {
       "type": "range",

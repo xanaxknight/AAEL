@@ -25,8 +25,8 @@
         "slide-1": {
           "type": "slide",
           "settings": {
-            "image_light_url": "https://i.ibb.co/DSs08Yp/day-Camera-1.png",
-            "image_dark_url": "https://i.ibb.co/J0fBQwn/day-Camera-5n.webp",
+            "image_light_url": "https://i.ibb.co/F49Z61Gt/1-amo-d.webp",
+            "image_dark_url": "https://i.ibb.co/J0fBQwn/1-amo-n.webp",
             "alt_text": "AMO Desk Lamp",
             "align_horizontal": "center",
             "align_vertical": "center"
@@ -35,45 +35,55 @@
         "slide-2": {
           "type": "slide",
           "settings": {
-            "image_light_url": "https://i.ibb.co/F49Z61Gt/day-Camera-5.webp",
-            "image_dark_url": "https://i.ibb.co/Z1MvPn04/day-Camera-9n.webp",
+            "image_light_url": "https://i.ibb.co/pr91svry/2-amo-d.webp",
+            "image_dark_url": "https://i.ibb.co/MD5DSRgr/2-amo-n.webp",
             "alt_text": "AMO Desk Lamp",
-            "align_horizontal": "center",
+            "align_horizontal": "left",
             "align_vertical": "center"
           }
         },
         "slide-3": {
           "type": "slide",
           "settings": {
-            "image_light_url": "https://i.ibb.co/pr91svry/day-Camera-4.webp",
-            "image_dark_url": "https://i.ibb.co/MD5DSRgr/day-Camera-4n.webp",
+            "image_light_url": "https://i.ibb.co/Q725pN0W/3-amo-d.webp",
+            "image_dark_url": "https://i.ibb.co/JW9VjLKj/3-amo-n.webp",
             "alt_text": "AMO Desk Lamp",
             "align_horizontal": "center",
-            "align_vertical": "center"
+            "align_vertical": "bottom"
           }
         },
         "slide-4": {
           "type": "slide",
           "settings": {
-            "image_light_url": "https://i.ibb.co/ymnQdQ7M/day-Camera-3.webp",
-            "image_dark_url": "https://i.ibb.co/LzgwXsgM/day-Camera-3n.webp",
+            "image_light_url": "https://i.ibb.co/Cs6f5Wmv/4-amo-d.webp",
+            "image_dark_url": "https://i.ibb.co/Z1MvPn04/4-amo-n.webp",
             "alt_text": "AMO Desk Lamp",
-            "align_horizontal": "center",
-            "align_vertical": "center"
+            "align_horizontal": "left",
+            "align_vertical": "bottom"
           }
         },
         "slide-5": {
           "type": "slide",
           "settings": {
-            "image_light_url": "https://i.ibb.co/Q725pN0W/day-Camera-2.webp",
-            "image_dark_url": "https://i.ibb.co/JW9VjLKj/day-Camera-2n.webp",
+            "image_light_url": "https://i.ibb.co/ymnQdQ7M/5-amo-d.webp",
+            "image_dark_url": "https://i.ibb.co/LzgwXsgM/5-amo-n.webp",
+            "alt_text": "AMO Desk Lamp",
+            "align_horizontal": "right",
+            "align_vertical": "center"
+          }
+        },
+        "slide-6": {
+          "type": "slide",
+          "settings": {
+            "image_light_url": "https://i.ibb.co/DSs08Yp/6-amo-d.png",
+            "image_dark_url": "https://i.ibb.co/23kJYLkT/6-amo-n.webp",
             "alt_text": "AMO Desk Lamp",
             "align_horizontal": "center",
             "align_vertical": "center"
           }
         }
       },
-      "block_order": ["slide-1", "slide-2", "slide-3", "slide-4", "slide-5"],
+      "block_order": ["slide-1", "slide-2", "slide-3", "slide-4", "slide-5", "slide-6"],
       "settings": {
         "max_width": 1920,
         "slide_timings": "12000,6000",
@@ -83,7 +93,10 @@
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "newsletter_title": "Let me know when AMO is available",
+        "newsletter_subtitle": "Spring 2026",
+        "newsletter_title": "First object. Base product line.\nLimited to 10 pieces.",
+        "newsletter_placeholder": "Email",
+        "newsletter_button": "Notify me",
         "padding_bottom": 80
       }
     },
