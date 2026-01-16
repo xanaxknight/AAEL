@@ -23,7 +23,11 @@
       "
     >
       {%- form 'contact', id: 'contact_form', class: 'newsletter-form-prelaunch', novalidate: 'novalidate' -%}
-        {%- if form.posted_successfully? -%}
+        {%- assign show_success = false -%}
+        {%- if form.posted_successfully? or request.path contains 'preview=success' -%}
+          {%- assign show_success = true -%}
+        {%- endif -%}
+        {%- if show_success -%}
           <div class="newsletter-text" style="width: 100%; margin: 0 auto; text-align: center;">
             {%- if section.settings.newsletter_subtitle != blank -%}
               <p style="font-size: 16px; color: var(--fg); opacity: 0.5; margin-bottom: 16px; letter-spacing: 0.5px;">
@@ -48,7 +52,7 @@
           </div>
         {%- endif -%}
       
-      {%- unless form.posted_successfully? -%}
+      {%- unless show_success -%}
         <div id="newsletter-form" class="newsletter-wrapper" style="width: 100%; max-width: 600px; margin: 0 auto; text-align: center;">
           {%- assign email_error = false -%}
           {%- if form.errors and form.errors.messages.email != blank -%}
