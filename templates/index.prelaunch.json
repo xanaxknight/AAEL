@@ -13,7 +13,7 @@
     "hero": {
       "type": "hero-lead",
       "settings": {
-        "hero_text": "AAEL creates limited series of interior artifacts primarily out of metal.",
+        "hero_text": "Limited series of interior artefacts meant to remain",
         "max_width": 800,
         "padding_top": 40,
         "padding_bottom": 64
@@ -25,8 +25,8 @@
         "slide-1": {
           "type": "slide",
           "settings": {
-            "image_light_url": "https://i.ibb.co/YFqGLMGM/amo-5-d.webp",
-            "image_dark_url": "https://i.ibb.co/x8CZ1cNY/amo-5-n.webp",
+            "image_light_url": "https://i.ibb.co/DSs08Yp/day-Camera-1.png",
+            "image_dark_url": "https://i.ibb.co/J0fBQwn/day-Camera-5n.webp",
             "alt_text": "AMO Desk Lamp",
             "align_horizontal": "center",
             "align_vertical": "center"
@@ -35,8 +35,8 @@
         "slide-2": {
           "type": "slide",
           "settings": {
-            "image_light_url": "https://i.ibb.co/M5N8XTHW/amo-4-d.webp",
-            "image_dark_url": "https://i.ibb.co/PGdjc1mn/amo-4-n.webp",
+            "image_light_url": "https://i.ibb.co/F49Z61Gt/day-Camera-5.webp",
+            "image_dark_url": "https://i.ibb.co/Z1MvPn04/day-Camera-9n.webp",
             "alt_text": "AMO Desk Lamp",
             "align_horizontal": "center",
             "align_vertical": "center"
@@ -45,15 +45,35 @@
         "slide-3": {
           "type": "slide",
           "settings": {
-            "image_light_url": "https://i.ibb.co/VWjW5STB/d-v3.webp",
-            "image_dark_url": "https://i.ibb.co/fmHHdcb/n-v3.webp",
+            "image_light_url": "https://i.ibb.co/pr91svry/day-Camera-4.webp",
+            "image_dark_url": "https://i.ibb.co/MD5DSRgr/day-Camera-4n.webp",
+            "alt_text": "AMO Desk Lamp",
+            "align_horizontal": "center",
+            "align_vertical": "center"
+          }
+        },
+        "slide-4": {
+          "type": "slide",
+          "settings": {
+            "image_light_url": "https://i.ibb.co/ymnQdQ7M/day-Camera-3.webp",
+            "image_dark_url": "https://i.ibb.co/LzgwXsgM/day-Camera-3n.webp",
+            "alt_text": "AMO Desk Lamp",
+            "align_horizontal": "center",
+            "align_vertical": "center"
+          }
+        },
+        "slide-5": {
+          "type": "slide",
+          "settings": {
+            "image_light_url": "https://i.ibb.co/Q725pN0W/day-Camera-2.webp",
+            "image_dark_url": "https://i.ibb.co/JW9VjLKj/day-Camera-2n.webp",
             "alt_text": "AMO Desk Lamp",
             "align_horizontal": "center",
             "align_vertical": "center"
           }
         }
       },
-      "block_order": ["slide-1", "slide-2", "slide-3"],
+      "block_order": ["slide-1", "slide-2", "slide-3", "slide-4", "slide-5"],
       "settings": {
         "max_width": 1920,
         "slide_timings": "12000,6000",

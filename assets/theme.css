@@ -10,10 +10,10 @@
 /* --- CSS Custom Properties --- */
 :root {
   --gap: 0px;
-  --bg: #EAEAEA;
+  --bg: #FAFAFA;
   --fg: #000000;
-  --gray-bg: #EAEAEA;
-  --stripe-col: #EAEAEA;
+  --gray-bg: #FAFAFA;
+  --stripe-col: #FAFAFA;
   --font-main: "Neue Haas Grotesk Display Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
   
   --text-xs: 11px;
@@ -26,7 +26,7 @@
   --cols: 2; 
 
   /* Prelaunch specific vars */
-  --prelaunch-bg: #EAEAEA;
+  --prelaunch-bg: #FAFAFA;
   --prelaunch-fg: #000000;
 
   /* Controls */
@@ -746,8 +746,15 @@ body.mode-prelaunch {
   flex-shrink: 0;
 }
 
+/* Hide collection text and logo mark in footer only */
+.section-footer .logo-badge .collection-text,
+.section-footer .logo-badge .logo-mark {
+  display: none;
+}
+
+/* Hide collection text in header on mobile */
 @media (max-width: 767px) {
-  .collection-text {
+  .header-block .collection-text {
     display: none;
   }
 }
@@ -1051,7 +1058,9 @@ html.dark body .theme-icon-line--dark {
 
 @media (max-width: 767px) {
   .lead-text {
-    font-size: 32px;
+    font-size: 36px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }
 
@@ -1220,27 +1229,31 @@ html.dark body .product-image.img-light {
   position: absolute;
   width: 32px;
   height: 32px;
-  background: rgba(255, 255, 255, 0.30);
+  background: rgba(255, 255, 255, 0.10);
   border-radius: 1.125rem;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, background 0.3s ease;
   z-index: 0;
   left: 6px;
   top: 50%;
   transform: translateY(-50%);
-  box-shadow: 0 0.5px 1px 0 #FFF inset, 0 0 2px 0 #FFF inset;
+  box-shadow: 0 0.5px 1px 0 #ffffff9f inset, 0 0 2px 0 rgba(0, 0, 0, 0.35) inset;
   backdrop-filter: blur(5px);
+}
+
+/* Hover state: brighter indicator with white inner shadow */
+.slider-theme-toggle:hover::before {
+  background: rgba(255, 255, 255, 0.30);
+  box-shadow: 0 0.5px 1px 0 #FFF inset, 0 0 2px 0 #FFF inset;
 }
 
 /* Slide to light icon position (left) */
 body:not(.dark) .slider-theme-toggle::before {
   transform: translateX(0) translateY(-50%);
-  box-shadow: 0 0.5px 1px 0 #FFF inset, 0 0 2px 0 #FFF inset;
 }
 
 /* Slide to dark icon position (right) with dark theme glass effect */
 body.dark .slider-theme-toggle::before {
   transform: translateX(32px) translateY(-50%);
-  box-shadow: 0 0.5px 1px 0 #FFF inset, 0 0 2px 0 #FFF inset;
 }
 
 .slider-theme-toggle .theme-icon {
@@ -1471,6 +1484,7 @@ body.dark .slider-theme-toggle .theme-icon--light {
   color: var(--fg);
   font-family: var(--font-main);
   font-size: 16px;
+  font-weight: 500;
   height: 42px;
   outline: none;
   backdrop-filter: blur(5px);
@@ -1485,6 +1499,47 @@ body.dark .newsletter-input-prelaunch {
 .newsletter-input-prelaunch::placeholder {
   color: var(--fg);
   opacity: 0.5;
+}
+
+/* Newsletter Error State */
+.newsletter-input-prelaunch.error {
+  border-radius: 1.375rem;
+  background: rgba(255, 255, 255, 0.50);
+  box-shadow: 0 0 12px 0 rgba(255, 119, 119, 0.35) inset;
+}
+
+body.dark .newsletter-input-prelaunch.error {
+  background: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 0 12px 0 rgba(255, 119, 119, 0.50) inset;
+}
+
+.newsletter-error-message {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  font-family: var(--font-main);
+  font-size: 14px;
+  color: #D3A5A5;
+  letter-spacing: 0.3px;
+}
+
+.newsletter-error-message.visible {
+  display: flex;
+}
+
+.newsletter-error-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "SF Pro", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
+  font-size: 16px;
+  color: #D3A5A5;
+  flex-shrink: 0;
+  font-weight: 600;
 }
 
 .newsletter-input {
@@ -1576,6 +1631,8 @@ hero-card {
   hero-card {
     min-height: 90vh; /* Account for mobile UI */
     aspect-ratio: 9/16; /* Portrait on mobile */
+    padding-left: 8px;
+    padding-right: 8px;
   }
 }
 

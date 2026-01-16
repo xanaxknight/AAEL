@@ -561,3 +561,49 @@ window.AAEL = {
   ProductCard,
   HeroCard
 };
+
+/* ========================================
+   NEWSLETTER FORM VALIDATION
+   ======================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.newsletter-form-prelaunch').forEach((form) => {
+    const input = form.querySelector('.newsletter-input-prelaunch');
+    const error = form.querySelector('.newsletter-error-message');
+    const errorText = error ? error.querySelector('span:last-child') : null;
+
+    if (!input) return;
+
+    const showError = (message) => {
+      if (error) {
+        error.classList.add('visible');
+        input.classList.add('error');
+        if (errorText) errorText.textContent = message;
+      }
+    };
+
+    const clearError = () => {
+      if (error) {
+        error.classList.remove('visible');
+        input.classList.remove('error');
+      }
+    };
+
+    form.addEventListener('submit', (event) => {
+      clearError();
+      const value = input.value.trim();
+      
+      // Only prevent submission if validation fails
+      if (!value || !value.includes('@')) {
+        event.preventDefault();
+        event.stopPropagation();
+        showError("Please include an '@' in the email address.");
+        return false;
+      }
+      
+      // Valid email - let form submit to Shopify
+    });
+
+    input.addEventListener('input', clearError);
+  });
+});
