@@ -1,4 +1,12 @@
-
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "layout": "theme.prelaunch",
   "sections": {
@@ -19,27 +27,32 @@
         "hero_text": "Limited series of interior artefacts meant to remain",
         "max_width": 800,
         "padding_top": 40,
-        "padding_bottom": 64
+        "padding_bottom": 64,
+        "align_s": "center",
+        "span_s": 2,
+        "span_m": 4,
+        "span_l": 6,
+        "span_xl": 8
       }
     },
     "hero-carousel": {
       "type": "hero-carousel",
       "blocks": {
-        "slide_89neN3": {
-          "type": "slide",
-          "settings": {
-            "image_light_url": "https://i.ibb.co/Cs6f5Wmv/day-Camera-9.webp",
-            "image_dark_url": "https://i.ibb.co/Z1MvPn04/day-Camera-9n.webp",
-            "alt_text": "AMO Desk Lamp",
-            "align_horizontal": "center",
-            "align_vertical": "center"
-          }
-        },
         "slide-2": {
           "type": "slide",
           "settings": {
             "image_light_url": "https://i.ibb.co/twB9kNWh/day-Camera-5.webp",
             "image_dark_url": "https://i.ibb.co/J0fBQwn/day-Camera-5n.webp",
+            "alt_text": "AMO Desk Lamp",
+            "align_horizontal": "center",
+            "align_vertical": "center"
+          }
+        },
+        "slide_89neN3": {
+          "type": "slide",
+          "settings": {
+            "image_light_url": "https://i.ibb.co/Cs6f5Wmv/day-Camera-9.webp",
+            "image_dark_url": "https://i.ibb.co/Z1MvPn04/day-Camera-9n.webp",
             "alt_text": "AMO Desk Lamp",
             "align_horizontal": "center",
             "align_vertical": "center"
@@ -77,8 +90,8 @@
         }
       },
       "block_order": [
-        "slide_89neN3",
         "slide-2",
+        "slide_89neN3",
         "slide-3",
         "slide-4",
         "slide-5"
