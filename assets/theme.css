@@ -1619,19 +1619,71 @@ body.dark .newsletter-wrapper .h-captcha {
   transition: height 0.3s ease;
 }
 
-/* Shopify challenge page positioning - for security redirects only */
+/* Shopify Challenge Page - Custom Styling */
 body[class*="challenge"] {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding-top: 120px;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-main);
 }
 
+/* Challenge page heading */
+body[class*="challenge"] h1,
+body[class*="challenge"] h2 {
+  font-family: var(--font-main);
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin-bottom: 24px;
+  text-align: center;
+  max-width: 600px;
+}
+
+/* Challenge page text */
+body[class*="challenge"] p {
+  font-size: 16px;
+  opacity: 0.6;
+  letter-spacing: 0.02em;
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto 32px;
+}
+
+/* Challenge captcha container */
 body[class*="challenge"] .h-captcha {
   margin: 24px auto !important;
-  background: transparent;
-  padding: 0 !important;
+  background: rgba(0, 0, 0, 0.02);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+body.dark[class*="challenge"] .h-captcha {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Challenge submit button */
+body[class*="challenge"] button[type="submit"],
+body[class*="challenge"] input[type="submit"] {
+  background: var(--fg);
+  color: var(--bg);
+  border: none;
+  padding: 12px 32px;
+  border-radius: 22px;
+  font-family: var(--font-main);
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  margin-top: 24px;
+}
+
+body[class*="challenge"] button[type="submit"]:hover {
+  opacity: 0.8;
 }
 
 .newsletter-input {
