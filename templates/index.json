@@ -1,4 +1,12 @@
-
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "layout": "theme.prelaunch",
   "sections": {
@@ -19,13 +27,18 @@
         "hero_text": "Limited series of interior artefacts meant to remain",
         "max_width": 800,
         "padding_top": 40,
-        "padding_bottom": 64
+        "padding_bottom": 64,
+        "align_s": "center",
+        "span_s": 2,
+        "span_m": 4,
+        "span_l": 6,
+        "span_xl": 8
       }
     },
     "hero-carousel": {
       "type": "hero-carousel",
       "blocks": {
-        "slide_89neN3": {
+        "slide_8qkLe9": {
           "type": "slide",
           "settings": {
             "image_light_url": "https://i.ibb.co/F49Z61Gt/1-amo-d.webp",
@@ -55,7 +68,7 @@
             "align_vertical": "bottom"
           }
         },
-        "slide-4": {
+        "slide_89neN3": {
           "type": "slide",
           "settings": {
             "image_light_url": "https://i.ibb.co/Cs6f5Wmv/4-amo-d.webp",
@@ -87,10 +100,10 @@
         }
       },
       "block_order": [
-        "slide_89neN3",
+        "slide_8qkLe9",
         "slide-2",
         "slide-3",
-        "slide-4",
+        "slide_89neN3",
         "slide-5",
         "slide-6"
       ],
