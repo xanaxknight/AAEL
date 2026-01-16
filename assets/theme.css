@@ -1578,32 +1578,48 @@ body.dark .newsletter-input-group:has(.error-persist) .newsletter-input-prelaunc
   z-index: 10;
 }
 
-/* Newsletter Captcha Styling */
-body #main-content .h-captcha,
-body #main-content iframe[src*="hcaptcha"],
-body #MainContent .h-captcha,
-body #MainContent iframe[src*="hcaptcha"],
+/* Newsletter Captcha - Inline Integration */
 .newsletter-form-prelaunch .h-captcha,
-.newsletter-form-prelaunch iframe[src*="hcaptcha"] {
-  margin: 24px auto 16px !important;
+.newsletter-wrapper .h-captcha {
   display: flex !important;
   justify-content: center !important;
+  align-items: center !important;
+  margin: 20px auto 0 !important;
+  padding: 16px !important;
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  max-width: 100% !important;
+  width: auto !important;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 12px;
+}
+
+body.dark .newsletter-form-prelaunch .h-captcha,
+body.dark .newsletter-wrapper .h-captcha {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Captcha iframe - force inline positioning */
+.newsletter-form-prelaunch iframe[src*="hcaptcha"],
+.newsletter-wrapper iframe[src*="hcaptcha"] {
+  margin: 0 auto !important;
+  display: block !important;
   position: relative !important;
   top: auto !important;
   left: auto !important;
   transform: none !important;
 }
 
-/* Captcha challenge wrapper */
-.newsletter-wrapper .g-recaptcha,
-.newsletter-wrapper .h-captcha {
-  display: flex;
-  justify-content: center;
-  margin: 24px auto 16px;
-  position: relative;
+/* Smooth transition when captcha appears */
+.newsletter-wrapper {
+  transition: height 0.3s ease;
 }
 
-/* Shopify challenge page positioning */
+/* Shopify challenge page positioning - for security redirects only */
 body[class*="challenge"] {
   display: flex;
   flex-direction: column;
@@ -1614,6 +1630,8 @@ body[class*="challenge"] {
 
 body[class*="challenge"] .h-captcha {
   margin: 24px auto !important;
+  background: transparent;
+  padding: 0 !important;
 }
 
 .newsletter-input {
