@@ -5,15 +5,17 @@
       "settings": {
         "logo_text": "AAEL",
         "collection_text": "C24",
-        "show_bag": true
+        "show_bag": false,
+        "right_button_text": "Let me know",
+        "right_button_link": "#newsletter"
       }
     },
     "about-content": {
       "type": "about-content",
       "settings": {
-        "max_width": 800,
-        "padding_top": 80,
-        "padding_bottom": 120
+        "max_width": 1000,
+        "padding_top": 120,
+        "padding_bottom": 160
       }
     },
     "footer": {
@@ -39,6 +41,7 @@
       "settings": {
         "logo_text": "AAEL",
         "collection_text": "C24",
+        "copyright_text": "© 2026",
         "padding_top": 24,
         "padding_bottom": 24
       }
