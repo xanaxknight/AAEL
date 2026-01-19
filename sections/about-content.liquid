@@ -48,9 +48,10 @@
             <span class="email-text">hi@aael24.com</span>
             <div class="email-tooltip">
               <span class="tooltip-default-text">Copy to clipboard</span>
+              <span class="tooltip-mobile-text">Tap to copy</span>
               <span class="tooltip-success-text">
                 <span class="sf-checkmark">􀁣</span>
-                Copied to clipboard
+                Copied
               </span>
             </div>
           </button>
@@ -81,9 +82,10 @@
     white-space: nowrap;
   }
 
-  /* Email text with smooth opacity transition */
+  /* Email text with smooth opacity transition - force lowercase */
   .email-text {
     transition: opacity 0.3s ease;
+    text-transform: lowercase;
   }
 
   .email-copy-btn:hover .email-text {
@@ -113,8 +115,9 @@
     z-index: 1000;
   }
 
-  /* Show default text by default, hide success */
-  .tooltip-success-text {
+  /* Show default text by default, hide success and mobile text */
+  .tooltip-success-text,
+  .tooltip-mobile-text {
     display: none;
   }
 
@@ -122,6 +125,10 @@
   .email-copy-btn:hover .email-tooltip {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
+  }
+
+  .email-copy-btn:hover .tooltip-default-text {
+    display: inline;
   }
 
   /* Success state - green text with checkmark, no background */
@@ -132,12 +139,13 @@
     color: #84D278;
   }
 
-  .email-copy-btn.copied .tooltip-default-text {
-    display: none;
+  .email-copy-btn.copied .tooltip-default-text,
+  .email-copy-btn.copied .tooltip-mobile-text {
+    display: none !important;
   }
 
   .email-copy-btn.copied .tooltip-success-text {
-    display: inline-flex;
+    display: inline-flex !important;
     align-items: center;
     gap: 6px;
   }
@@ -162,7 +170,7 @@
     opacity: 1;
   }
 
-  /* Responsive adjustments */
+  /* Responsive adjustments - Mobile gets visible tooltip */
   @media (max-width: 768px) {
     .about-paragraph {
       font-size: 2rem !important;
@@ -175,6 +183,22 @@
 
     .email-tooltip {
       font-size: 0.65rem !important;
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Hide desktop text, show mobile text on mobile */
+    .tooltip-default-text {
+      display: none !important;
+    }
+
+    .tooltip-mobile-text {
+      display: inline !important;
+    }
+
+    /* Keep hover behavior disabled on mobile */
+    .email-copy-btn:hover .email-text {
+      opacity: 1;
     }
   }
 
