@@ -39,9 +39,21 @@
         </p>
 
         <div class="about-contact" style="margin-top: 60px;">
-          <a href="mailto:HI@AAEL24.COM" class="about-email" style="font-size: 16px; letter-spacing: 0.05em; color: var(--fg); text-decoration: none; transition: opacity 0.2s;">
-            HI@AAEL24.COM
-          </a>
+          <button 
+            class="email-copy-btn bag-btn" 
+            data-email="hi@aael24.com"
+            aria-label="Copy email address to clipboard"
+            type="button"
+          >
+            <span class="email-text">HI@AAEL24.COM</span>
+            <span class="email-hover-text">Copy to clipboard</span>
+            <span class="email-copied-text">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 4px;">
+                <path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Copied to clipboard
+            </span>
+          </button>
         </div>
 
       </div>
@@ -50,19 +62,69 @@
 </div>
 
 <style>
-  .about-email:hover {
-    opacity: 0.6;
-    text-decoration: underline;
+  /* Email Copy Button - Styled like bag-btn */
+  .email-copy-btn {
+    display: inline-flex;
+    position: relative;
+    height: auto;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: none;
+    color: var(--fg);
+    font-family: var(--font-main);
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.075rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
   }
 
+  .email-copy-btn:hover {
+    opacity: 0.6;
+  }
+
+  /* State management - show/hide different text */
+  .email-copy-btn .email-hover-text,
+  .email-copy-btn .email-copied-text {
+    display: none;
+  }
+
+  .email-copy-btn:hover .email-text {
+    display: none;
+  }
+
+  .email-copy-btn:hover .email-hover-text {
+    display: inline;
+  }
+
+  .email-copy-btn.copied .email-text,
+  .email-copy-btn.copied .email-hover-text {
+    display: none;
+  }
+
+  .email-copy-btn.copied .email-copied-text {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .email-copy-btn.copied:hover .email-copied-text {
+    display: inline-flex;
+  }
+
+  /* Responsive adjustments */
   @media (max-width: 768px) {
     .about-paragraph {
       font-size: 2rem !important;
       letter-spacing: 0.04rem !important;
     }
     
-    .about-email {
-      font-size: 14px !important;
+    .email-copy-btn {
+      font-size: 1.2rem !important;
     }
   }
 
@@ -71,8 +133,84 @@
       font-size: 1.5rem !important;
       letter-spacing: 0.03rem !important;
     }
+
+    .email-copy-btn {
+      font-size: 1rem !important;
+    }
   }
 </style>
+
+<script>
+  (function() {
+    'use strict';
+    
+    // Wait for DOM to be ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initEmailCopy);
+    } else {
+      initEmailCopy();
+    }
+    
+    function initEmailCopy() {
+      const emailBtn = document.querySelector('.email-copy-btn');
+      
+      if (!emailBtn) return;
+      
+      emailBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const email = this.getAttribute('data-email');
+        
+        // Try modern clipboard API first
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(email).then(function() {
+            showCopiedState(emailBtn);
+          }).catch(function(err) {
+            // Fallback for clipboard API failure
+            fallbackCopy(email, emailBtn);
+          });
+        } else {
+          // Fallback for older browsers
+          fallbackCopy(email, emailBtn);
+        }
+      });
+    }
+    
+    function showCopiedState(btn) {
+      btn.classList.add('copied');
+      
+      // Remove copied state after 2.5 seconds
+      setTimeout(function() {
+        btn.classList.remove('copied');
+      }, 2500);
+    }
+    
+    function fallbackCopy(text, btn) {
+      // Create temporary textarea
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      textarea.style.pointerEvents = 'none';
+      document.body.appendChild(textarea);
+      
+      try {
+        textarea.select();
+        textarea.setSelectionRange(0, 99999); // For mobile devices
+        
+        const successful = document.execCommand('copy');
+        
+        if (successful) {
+          showCopiedState(btn);
+        }
+      } catch (err) {
+        console.error('Failed to copy email:', err);
+      } finally {
+        document.body.removeChild(textarea);
+      }
+    }
+  })();
+</script>
 
 {% schema %}
 {
