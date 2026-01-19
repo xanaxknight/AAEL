@@ -60,7 +60,7 @@
           {%- endif -%}
 
           <input type="hidden" name="contact[tags]" value="newsletter,prelaunch">
-          <input type="hidden" name="return_to" value="{{ request.path }}#newsletter-form">
+          <input type="hidden" name="return_to" value="{{ request.path }}?contact_posted=true#newsletter-form">
           <div class="newsletter-input-group" style="display: flex; width: 100%; max-width: {{ section.settings.form_max_width }}px; margin: 0 auto; gap: 8px; align-items: center;">
             <input 
               type="email" 
