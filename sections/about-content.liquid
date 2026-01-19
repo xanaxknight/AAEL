@@ -40,19 +40,19 @@
 
         <div class="about-contact" style="margin-top: 60px;">
           <button 
-            class="email-copy-btn bag-btn" 
+            class="email-copy-btn" 
             data-email="hi@aael24.com"
             aria-label="Copy email address to clipboard"
             type="button"
           >
-            <span class="email-main-text">hi@aael24.com</span>
-            <span class="email-feedback-text">Copy to clipboard</span>
-            <span class="email-success-text">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 4px;">
-                <path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              Copied to clipboard
-            </span>
+            <span class="email-text">hi@aael24.com</span>
+            <div class="email-tooltip">
+              <span class="tooltip-default-text">Copy to clipboard</span>
+              <span class="tooltip-success-text">
+                <span class="sf-checkmark">􀁣</span>
+                Copied to clipboard
+              </span>
+            </div>
           </button>
         </div>
 
@@ -62,12 +62,9 @@
 </div>
 
 <style>
-  /* Email Copy Button - Styled like bag-btn with stacked feedback */
+  /* Email Copy Button - Styled like bag-btn */
   .email-copy-btn {
     display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
     position: relative;
     height: auto;
     padding: 0;
@@ -84,48 +81,95 @@
     white-space: nowrap;
   }
 
-  /* Main email text */
-  .email-main-text {
-    transition: opacity 0.2s ease;
+  /* Email text with smooth opacity transition */
+  .email-text {
+    transition: opacity 0.3s ease;
   }
 
-  /* Default state - hide feedback */
-  .email-feedback-text,
-  .email-success-text {
-    display: none;
-    font-size: 1rem;
-    letter-spacing: 0.05em;
-    text-transform: none;
-    opacity: 0.5;
-  }
-
-  /* Hover state - fade email and show "Copy to clipboard" */
-  .email-copy-btn:hover .email-main-text {
+  .email-copy-btn:hover .email-text {
     opacity: 0.6;
   }
 
-  .email-copy-btn:hover .email-feedback-text {
-    display: block;
+  /* Tooltip - absolutely positioned below button */
+  .email-tooltip {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-5px);
+    margin-top: 12px;
+    padding: 8px 16px;
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 1000;
   }
 
-  /* Clicked/Copied state - show success message in green */
-  .email-copy-btn.copied .email-feedback-text {
+  /* Dark mode tooltip */
+  body.dark .email-tooltip {
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
+  }
+
+  /* Show default text by default, hide success */
+  .tooltip-success-text {
     display: none;
   }
 
-  .email-copy-btn.copied .email-success-text {
+  /* Hover state - show tooltip with slide up animation */
+  .email-copy-btn:hover .email-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* Success state - green tooltip with checkmark */
+  .email-copy-btn.copied .email-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    background: #4CAF50;
+    color: white;
+  }
+
+  body.dark .email-copy-btn.copied .email-tooltip {
+    background: #4CAF50;
+    color: white;
+  }
+
+  .email-copy-btn.copied .tooltip-default-text {
+    display: none;
+  }
+
+  .email-copy-btn.copied .tooltip-success-text {
     display: inline-flex;
     align-items: center;
-    color: #4CAF50;
-    opacity: 1;
+    gap: 6px;
   }
 
-  .email-copy-btn.copied:hover .email-main-text {
-    opacity: 1;
-  }
-
-  .email-copy-btn.copied:hover .email-success-text {
+  /* SF Symbols checkmark with filled circle */
+  .sf-checkmark {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro", system-ui, sans-serif;
+    font-size: 1.1rem;
     display: inline-flex;
+    align-items: center;
+  }
+
+  /* Dissolve animation */
+  .email-copy-btn.dissolving .email-tooltip {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Keep email at full opacity when copied */
+  .email-copy-btn.copied .email-text,
+  .email-copy-btn.copied:hover .email-text {
+    opacity: 1;
   }
 
   /* Responsive adjustments */
@@ -139,9 +183,9 @@
       font-size: 1.2rem !important;
     }
 
-    .email-feedback-text,
-    .email-success-text {
-      font-size: 0.8rem !important;
+    .email-tooltip {
+      font-size: 0.75rem !important;
+      padding: 6px 12px !important;
     }
   }
 
@@ -155,9 +199,9 @@
       font-size: 1rem !important;
     }
 
-    .email-feedback-text,
-    .email-success-text {
+    .email-tooltip {
       font-size: 0.7rem !important;
+      padding: 5px 10px !important;
     }
   }
 </style>
@@ -178,8 +222,16 @@
       
       if (!emailBtn) return;
       
+      let dissolveTimeout = null;
+      let resetTimeout = null;
+      
+      // Click handler - copy and show success
       emailBtn.addEventListener('click', function(e) {
         e.preventDefault();
+        
+        // Clear any existing timeouts
+        if (dissolveTimeout) clearTimeout(dissolveTimeout);
+        if (resetTimeout) clearTimeout(resetTimeout);
         
         const email = this.getAttribute('data-email');
         
@@ -196,15 +248,31 @@
           fallbackCopy(email, emailBtn);
         }
       });
+      
+      // Mouse leave handler - hide tooltip if not in copied state
+      emailBtn.addEventListener('mouseleave', function() {
+        if (!this.classList.contains('copied')) {
+          // Tooltip will hide automatically via CSS :hover
+        }
+      });
     }
     
     function showCopiedState(btn) {
+      // Remove any existing states
+      btn.classList.remove('dissolving');
+      
+      // Add copied state immediately
       btn.classList.add('copied');
       
-      // Remove copied state after 2.5 seconds
-      setTimeout(function() {
-        btn.classList.remove('copied');
-      }, 2500);
+      // After 2 seconds, start dissolve animation
+      const dissolveTimeout = setTimeout(function() {
+        btn.classList.add('dissolving');
+        
+        // After dissolve animation completes (300ms), remove all classes
+        const resetTimeout = setTimeout(function() {
+          btn.classList.remove('copied', 'dissolving');
+        }, 300);
+      }, 2000);
     }
     
     function fallbackCopy(text, btn) {
