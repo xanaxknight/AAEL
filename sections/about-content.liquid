@@ -2,6 +2,10 @@
   assign padding_top = section.settings.padding_top | default: 120
   assign padding_bottom = section.settings.padding_bottom | default: 160
   assign max_width = section.settings.max_width | default: 1000
+  assign paragraph_1 = section.settings.paragraph_1 | default: 'AAEL creates authored objects and spatial elements for interior space.'
+  assign paragraph_2 = section.settings.paragraph_2 | default: 'The work exists through limited series and drops, allowing ideas to develop. Honest materials guide the practice, keeping decisions clear. Form, function, and structure are developed together, without hierarchy.'
+  assign paragraph_3 = section.settings.paragraph_3 | default: 'These objects act as points of presence within a space, with subtle shifts built in to support continuity.'
+  assign email = section.settings.email | default: 'HI@AAEL24.COM'
 -%}
 
 <div class="about-content-wrapper" style="padding-top: {{ padding_top }}px; padding-bottom: {{ padding_bottom }}px;">
@@ -26,23 +30,31 @@
     >
       <div class="about-content-inner" style="max-width: {{ max_width }}px; margin: 0 auto; padding: 0 40px;">
         
-        <p class="about-paragraph about-paragraph-1">
-          AAEL creates authored objects and spatial elements for interior space.
-        </p>
+        {%- if paragraph_1 != blank -%}
+          <p class="about-paragraph about-paragraph-1">
+            {{ paragraph_1 }}
+          </p>
+        {%- endif -%}
 
-        <p class="about-paragraph about-paragraph-2">
-          The work exists through limited series and drops, allowing ideas to develop. Honest materials guide the practice, keeping decisions clear. Form, function, and structure are developed together, without hierarchy.
-        </p>
+        {%- if paragraph_2 != blank -%}
+          <p class="about-paragraph about-paragraph-2">
+            {{ paragraph_2 }}
+          </p>
+        {%- endif -%}
 
-        <p class="about-paragraph about-paragraph-3">
-          These objects act as points of presence within a space, with subtle shifts built in to support continuity.
-        </p>
+        {%- if paragraph_3 != blank -%}
+          <p class="about-paragraph about-paragraph-3">
+            {{ paragraph_3 }}
+          </p>
+        {%- endif -%}
 
-        <div class="about-contact">
-          <a href="mailto:HI@AAEL24.COM" class="about-email">
-            HI@AAEL24.COM
-          </a>
-        </div>
+        {%- if email != blank -%}
+          <div class="about-contact">
+            <a href="mailto:{{ email }}" class="about-email">
+              {{ email }}
+            </a>
+          </div>
+        {%- endif -%}
 
       </div>
     </div>
@@ -128,6 +140,38 @@
   "tag": "section",
   "class": "section-about-content",
   "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_1",
+      "label": "Paragraph 1",
+      "default": "AAEL creates authored objects and spatial elements for interior space."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_2",
+      "label": "Paragraph 2",
+      "default": "The work exists through limited series and drops, allowing ideas to develop. Honest materials guide the practice, keeping decisions clear. Form, function, and structure are developed together, without hierarchy."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_3",
+      "label": "Paragraph 3",
+      "default": "These objects act as points of presence within a space, with subtle shifts built in to support continuity."
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Contact email",
+      "default": "HI@AAEL24.COM"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
     {
       "type": "range",
       "id": "max_width",

@@ -13,6 +13,10 @@
     "about-content": {
       "type": "about-content",
       "settings": {
+        "paragraph_1": "AAEL creates authored objects and spatial elements for interior space.",
+        "paragraph_2": "The work exists through limited series and drops, allowing ideas to develop. Honest materials guide the practice, keeping decisions clear. Form, function, and structure are developed together, without hierarchy.",
+        "paragraph_3": "These objects act as points of presence within a space, with subtle shifts built in to support continuity.",
+        "email": "HI@AAEL24.COM",
         "max_width": 1000,
         "padding_top": 120,
         "padding_bottom": 160
