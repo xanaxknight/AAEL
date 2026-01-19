@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="{{ request.locale.iso_code }}">
 <head>
+  {{ content_for_header }}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page_title }}</title>
-  
-  {{ content_for_header }}
   {{ 'theme.css' | asset_url | stylesheet_tag }}
 
   <style>
@@ -149,7 +148,7 @@
       <span>AAEL</span>
     </div>
     <div class="checkpoint-header-center">
-      <span>⚙</span>
+      <span>o</span>
     </div>
     <div class="checkpoint-header-right">
       <span>C24</span>
@@ -165,7 +164,7 @@
   <div class="checkpoint-footer">
     <div class="checkpoint-footer-left">
       <span>AAEL</span>
-      <span>⚙</span>
+      <span>o</span>
       <span>C24</span>
     </div>
     <div class="checkpoint-footer-right">
