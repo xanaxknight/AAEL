@@ -29,6 +29,8 @@
       padding: 24px 32px;
       font-size: 14px;
       letter-spacing: 0.05em;
+      position: relative;
+      z-index: 1;
     }
 
     .checkpoint-header-left,
@@ -47,6 +49,8 @@
       justify-content: center;
       padding: 60px 20px;
       text-align: center;
+      position: relative;
+      z-index: 5;
     }
 
     /* Hide default Shopify text */
@@ -59,6 +63,15 @@
     .checkpoint-main .h-captcha {
       margin: 0 auto 24px !important;
       display: inline-block !important;
+      position: relative;
+      z-index: 10;
+      pointer-events: auto;
+    }
+
+    .checkpoint-main iframe[src*="hcaptcha"] {
+      position: relative !important;
+      z-index: 10 !important;
+      pointer-events: auto !important;
     }
 
     /* Submit button */
@@ -92,6 +105,8 @@
       font-size: 13px;
       letter-spacing: 0.05em;
       opacity: 0.6;
+      position: relative;
+      z-index: 1;
     }
 
     .checkpoint-footer-left,
