@@ -1,4 +1,18 @@
 /* ========================================
+   FONT FACE DECLARATIONS
+   ======================================== */
+
+/* Helvetica Now Pro Display - Regular */
+@font-face {
+  font-family: 'Helvetica Now Display';
+  src: url('HelveticaNowProDisplay-Regular.woff2') format('woff2'),
+       url('HelveticaNowProDisplay-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========================================
    AAEL Theme - Shopify Online Store 2.0
    ======================================== */
 
@@ -14,7 +28,7 @@
   --fg: #000000;
   --gray-bg: #FAFAFA;
   --stripe-col: #FAFAFA;
-  --font-main: "Neue Haas Grotesk Display Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-main: "Helvetica Now Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
   
   --text-xs: 11px;
   --text-sm: 13px;
