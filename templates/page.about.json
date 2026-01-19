@@ -8,21 +8,11 @@
         "show_bag": true
       }
     },
-    "hero": {
-      "type": "hero-lead",
+    "about-content": {
+      "type": "about-content",
       "settings": {
-        "hero_text": "About AAEL",
-        "max_width": 600,
-        "padding_top": 40,
-        "padding_bottom": 40
-      }
-    },
-    "main": {
-      "type": "page-content",
-      "settings": {
-        "show_title": false,
         "max_width": 800,
-        "padding_top": 40,
+        "padding_top": 80,
         "padding_bottom": 120
       }
     },
@@ -56,8 +46,7 @@
   },
   "order": [
     "header",
-    "hero",
-    "main",
+    "about-content",
     "footer"
   ]
 }
