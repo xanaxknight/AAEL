@@ -673,3 +673,38 @@ document.addEventListener('DOMContentLoaded', () => {
     updateButtonState();
   });
 });
+
+// Smooth newsletter success state handling - prevent page jump
+(function() {
+  // Maintain scroll position on newsletter form submission
+  if (window.location.search.includes('contact_posted=true')) {
+    // Prevent automatic scroll restoration
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    
+    // Handle smooth transition to success state
+    window.addEventListener('load', () => {
+      // Clean up URL without reload
+      const cleanUrl = window.location.pathname + window.location.hash;
+      window.history.replaceState({}, '', cleanUrl);
+      
+      // Smooth scroll to newsletter section after brief delay
+      setTimeout(() => {
+        const newsletter = document.querySelector('.newsletter-section-wrapper') || 
+                          document.querySelector('.section-newsletter') ||
+                          document.getElementById('newsletter-form');
+        
+        if (newsletter) {
+          const yOffset = -100; // Offset from top for better centering
+          const y = newsletter.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          
+          window.scrollTo({ 
+            top: y, 
+            behavior: 'smooth' 
+          });
+        }
+      }, 200);
+    });
+  }
+})();
