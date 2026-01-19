@@ -1619,129 +1619,77 @@ body.dark .newsletter-wrapper .h-captcha {
   transition: height 0.3s ease;
 }
 
-/* Shopify Challenge Page - Enhanced Modal-Style Design */
+/* Shopify Challenge Page - Clean Minimal Centered Design */
 body[class*="challenge"] {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  padding: 60px 20px;
+  padding: 40px 20px;
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-main);
   letter-spacing: 0.02em;
-  position: relative;
 }
 
-/* Subtle backdrop effect */
-body[class*="challenge"]::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: var(--bg);
-  backdrop-filter: blur(10px);
-  z-index: -1;
-}
-
-/* Hide Shopify branding */
+/* Hide Shopify branding and unnecessary text */
 body[class*="challenge"] .shopify-logo,
 body[class*="challenge"] .powered-by {
   display: none;
 }
 
-/* Challenge page main container - modal style */
-body[class*="challenge"] > div,
-body[class*="challenge"] main {
-  max-width: 500px;
-  width: 100%;
-  text-align: center;
-  background: var(--bg);
-  border-radius: 20px;
-  padding: 48px 32px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  animation: fadeInChallenge 0.4s ease;
-}
-
-body.dark[class*="challenge"] > div,
-body.dark[class*="challenge"] main {
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-/* Challenge page heading - subtle and refined */
+/* Hide the "To continue..." heading */
 body[class*="challenge"] h1,
-body[class*="challenge"] h2 {
-  font-family: var(--font-main);
-  font-size: 20px;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  margin-bottom: 16px;
-  text-align: center;
-  opacity: 0.9;
-  line-height: 1.4;
-}
-
-/* Challenge page text - match subtitle style */
+body[class*="challenge"] h2,
 body[class*="challenge"] p {
-  font-size: 14px;
-  opacity: 0.5;
-  letter-spacing: 0.02em;
+  display: none;
+}
+
+/* Challenge page main container - simple centered */
+body[class*="challenge"] > div,
+body[class*="challenge"] main,
+body[class*="challenge"] form {
+  width: 100%;
+  max-width: 100%;
   text-align: center;
-  margin: 0 auto 40px;
-  line-height: 1.6;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
 }
 
-/* Challenge captcha container - elevated card style */
+/* Challenge captcha container - clean and minimal */
 body[class*="challenge"] .h-captcha {
-  margin: 32px auto !important;
-  background: rgba(0, 0, 0, 0.02);
-  padding: 24px;
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  margin: 0 auto 24px !important;
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: inline-block !important;
 }
 
-body.dark[class*="challenge"] .h-captcha {
-  background: rgba(255, 255, 255, 0.03);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Challenge submit button - match pill button style */
+/* Challenge submit button - match your pill button exactly */
 body[class*="challenge"] button[type="submit"],
 body[class*="challenge"] input[type="submit"] {
-  background: var(--fg);
-  color: var(--bg);
-  border: none;
-  padding: 14px 40px;
-  border-radius: 24px;
-  font-family: var(--font-main);
-  font-size: 15px;
-  letter-spacing: 0.02em;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  margin-top: 32px;
-  font-weight: 400;
+  background: var(--fg) !important;
+  color: var(--bg) !important;
+  border: none !important;
+  padding: 12px 32px !important;
+  border-radius: 24px !important;
+  font-family: var(--font-main) !important;
+  font-size: 15px !important;
+  letter-spacing: 0.02em !important;
+  cursor: pointer !important;
+  transition: opacity 0.2s ease !important;
+  margin: 24px auto 0 !important;
+  font-weight: 400 !important;
+  display: inline-block !important;
 }
 
-body[class*="challenge"] button[type="submit"]:hover {
-  opacity: 0.85;
-  transform: translateY(-1px);
-}
-
-/* Fade-in animation for smooth appearance */
-@keyframes fadeInChallenge {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+body[class*="challenge"] button[type="submit"]:hover,
+body[class*="challenge"] input[type="submit"]:hover {
+  opacity: 0.8 !important;
 }
 
 .newsletter-input {
