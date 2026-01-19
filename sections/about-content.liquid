@@ -47,12 +47,9 @@
           >
             <span class="email-text">hi@aael24.com</span>
             <div class="email-tooltip">
-              <span class="tooltip-default-text">Copy to clipboard</span>
+              <span class="tooltip-default-text">Click to copy</span>
               <span class="tooltip-mobile-text">Tap to copy</span>
-              <span class="tooltip-success-text">
-                <span class="sf-checkmark">􀁣</span>
-                Copied
-              </span>
+              <span class="tooltip-success-text">Copied</span>
             </div>
           </button>
         </div>
@@ -111,7 +108,7 @@
     white-space: nowrap;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
     z-index: 1000;
   }
 
@@ -131,12 +128,22 @@
     display: inline;
   }
 
-  /* Success state - green text with checkmark, no background */
+  /* Success state - green text, no background, hide hover text */
   .email-copy-btn.copied .email-tooltip {
     opacity: 1 !important;
     transform: translateX(-50%) translateY(0) !important;
     background: transparent;
     color: #84D278;
+  }
+
+  /* When in success state, prevent showing hover text */
+  .email-copy-btn.copied:hover .tooltip-default-text,
+  .email-copy-btn.copied:hover .tooltip-mobile-text {
+    display: none !important;
+  }
+
+  .email-copy-btn.copied:hover .tooltip-success-text {
+    display: inline !important;
   }
 
   .email-copy-btn.copied .tooltip-default-text,
@@ -145,17 +152,7 @@
   }
 
   .email-copy-btn.copied .tooltip-success-text {
-    display: inline-flex !important;
-    align-items: center;
-    gap: 6px;
-  }
-
-  /* SF Symbols checkmark with filled circle */
-  .sf-checkmark {
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro", system-ui, sans-serif;
-    font-size: 1.1rem;
-    display: inline-flex;
-    align-items: center;
+    display: inline !important;
   }
 
   /* Dissolve animation */
