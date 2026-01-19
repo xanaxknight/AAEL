@@ -97,25 +97,20 @@
     left: 50%;
     transform: translateX(-50%) translateY(-5px);
     margin-top: 12px;
-    padding: 8px 16px;
-    background: rgba(0, 0, 0, 0.85);
-    color: white;
-    border-radius: 6px;
-    font-size: 0.875rem;
-    font-weight: 400;
-    letter-spacing: 0.02em;
+    padding: 0;
+    background: transparent;
+    color: #B9B9B9;
+    font-family: "Neue Haas Grotesk Display Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.125rem;
+    letter-spacing: 0.0375rem;
     text-transform: none;
     white-space: nowrap;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease, transform 0.3s ease;
     z-index: 1000;
-  }
-
-  /* Dark mode tooltip */
-  body.dark .email-tooltip {
-    background: rgba(255, 255, 255, 0.9);
-    color: #000;
   }
 
   /* Show default text by default, hide success */
@@ -129,17 +124,12 @@
     transform: translateX(-50%) translateY(0);
   }
 
-  /* Success state - green tooltip with checkmark */
+  /* Success state - green text with checkmark, no background */
   .email-copy-btn.copied .email-tooltip {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-    background: #4CAF50;
-    color: white;
-  }
-
-  body.dark .email-copy-btn.copied .email-tooltip {
-    background: #4CAF50;
-    color: white;
+    opacity: 1 !important;
+    transform: translateX(-50%) translateY(0) !important;
+    background: transparent;
+    color: #84D278;
   }
 
   .email-copy-btn.copied .tooltip-default-text {
@@ -184,8 +174,7 @@
     }
 
     .email-tooltip {
-      font-size: 0.75rem !important;
-      padding: 6px 12px !important;
+      font-size: 0.65rem !important;
     }
   }
 
@@ -200,8 +189,7 @@
     }
 
     .email-tooltip {
-      font-size: 0.7rem !important;
-      padding: 5px 10px !important;
+      font-size: 0.6rem !important;
     }
   }
 </style>
