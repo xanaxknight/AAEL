@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page_title }}</title>
   
-  {{ 'theme.css' | asset_url | stylesheet_tag }}
   {{ content_for_header }}
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
 
   <style>
     /* Challenge/Checkpoint page specific styling */
@@ -149,7 +149,7 @@
       <span>AAEL</span>
     </div>
     <div class="checkpoint-header-center">
-      {% render 'icon-theme' %}
+      <span>⚙</span>
     </div>
     <div class="checkpoint-header-right">
       <span>C24</span>
@@ -165,7 +165,7 @@
   <div class="checkpoint-footer">
     <div class="checkpoint-footer-left">
       <span>AAEL</span>
-      <span>{% render 'icon-theme' %}</span>
+      <span>⚙</span>
       <span>C24</span>
     </div>
     <div class="checkpoint-footer-right">
