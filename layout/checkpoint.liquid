@@ -1,194 +1,63 @@
 <!DOCTYPE html>
-<html lang="{{ request.locale.iso_code }}">
+<html lang="{{ locale }}">
 <head>
-  {{ content_for_header }}
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ page_title }}</title>
-  {{ 'theme.css' | asset_url | stylesheet_tag }}
-
+  {{ content_for_header }}
   <style>
-    /* Challenge/Checkpoint page specific styling */
     body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       display: flex;
-      flex-direction: column;
-      background: var(--bg, #fafafa);
-      color: var(--fg, #000);
-      font-family: var(--font-main, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
-      letter-spacing: 0.02em;
-    }
-
-    /* Header */
-    .checkpoint-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 24px 32px;
-      font-size: 14px;
-      letter-spacing: 0.05em;
-      position: relative;
-      z-index: 1;
-    }
-
-    .checkpoint-header-left,
-    .checkpoint-header-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    /* Main content - centered */
-    .checkpoint-main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      padding: 60px 20px;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background: #f9fafb;
+    }
+    .checkpoint-container {
+      background: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 500px;
+      width: 100%;
       text-align: center;
-      position: relative;
-      z-index: 5;
     }
-
-    /* Hide default Shopify text */
-    .checkpoint-main h1,
-    .checkpoint-main > p {
-      display: none;
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #202223;
     }
-
-    /* Captcha container */
-    .checkpoint-main .h-captcha {
-      margin: 0 auto 24px !important;
-      display: inline-block !important;
-      position: relative;
-      z-index: 10;
-      pointer-events: auto;
+    .checkpoint-form {
+      margin-top: 30px;
     }
-
-    .checkpoint-main iframe[src*="hcaptcha"] {
-      position: relative !important;
-      z-index: 10 !important;
-      pointer-events: auto !important;
+    .h-captcha {
+      margin: 30px auto;
+      display: inline-block;
+      z-index: 9999;
     }
-
-    /* Submit button */
-    .checkpoint-main button[type="submit"],
-    .checkpoint-main input[type="submit"] {
-      background: var(--fg, #000) !important;
-      color: var(--bg, #fff) !important;
-      border: none !important;
-      padding: 12px 32px !important;
-      border-radius: 24px !important;
-      font-family: var(--font-main, inherit) !important;
-      font-size: 15px !important;
-      letter-spacing: 0.02em !important;
-      cursor: pointer !important;
-      transition: opacity 0.2s ease !important;
-      margin: 0 auto !important;
-      display: inline-block !important;
+    button {
+      background: #000;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
     }
-
-    .checkpoint-main button[type="submit"]:hover,
-    .checkpoint-main input[type="submit"]:hover {
-      opacity: 0.8 !important;
-    }
-
-    /* Footer */
-    .checkpoint-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 24px 32px;
-      font-size: 13px;
-      letter-spacing: 0.05em;
-      opacity: 0.6;
-      position: relative;
-      z-index: 1;
-    }
-
-    .checkpoint-footer-left,
-    .checkpoint-footer-right {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .checkpoint-footer a {
-      color: inherit;
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-
-    .checkpoint-footer a:hover {
-      opacity: 0.7;
-    }
-
-    /* Dark mode support */
-    body.dark {
-      --bg: #0a0a0a;
-      --fg: #fafafa;
-    }
-
-    /* Mobile responsive */
-    @media (max-width: 768px) {
-      .checkpoint-header,
-      .checkpoint-footer {
-        padding: 20px;
-        font-size: 12px;
-      }
-
-      .checkpoint-header-center,
-      .checkpoint-footer-center {
-        display: none;
-      }
+    button:hover {
+      background: #333;
     }
   </style>
-
-  <script>
-    // Theme toggle support
-    (function() {
-      var savedTheme = localStorage.getItem('theme') || 'light';
-      document.documentElement.classList.add(savedTheme);
-    })();
-  </script>
 </head>
-
 <body>
-  <!-- Header -->
-  <div class="checkpoint-header">
-    <div class="checkpoint-header-left">
-      <span>AAEL</span>
-    </div>
-    <div class="checkpoint-header-center">
-      <span>o</span>
-    </div>
-    <div class="checkpoint-header-right">
-      <span>C24</span>
-    </div>
-  </div>
-
-  <!-- Main Content (Captcha Form) -->
-  <div class="checkpoint-main">
+  <div class="checkpoint-container">
+    <h1>{{ 'general.checkpoint.title' | t }}</h1>
+    <p>{{ 'general.checkpoint.subtitle' | t }}</p>
+    
     {{ content_for_layout }}
   </div>
-
-  <!-- Footer -->
-  <div class="checkpoint-footer">
-    <div class="checkpoint-footer-left">
-      <span>AAEL</span>
-      <span>o</span>
-      <span>C24</span>
-    </div>
-    <div class="checkpoint-footer-right">
-      <a href="/pages/about">ABOUT</a>
-      <a href="https://instagram.com" target="_blank">INSTA</a>
-      <span>© {{ 'now' | date: '%Y' }}</span>
-    </div>
-  </div>
-
-  <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
 </body>
 </html>
