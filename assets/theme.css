@@ -1487,6 +1487,11 @@ body.dark .slider-theme-toggle .theme-icon--light {
    NEWSLETTER
    ======================================== */
 
+.newsletter-section-wrapper {
+  min-height: 368px;
+  max-height: 540px;
+}
+
 .section-hero-lead .grid-block {
   height: 320px;
 }

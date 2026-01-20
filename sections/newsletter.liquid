@@ -1,6 +1,6 @@
 {%- liquid
-  assign padding_top = section.settings.padding_top | default: 40
-  assign padding_bottom = section.settings.padding_bottom | default: 80
+  assign padding_top = section.settings.padding_top | default: 120
+  assign padding_bottom = section.settings.padding_bottom | default: 120
 -%}
 
 <div class="newsletter-section-wrapper" style="padding-top: {{ padding_top }}px; padding-bottom: {{ padding_bottom }}px;">
@@ -136,8 +136,8 @@
       "id": "padding_top",
       "min": 0,
       "max": 200,
-      "step": 4,
-      "default": 40,
+      "step": 10,
+      "default": 150,
       "unit": "px",
       "label": "Padding Top"
     },
@@ -146,8 +146,8 @@
       "id": "padding_bottom",
       "min": 0,
       "max": 200,
-      "step": 4,
-      "default": 80,
+      "step": 10,
+      "default": 150,
       "unit": "px",
       "label": "Padding Bottom"
     }
