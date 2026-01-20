@@ -708,3 +708,63 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 })();
+
+/**
+ * Dynamic Logo Mark Visibility
+ * Show/hide the graphic logo based on available space
+ */
+(function() {
+  function checkLogoSpace() {
+    const logoBadges = document.querySelectorAll('.logo-badge');
+    
+    logoBadges.forEach(badge => {
+      const logoMark = badge.querySelector('.logo-mark');
+      const brandText = badge.querySelector('.brand-text, .header__heading-logo');
+      const collectionText = badge.querySelector('.collection-text');
+      
+      if (!logoMark || !brandText || !collectionText) return;
+      
+      // Temporarily hide logo mark to measure text widths
+      logoMark.style.display = 'none';
+      
+      // Get the actual widths
+      const badgeWidth = badge.offsetWidth;
+      const brandWidth = brandText.offsetWidth || brandText.getBoundingClientRect().width;
+      const collectionWidth = collectionText.offsetWidth || collectionText.getBoundingClientRect().width;
+      const logoMarkWidth = 24; // SVG is 24px wide
+      const gap = 12; // Gap between elements
+      const padding = 48; // Total horizontal padding (24px each side)
+      
+      // Calculate total needed width: brand + gap + logoMark + gap + collection + padding
+      const neededWidth = brandWidth + gap + logoMarkWidth + gap + collectionWidth + padding;
+      
+      // Show logo mark if there's enough space
+      if (neededWidth <= badgeWidth) {
+        logoMark.classList.add('has-space');
+        logoMark.style.display = '';
+      } else {
+        logoMark.classList.remove('has-space');
+        logoMark.style.display = 'none';
+      }
+    });
+  }
+  
+  // Check on load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', checkLogoSpace);
+  } else {
+    checkLogoSpace();
+  }
+  
+  // Check on resize with debounce
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(checkLogoSpace, 150);
+  });
+  
+  // Check after fonts load (they can change text width)
+  if (document.fonts) {
+    document.fonts.ready.then(checkLogoSpace);
+  }
+})();

@@ -8,13 +8,40 @@
 
 <div class="footer-section-wrapper" style="padding-top: {{ padding_top }}px; padding-bottom: {{ padding_bottom }}px;">
   <div class="grid-container">
-    {%- comment -%} Logo & Collection Block (Left) {%- endcomment -%}
+    {%- comment -%} Footer Links - Mobile Only (Row 1) {%- endcomment -%}
+    {%- assign link_blocks = section.blocks | where: 'type', 'link' -%}
+    {%- for block in link_blocks -%}
+      <div 
+        class="grid-block footer-block mobile-only"
+        style="
+          --span-s: span 1;
+          --start-s: {{ forloop.index }};
+          --row-s: 1;
+          --align-s: center;
+          --text-s: center;
+        "
+        {{ block.shopify_attributes }}
+      >
+        <a 
+          href="{{ block.settings.link }}" 
+          class="footer-text"
+          {%- if block.settings.open_new_tab -%}
+            target="_blank" 
+            rel="noopener noreferrer"
+          {%- endif -%}
+        >
+          {{ block.settings.label }}
+        </a>
+      </div>
+    {%- endfor -%}
+
+    {%- comment -%} Logo & Collection Block (Mobile: Row 2 Col 1, Desktop: Col 1) {%- endcomment -%}
     <div 
       class="grid-block footer-block"
       style="
         --span-s: span 1;
         --start-s: 1;
-        --row-s: 1;
+        --row-s: 2;
         --align-s: flex-start;
         --text-s: left;
         --span-m: span 1;
@@ -35,7 +62,9 @@
       "
     >
       <div class="logo-badge" style="justify-content: center; width: 100%; padding: 0 24px; text-align: center;">
-        <span class="brand-text" style="letter-spacing: 0.45rem;">{{ logo_text }}</span>
+        <a href="{{ routes.root_url }}" class="brand-logo-link" aria-label="{{ shop.name }}">
+          <span class="brand-text" style="letter-spacing: 0.45rem;">{{ logo_text }}</span>
+        </a>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="logo-mark">
           <path d="M12.001 0C18.629 0 24.0019 5.373 24.002 12.001C24.0018 18.6289 18.629 24.002 12.001 24.002C5.37309 24.0018 0.00011442 18.6289 0 12.001C9.89583e-05 5.37308 5.37308 0.000116675 12.001 0ZM12.1807 12.4268L7.07324 21.2734C8.54297 22.0561 10.2196 22.5019 12.001 22.502C15.7329 22.502 19.0077 20.5535 20.8701 17.6201L17.8721 12.4268H12.1807ZM6.12695 12.4268L3.13184 17.6201C3.8369 18.7306 4.74325 19.7 5.80176 20.4756L10.4482 12.4268H6.12695ZM1.51074 12.4268C1.56176 13.7053 1.84013 14.9247 2.30859 16.0459L4.39551 12.4268H1.51074ZM19.6045 12.4268L21.6934 16.0449C22.1616 14.924 22.4402 13.705 22.4912 12.4268H19.6045ZM10.6455 1.58887C5.83677 2.20882 2.04724 6.07923 1.55469 10.9268H5.26074L10.6455 1.58887ZM6.99219 10.9268H11.3145L14.1602 5.99805L11.9971 2.25L6.99219 10.9268ZM13.0469 10.9268H17.0059L15.0264 7.49805L13.0469 10.9268ZM15.8926 5.99805L18.7383 10.9268H22.4482C22.1126 7.62342 20.2442 4.77482 17.5674 3.09766L15.8926 5.99805ZM15.0264 4.49805L16.2412 2.39355C15.3361 1.9935 14.3645 1.71812 13.3467 1.58789L15.0264 4.49805Z" fill="currentColor"/>
         </svg>
@@ -75,13 +104,13 @@
       </div>
     {%- endfor -%}
 
-    {%- comment -%} Copyright Block (Centered in Column) {%- endcomment -%}
+    {%- comment -%} Copyright Block (Mobile: Row 2 Col 2, Desktop: Right) {%- endcomment -%}
     <div 
       class="grid-block footer-block"
       style="
         --span-s: span 1;
         --start-s: 2;
-        --row-s: 1;
+        --row-s: 2;
         --align-s: center;
         --text-s: center;
         --span-m: span 1;
