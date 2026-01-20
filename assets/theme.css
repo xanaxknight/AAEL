@@ -692,7 +692,7 @@ body.mode-prelaunch {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 12px;
   width: 100%;
   text-decoration: none;
@@ -1025,20 +1025,11 @@ body.mode-prelaunch .mobile-menu-absolute {
   height: 100%;
 }
 
-.theme-icon-circle {
-  opacity: 0.3;
-  transition: opacity 0.3s ease, stroke 1200ms ease;
-}
-
-.icon-btn:hover .theme-icon-circle {
-  opacity: 1;
-}
-
 .theme-icon-line {
   transition: stroke 1200ms ease, fill 1200ms ease, opacity 0.3s ease;
 }
 
-/* Show/hide appropriate icon based on theme */
+/* Show/hide appropriate icon based on theme with default 30% opacity */
 body.light .theme-icon-line--dark,
 html.light body .theme-icon-line--dark {
   opacity: 0;
@@ -1051,12 +1042,27 @@ html.dark body .theme-icon-line--light {
 
 body.light .theme-icon-line--light,
 html.light body .theme-icon-line--light {
-  opacity: 1;
+  opacity: 0.3;
 }
 
 body.dark .theme-icon-line--dark,
 html.dark body .theme-icon-line--dark {
-  opacity: 1;
+  opacity: 0.3;
+}
+
+/* Hover state: increase visible icon to 80% opacity */
+.icon-btn:hover body.light .theme-icon-line--light,
+.icon-btn:hover html.light body .theme-icon-line--light,
+body.light .icon-btn:hover .theme-icon-line--light,
+html.light body .icon-btn:hover .theme-icon-line--light {
+  opacity: 0.8;
+}
+
+.icon-btn:hover body.dark .theme-icon-line--dark,
+.icon-btn:hover html.dark body .theme-icon-line--dark,
+body.dark .icon-btn:hover .theme-icon-line--dark,
+html.dark body .icon-btn:hover .theme-icon-line--dark {
+  opacity: 0.8;
 }
 
 /* ========================================
