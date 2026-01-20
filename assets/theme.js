@@ -162,6 +162,53 @@ class HeroCard extends HTMLElement {
       dot.addEventListener('click', () => this.goToSlide(index));
     });
 
+    // Click on image to advance to next slide
+    this.heroVisual = this.querySelector('.hero-visual');
+    if (this.heroVisual) {
+      this.heroVisual.addEventListener('click', (e) => {
+        // Don't trigger if clicking on controls
+        if (!e.target.closest('.card-controls')) {
+          this.nextSlide();
+        }
+      });
+    }
+
+    // Touch/swipe support for mobile
+    if (this.heroVisual) {
+      let touchStartX = 0;
+      let touchEndX = 0;
+      let touchStartY = 0;
+      let touchEndY = 0;
+      const minSwipeDistance = 50; // Minimum distance for a swipe
+      
+      this.heroVisual.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+      }, { passive: true });
+      
+      this.heroVisual.addEventListener('touchend', (e) => {
+        // Don't trigger if touching controls
+        if (e.target.closest('.card-controls')) return;
+        
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+        
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = touchEndY - touchStartY;
+        
+        // Only trigger if horizontal swipe is more significant than vertical
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
+          if (deltaX > 0) {
+            // Swipe right - go to previous slide
+            this.previousSlide();
+          } else {
+            // Swipe left - go to next slide
+            this.nextSlide();
+          }
+        }
+      }, { passive: true });
+    }
+
     // Only auto-start if we have multiple slides
     if (this.slides.length > 1) {
       this.startTimer();
@@ -185,6 +232,16 @@ class HeroCard extends HTMLElement {
     this.state.currentSlide = index;
     this.renderState();
     if (this.state.isPlaying) this.startTimer();
+  }
+
+  nextSlide() {
+    const next = (this.state.currentSlide + 1) % this.slides.length;
+    this.goToSlide(next);
+  }
+
+  previousSlide() {
+    const prev = (this.state.currentSlide - 1 + this.slides.length) % this.slides.length;
+    this.goToSlide(prev);
   }
 
   togglePlay() {

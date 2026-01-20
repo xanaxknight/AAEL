@@ -1830,6 +1830,14 @@ hero-card {
   position: relative;
   overflow: hidden;
   border-radius: 1.125rem;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Don't show pointer on controls */
+.card-controls {
+  cursor: default;
 }
 
 .hero-image {
