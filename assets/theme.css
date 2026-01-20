@@ -688,6 +688,17 @@ body.mode-prelaunch {
   overflow: hidden;
 }
 
+.brand-logo-link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
 .logo-mark {
   width: 24px;
   height: 24px;
@@ -700,25 +711,14 @@ body.mode-prelaunch {
   fill: currentColor;
 }
 
-/* Hide logo mark on mobile when space is limited */
-@media (max-width: 767px) {
-  .logo-badge .logo-mark {
-    display: none;
-  }
+/* Logo mark visibility controlled by JavaScript based on available space */
+.logo-badge .logo-mark {
+  display: none;
+  transition: color 1200ms ease, opacity 0.3s ease;
 }
 
-/* Hide logo mark on tablet if column is narrow */
-@media (min-width: 768px) and (max-width: 1199px) {
-  .logo-badge .logo-mark {
-    display: none;
-  }
-}
-
-/* Show logo mark on larger screens with more space */
-@media (min-width: 1200px) {
-  .logo-badge .logo-mark {
-    display: block;
-  }
+.logo-badge .logo-mark.has-space {
+  display: block;
 }
 
 @media (min-width: 768px) {
@@ -730,7 +730,7 @@ body.mode-prelaunch {
 
 @media (max-width: 767px) {
   .logo-badge {
-    justify-content: center;
+    justify-content: space-between;
   }
 }
 
@@ -752,12 +752,17 @@ body.mode-prelaunch {
 .brand-text {
   overflow: hidden;
   text-overflow: ellipsis;
+  vertical-align: top;
+  margin-top: 0;
+  margin-bottom: 0;
+  height: 20px;
 }
 
 .collection-text {
   overflow: hidden;
   text-overflow: ellipsis;
   flex-shrink: 0;
+  height: 20px;
 }
 
 /* Hide collection text and logo mark in footer only */
@@ -957,7 +962,8 @@ body.mode-prelaunch .mobile-menu-absolute {
 .pill-btn {
   display: flex;
   height: 42px;
-  padding: 8px 24px;
+  width: 132px;
+  padding: 9px 24px 7px;
   justify-content: center;
   align-items: center;
   gap: 8px;
@@ -1721,7 +1727,7 @@ body[class*="challenge"] input[type="submit"]:hover {
 .newsletter-input::placeholder {
   color: var(--fg);
   opacity: 0.4;
-  transition: color 1200ms ease;
+  transition: color 800ms ease;
 }
 
 .newsletter-submit {
@@ -1852,6 +1858,15 @@ html.dark body .hero-image.img-light {
 .hero-image.align-left-bottom { object-position: left bottom; }
 .hero-image.align-center-bottom { object-position: center bottom; }
 .hero-image.align-right-bottom { object-position: right bottom; }
+
+/* ========================================
+   ABOUT PAGE
+   ======================================== */
+
+.about-paragraph {
+  color: var(--fg);
+  transition: color 1200ms ease;
+}
 
 /* ========================================
    UTILITY CLASSES
