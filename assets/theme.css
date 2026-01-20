@@ -561,6 +561,7 @@ body.mode-prelaunch {
   position: relative;
   vertical-align: middle;
   justify-content: center;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
@@ -692,11 +693,18 @@ body.mode-prelaunch {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 12px;
   width: 100%;
   text-decoration: none;
   color: inherit;
+}
+
+/* Desktop: distribute all three elements evenly */
+@media (min-width: 768px) {
+  .brand-logo-link {
+    justify-content: space-evenly;
+  }
 }
 
 .logo-mark {
@@ -723,14 +731,7 @@ body.mode-prelaunch {
 
 @media (min-width: 768px) {
   .logo-badge {
-    justify-content: space-between;
     padding: 0 24px;
-  }
-}
-
-@media (max-width: 767px) {
-  .logo-badge {
-    justify-content: space-between;
   }
 }
 
@@ -771,10 +772,11 @@ body.mode-prelaunch {
   display: none;
 }
 
-/* Hide collection text in header on mobile */
+/* Hide collection text and logo mark in header on mobile */
 @media (max-width: 767px) {
-  .header-block .collection-text {
-    display: none;
+  .header-block .collection-text,
+  .header-block .logo-mark {
+    display: none !important;
   }
 }
 
@@ -1072,7 +1074,7 @@ html.dark body .icon-btn:hover .theme-icon-line--dark {
 .lead-text {
   text-align: center;
   font-family: var(--font-main);
-  font-size: 48px;
+  font-size: 56px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -1080,6 +1082,7 @@ html.dark body .icon-btn:hover .theme-icon-line--dark {
   vertical-align: bottom;
   padding-left: 72px;
   padding-right: 72px;
+  width: 100%;
 }
 
 @media (max-width: 767px) {
