@@ -1,5 +1,15 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
+    "favicon": "shopify://shop_images/aael_fav.png",
     "color_bg_light": "#ffffff",
     "color_fg_light": "#000000",
     "color_bg_dark": "#1E1E1E",
@@ -35,7 +45,8 @@
         "block_order": [
           "menu-link-1",
           "menu-link-2"
-        ]
+        ],
+        "settings": {}
       },
       "footer": {
         "type": "footer",
@@ -64,7 +75,16 @@
           "logo_text": "AAEL",
           "collection_text": "C24"
         }
+      },
+      "cookie-banner": {
+        "type": "cookie-banner",
+        "settings": {
+          "title": "Cookie consent",
+          "privacy_policy_url": "",
+          "prefs_title": "Cookie and privacy preferences"
+        }
       }
-    }
+    },
+    "content_for_index": []
   }
 }
