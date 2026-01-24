@@ -24,7 +24,7 @@
     "hero": {
       "type": "hero-lead",
       "settings": {
-        "hero_text": "Limited series of interior artefacts made to remain",
+        "hero_text": "Limited series of interior artefacts made to remain.",
         "max_width": 800,
         "padding_top": 40,
         "padding_bottom": 64,
