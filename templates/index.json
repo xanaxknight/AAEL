@@ -118,16 +118,17 @@
         "span_xl": 8
       }
     },
-    "newsletter": {
+    "newsletter_Bptgwx": {
       "type": "newsletter",
+      "name": "Newsletter",
       "settings": {
         "newsletter_subtitle": "Spring 2026",
-        "newsletter_title": "First object.\nLimited to 10 pieces.",
+        "newsletter_title": "First object. Base product line.Limited to 10 pieces.",
         "newsletter_placeholder": "Email",
         "newsletter_button": "Notify me",
         "form_max_width": 400,
-        "padding_top": 40,
-        "padding_bottom": 80
+        "padding_top": 150,
+        "padding_bottom": 150
       }
     },
     "footer": {
@@ -161,27 +162,13 @@
         "padding_top": 24,
         "padding_bottom": 24
       }
-    },
-    "newsletter_Bptgwx": {
-      "type": "newsletter",
-      "name": "Newsletter",
-      "settings": {
-        "newsletter_subtitle": "Spring 2026",
-        "newsletter_title": "First object. Base product line.\nLimited to 10 pieces.",
-        "newsletter_placeholder": "Email",
-        "newsletter_button": "Notify me",
-        "form_max_width": 400,
-        "padding_top": 150,
-        "padding_bottom": 150
-      }
     }
   },
   "order": [
     "header",
     "hero",
     "hero-carousel",
-    "newsletter",
-    "footer",
-    "newsletter_Bptgwx"
+    "newsletter_Bptgwx",
+    "footer"
   ]
 }
