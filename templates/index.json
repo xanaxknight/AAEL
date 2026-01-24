@@ -145,7 +145,7 @@
         "link-2": {
           "type": "link",
           "settings": {
-            "label": "INSTA",
+            "label": "INST",
             "link": "https://instagram.com",
             "open_new_tab": true
           }
