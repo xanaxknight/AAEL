@@ -1192,17 +1192,27 @@ product-card.prelaunch {
   transition: opacity 1200ms ease, filter 800ms ease, transform 800ms ease;
 }
 
-/* Blur-up lazy loading effect - hide until loaded */
-.product-image:not(.loaded) {
-  opacity: 0;
-  filter: blur(10px);
-  transform: scale(1.02);
+/* Progressive LQIP blur-up */
+.product-image.lqip {
+  opacity: 1;
+  filter: blur(20px);
+  transform: scale(1.05);
+  z-index: 1;
 }
 
-.product-image.loaded {
+.product-image.full {
+  opacity: 0;
+  z-index: 2;
+}
+
+.product-image.full.loaded {
   opacity: 1;
   filter: blur(0);
   transform: scale(1);
+}
+
+.product-image.full.loaded + .product-image.lqip {
+  opacity: 0;
 }
 
 /* Theme switching for images */
@@ -1874,17 +1884,27 @@ hero-card {
   transition: opacity 1200ms ease, filter 800ms ease, transform 800ms ease;
 }
 
-/* Blur-up lazy loading effect - hide until loaded */
-.hero-image:not(.loaded) {
-  opacity: 0;
-  filter: blur(10px);
-  transform: scale(1.02);
+/* Progressive LQIP blur-up */
+.hero-image.lqip {
+  opacity: 1;
+  filter: blur(20px);
+  transform: scale(1.05);
+  z-index: 1;
 }
 
-.hero-image.loaded {
+.hero-image.full {
+  opacity: 0;
+  z-index: 2;
+}
+
+.hero-image.full.loaded {
   opacity: 1;
   filter: blur(0);
   transform: scale(1);
+}
+
+.hero-image.full.loaded + .hero-image.lqip {
+  opacity: 0;
 }
 
 /* Theme switching for hero images */
