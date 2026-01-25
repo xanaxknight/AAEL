@@ -327,6 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initSmoothScroll();
   initCookieConsent();
+  initBlurUpImages();
 });
 
 /**
@@ -590,6 +591,59 @@ function initSmoothScroll() {
       }
     });
   });
+}
+
+/**
+ * Blur-up Image Loading
+ * Adds smooth blur-to-sharp transition for lazy-loaded images
+ */
+function initBlurUpImages() {
+  const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+  
+  if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          
+          // If image is already loaded (cached), mark it immediately
+          if (img.complete && img.naturalHeight !== 0) {
+            img.classList.add('loaded');
+          } else {
+            // Wait for image to load
+            img.addEventListener('load', () => {
+              img.classList.add('loaded');
+            }, { once: true });
+            
+            // Handle load errors gracefully
+            img.addEventListener('error', () => {
+              img.classList.add('loaded');
+            }, { once: true });
+          }
+          
+          observer.unobserve(img);
+        }
+      });
+    }, {
+      rootMargin: '50px', // Start loading 50px before entering viewport
+      threshold: 0.01
+    });
+    
+    lazyImages.forEach(img => {
+      imageObserver.observe(img);
+    });
+  } else {
+    // Fallback for browsers without IntersectionObserver
+    lazyImages.forEach(img => {
+      if (img.complete) {
+        img.classList.add('loaded');
+      } else {
+        img.addEventListener('load', () => {
+          img.classList.add('loaded');
+        }, { once: true });
+      }
+    });
+  }
 }
 
 /* ========================================
