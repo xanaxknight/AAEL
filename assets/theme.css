@@ -62,11 +62,11 @@
 /* --- Dark Theme --- */
 body.dark,
 html.dark body {
-  --bg: #1E1E1E;
+  --bg: #121212;
   --fg: #f0f0f0;
   --gray-bg: #2a2a2a;
   --stripe-col: #1a1a1a;
-  --prelaunch-bg: #1E1E1E;
+  --prelaunch-bg: #121212;
   --prelaunch-fg: #f0f0f0;
   --control-col: rgba(255, 255, 255, 0.8);
   --control-col-hover: #ffffff;
