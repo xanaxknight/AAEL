@@ -77,6 +77,8 @@
         "slide_89neN3": {
           "type": "slide",
           "settings": {
+            "image_light": "shopify://shop_images/day_Camera_9.webp",
+            "image_dark": "shopify://shop_images/day_Camera_9n.webp",
             "image_light_url": "https://i.ibb.co/Cs6f5Wmv/4-amo-d.webp",
             "image_dark_url": "https://i.ibb.co/Z1MvPn04/4-amo-n.webp",
             "alt_text": "AMO Desk Lamp",
