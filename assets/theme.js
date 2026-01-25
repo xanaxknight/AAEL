@@ -608,10 +608,21 @@ function initBlurUpImages() {
     }
   };
   
-  // Immediately mark all eager-loaded images as loaded
+  // Handle all images (both eager and lazy)
   allImages.forEach(img => {
-    if (img.loading !== 'lazy' || (img.complete && img.naturalHeight !== 0)) {
+    // If already loaded, mark immediately
+    if (img.complete && img.naturalHeight !== 0) {
       markAsLoaded(img);
+    } else {
+      // Add load listener for images that aren't loaded yet (especially important for mobile)
+      img.addEventListener('load', () => {
+        markAsLoaded(img);
+      }, { once: true });
+      
+      // Handle errors
+      img.addEventListener('error', () => {
+        markAsLoaded(img);
+      }, { once: true });
     }
   });
   
