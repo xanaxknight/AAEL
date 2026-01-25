@@ -598,7 +598,22 @@ function initSmoothScroll() {
  * Adds smooth blur-to-sharp transition for lazy-loaded images
  */
 function initBlurUpImages() {
+  const allImages = document.querySelectorAll('.hero-image, .product-image');
   const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+  
+  // Helper to mark image as loaded
+  const markAsLoaded = (img) => {
+    if (!img.classList.contains('loaded')) {
+      img.classList.add('loaded');
+    }
+  };
+  
+  // Immediately mark all eager-loaded images as loaded
+  allImages.forEach(img => {
+    if (img.loading !== 'lazy' || (img.complete && img.naturalHeight !== 0)) {
+      markAsLoaded(img);
+    }
+  });
   
   if ('IntersectionObserver' in window) {
     const imageObserver = new IntersectionObserver((entries, observer) => {
@@ -608,17 +623,24 @@ function initBlurUpImages() {
           
           // If image is already loaded (cached), mark it immediately
           if (img.complete && img.naturalHeight !== 0) {
-            img.classList.add('loaded');
+            markAsLoaded(img);
           } else {
             // Wait for image to load
             img.addEventListener('load', () => {
-              img.classList.add('loaded');
+              markAsLoaded(img);
             }, { once: true });
             
             // Handle load errors gracefully
             img.addEventListener('error', () => {
-              img.classList.add('loaded');
+              markAsLoaded(img);
             }, { once: true });
+            
+            // Double-check after a tiny delay in case image loads very quickly
+            setTimeout(() => {
+              if (img.complete && img.naturalHeight !== 0) {
+                markAsLoaded(img);
+              }
+            }, 100);
           }
           
           observer.unobserve(img);
@@ -630,16 +652,25 @@ function initBlurUpImages() {
     });
     
     lazyImages.forEach(img => {
-      imageObserver.observe(img);
+      // If image is already in viewport and loaded, mark immediately
+      if (img.complete && img.naturalHeight !== 0) {
+        markAsLoaded(img);
+      } else {
+        imageObserver.observe(img);
+      }
     });
   } else {
     // Fallback for browsers without IntersectionObserver
     lazyImages.forEach(img => {
-      if (img.complete) {
-        img.classList.add('loaded');
+      if (img.complete && img.naturalHeight !== 0) {
+        markAsLoaded(img);
       } else {
         img.addEventListener('load', () => {
-          img.classList.add('loaded');
+          markAsLoaded(img);
+        }, { once: true });
+        
+        img.addEventListener('error', () => {
+          markAsLoaded(img);
         }, { once: true });
       }
     });
