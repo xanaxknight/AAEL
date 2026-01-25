@@ -613,6 +613,23 @@ function initBlurUpImages() {
     // If already loaded, mark immediately
     if (img.complete && img.naturalHeight !== 0) {
       markAsLoaded(img);
+    } else if (img.complete && img.naturalHeight === 0) {
+      // Image is cached but dimensions not ready yet (common on mobile)
+      // Check again after a brief delay
+      setTimeout(() => {
+        if (img.naturalHeight !== 0) {
+          markAsLoaded(img);
+        }
+      }, 50);
+      
+      // Also add load listener as fallback
+      img.addEventListener('load', () => {
+        markAsLoaded(img);
+      }, { once: true });
+      
+      img.addEventListener('error', () => {
+        markAsLoaded(img);
+      }, { once: true });
     } else {
       // Add load listener for images that aren't loaded yet (especially important for mobile)
       img.addEventListener('load', () => {
