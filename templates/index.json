@@ -51,8 +51,6 @@
         "slide-2": {
           "type": "slide",
           "settings": {
-            "image_light": "shopify://shop_images/day_Camera_4.webp",
-            "image_dark": "shopify://shop_images/day_Camera_4n.webp",
             "image_light_url": "https://i.ibb.co/pr91svry/2-amo-d.webp",
             "image_dark_url": "https://i.ibb.co/MD5DSRgr/2-amo-n.webp",
             "alt_text": "AMO Desk Lamp",
@@ -63,8 +61,6 @@
         "slide-3": {
           "type": "slide",
           "settings": {
-            "image_light": "shopify://shop_images/day_Camera_2.webp",
-            "image_dark": "shopify://shop_images/day_Camera_2n.webp",
             "image_light_url": "https://i.ibb.co/Q725pN0W/3-amo-d.webp",
             "image_dark_url": "https://i.ibb.co/JW9VjLKj/3-amo-n.webp",
             "alt_text": "AMO Desk Lamp",
@@ -75,8 +71,6 @@
         "slide_89neN3": {
           "type": "slide",
           "settings": {
-            "image_light": "shopify://shop_images/day_Camera_9.webp",
-            "image_dark": "shopify://shop_images/day_Camera_9n.webp",
             "image_light_url": "https://i.ibb.co/Cs6f5Wmv/4-amo-d.webp",
             "image_dark_url": "https://i.ibb.co/Z1MvPn04/4-amo-n.webp",
             "alt_text": "AMO Desk Lamp",
@@ -87,8 +81,6 @@
         "slide-5": {
           "type": "slide",
           "settings": {
-            "image_light": "shopify://shop_images/day_Camera_3.webp",
-            "image_dark": "shopify://shop_images/day_Camera_3n.webp",
             "image_light_url": "https://i.ibb.co/ymnQdQ7M/5-amo-d.webp",
             "image_dark_url": "https://i.ibb.co/LzgwXsgM/5-amo-n.webp",
             "alt_text": "AMO Desk Lamp",
@@ -99,8 +91,6 @@
         "slide-6": {
           "type": "slide",
           "settings": {
-            "image_light": "shopify://shop_images/day_Camera_1.webp",
-            "image_dark": "shopify://shop_images/day_Camera_1n.webp",
             "image_light_url": "https://i.ibb.co/DSs08Yp/6-amo-d.png",
             "image_dark_url": "https://i.ibb.co/23kJYLkT/6-amo-n.webp",
             "alt_text": "AMO Desk Lamp",
