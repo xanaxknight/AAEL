@@ -43,20 +43,24 @@
           
           {%- comment -%} Light theme image {%- endcomment -%}
           {%- if block.settings.image_light -%}
+            {%- assign full_light_class = 'hero-image img-light full ' | append: alignment_class -%}
             {{- block.settings.image_light | image_url: width: 3840 | image_tag:
-              class: 'hero-image img-light full ' | append: alignment_class,
+              class: full_light_class,
               loading: loading_priority,
               widths: '750, 1100, 1500, 1920, 2560, 3840',
               sizes: '100vw',
               alt: block.settings.alt_text | default: 'Hero image'
             -}}
-            {{- block.settings.image_light | image_url: width: 40 | image_tag:
-              class: 'hero-image img-light lqip ' | append: alignment_class,
-              loading: 'eager',
-              widths: '40, 80',
-              sizes: '100vw',
-              alt: ''
-            -}}
+            {%- if forloop.first -%}
+              {%- assign lqip_light_class = 'hero-image img-light lqip ' | append: alignment_class -%}
+              {{- block.settings.image_light | image_url: width: 40 | image_tag:
+                class: lqip_light_class,
+                loading: 'eager',
+                widths: '40, 80',
+                sizes: '100vw',
+                alt: ''
+              -}}
+            {%- endif -%}
           {%- elsif block.settings.image_light_url != blank -%}
             <img 
               src="{{ block.settings.image_light_url }}" 
@@ -69,20 +73,24 @@
           
           {%- comment -%} Dark theme image {%- endcomment -%}
           {%- if block.settings.image_dark -%}
+            {%- assign full_dark_class = 'hero-image img-dark full ' | append: alignment_class -%}
             {{- block.settings.image_dark | image_url: width: 3840 | image_tag:
-              class: 'hero-image img-dark full ' | append: alignment_class,
+              class: full_dark_class,
               loading: loading_priority,
               widths: '750, 1100, 1500, 1920, 2560, 3840',
               sizes: '100vw',
               alt: block.settings.alt_text | default: 'Hero image'
             -}}
-            {{- block.settings.image_dark | image_url: width: 40 | image_tag:
-              class: 'hero-image img-dark lqip ' | append: alignment_class,
-              loading: 'eager',
-              widths: '40, 80',
-              sizes: '100vw',
-              alt: ''
-            -}}
+            {%- if forloop.first -%}
+              {%- assign lqip_dark_class = 'hero-image img-dark lqip ' | append: alignment_class -%}
+              {{- block.settings.image_dark | image_url: width: 40 | image_tag:
+                class: lqip_dark_class,
+                loading: 'eager',
+                widths: '40, 80',
+                sizes: '100vw',
+                alt: ''
+              -}}
+            {%- endif -%}
           {%- elsif block.settings.image_dark_url != blank -%}
             <img 
               src="{{ block.settings.image_dark_url }}" 
