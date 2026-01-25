@@ -209,6 +209,8 @@ body.dark #CookieConsent .glass-card {
 
 .cookie-actions .pill-btn {
   height: 36px;
+  width: auto;
+  min-width: 100px;
 }
 
 .cookie-actions-left,
