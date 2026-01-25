@@ -768,10 +768,16 @@ body.mode-prelaunch {
   height: 20px;
 }
 
-/* Hide collection text and logo mark in footer only */
-.section-footer .logo-badge .collection-text,
-.section-footer .logo-badge .logo-mark {
+/* Hide collection text in footer only */
+.section-footer .logo-badge .collection-text {
   display: none;
+}
+
+/* Show logo mark in footer on desktop */
+@media (min-width: 768px) {
+  .section-footer .logo-badge .logo-mark {
+    display: block !important;
+  }
 }
 
 /* Hide collection text and logo mark in header on mobile */
