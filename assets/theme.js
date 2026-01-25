@@ -598,8 +598,8 @@ function initSmoothScroll() {
  * Adds smooth blur-to-sharp transition for lazy-loaded images
  */
 function initBlurUpImages() {
-  const allImages = document.querySelectorAll('.hero-image, .product-image');
-  const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+  const allImages = document.querySelectorAll('.hero-image.full, .product-image.full');
+  const lazyImages = document.querySelectorAll('img.full[loading="lazy"]');
   
   // Helper to mark image as loaded
   const markAsLoaded = (img) => {

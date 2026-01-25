@@ -45,34 +45,55 @@
           {%- if slide.light_image and slide.dark_image -%}
             {%- comment -%} Custom slide with light/dark variants {%- endcomment -%}
             {{- slide.light_image | image_url: width: 1440 | image_tag:
-              class: 'product-image img-light',
+              class: 'product-image img-light full',
               loading: 'lazy',
               widths: '375, 550, 750, 1100, 1440',
               sizes: '(min-width: 1440px) 1440px, 100vw',
               alt: product.title
             -}}
+            {{- slide.light_image | image_url: width: 40 | image_tag:
+              class: 'product-image img-light lqip',
+              loading: 'eager',
+              widths: '40, 80',
+              sizes: '(min-width: 1440px) 1440px, 100vw',
+              alt: ''
+            -}}
             {{- slide.dark_image | image_url: width: 1440 | image_tag:
-              class: 'product-image img-dark',
+              class: 'product-image img-dark full',
               loading: 'lazy',
               widths: '375, 550, 750, 1100, 1440',
               sizes: '(min-width: 1440px) 1440px, 100vw',
               alt: product.title
+            -}}
+            {{- slide.dark_image | image_url: width: 40 | image_tag:
+              class: 'product-image img-dark lqip',
+              loading: 'eager',
+              widths: '40, 80',
+              sizes: '(min-width: 1440px) 1440px, 100vw',
+              alt: ''
             -}}
           {%- elsif slide.src -%}
             {%- comment -%} Product image object {%- endcomment -%}
             {{- slide | image_url: width: 1440 | image_tag:
-              class: 'product-image',
+              class: 'product-image full',
               loading: 'lazy',
               widths: '375, 550, 750, 1100, 1440',
               sizes: '(min-width: 1440px) 1440px, 100vw',
               alt: slide.alt | default: product.title
+            -}}
+            {{- slide | image_url: width: 40 | image_tag:
+              class: 'product-image lqip',
+              loading: 'eager',
+              widths: '40, 80',
+              sizes: '(min-width: 1440px) 1440px, 100vw',
+              alt: ''
             -}}
           {%- else -%}
             {%- comment -%} External URL slides {%- endcomment -%}
             <img 
               src="{{ slide.light | default: slide }}" 
               alt="{{ product.title | default: 'Product image' }}"
-              class="product-image img-light"
+              class="product-image img-light full"
               loading="lazy"
               draggable="false"
               {%- if slide.style -%}
@@ -83,7 +104,7 @@
               <img 
                 src="{{ slide.dark }}" 
                 alt="{{ product.title | default: 'Product image' }}"
-                class="product-image img-dark"
+                class="product-image img-dark full"
                 loading="lazy"
                 draggable="false"
                 {%- if slide.style -%}

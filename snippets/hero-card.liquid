@@ -44,17 +44,24 @@
           {%- comment -%} Light theme image {%- endcomment -%}
           {%- if block.settings.image_light -%}
             {{- block.settings.image_light | image_url: width: 3840 | image_tag:
-              class: 'hero-image img-light ' | append: alignment_class,
+              class: 'hero-image img-light full ' | append: alignment_class,
               loading: loading_priority,
               widths: '750, 1100, 1500, 1920, 2560, 3840',
               sizes: '100vw',
               alt: block.settings.alt_text | default: 'Hero image'
             -}}
+            {{- block.settings.image_light | image_url: width: 40 | image_tag:
+              class: 'hero-image img-light lqip ' | append: alignment_class,
+              loading: 'eager',
+              widths: '40, 80',
+              sizes: '100vw',
+              alt: ''
+            -}}
           {%- elsif block.settings.image_light_url != blank -%}
             <img 
               src="{{ block.settings.image_light_url }}" 
               alt="{{ block.settings.alt_text | default: 'Hero image' }}"
-              class="hero-image img-light {{ alignment_class }}"
+              class="hero-image img-light full {{ alignment_class }}"
               loading="{{ loading_priority }}"
               draggable="false"
             >
@@ -63,17 +70,24 @@
           {%- comment -%} Dark theme image {%- endcomment -%}
           {%- if block.settings.image_dark -%}
             {{- block.settings.image_dark | image_url: width: 3840 | image_tag:
-              class: 'hero-image img-dark ' | append: alignment_class,
+              class: 'hero-image img-dark full ' | append: alignment_class,
               loading: loading_priority,
               widths: '750, 1100, 1500, 1920, 2560, 3840',
               sizes: '100vw',
               alt: block.settings.alt_text | default: 'Hero image'
             -}}
+            {{- block.settings.image_dark | image_url: width: 40 | image_tag:
+              class: 'hero-image img-dark lqip ' | append: alignment_class,
+              loading: 'eager',
+              widths: '40, 80',
+              sizes: '100vw',
+              alt: ''
+            -}}
           {%- elsif block.settings.image_dark_url != blank -%}
             <img 
               src="{{ block.settings.image_dark_url }}" 
               alt="{{ block.settings.alt_text | default: 'Hero image' }}"
-              class="hero-image img-dark {{ alignment_class }}"
+              class="hero-image img-dark full {{ alignment_class }}"
               loading="{{ loading_priority }}"
               draggable="false"
             >
