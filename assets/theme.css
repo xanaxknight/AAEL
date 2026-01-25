@@ -1661,6 +1661,8 @@ body.dark .newsletter-input-group:has(.error-persist) .newsletter-input-prelaunc
   width: auto !important;
   background: rgba(0, 0, 0, 0.02);
   border-radius: 12px;
+  pointer-events: auto !important;
+  z-index: 100 !important;
 }
 
 body.dark .newsletter-form-prelaunch .h-captcha,
@@ -1677,6 +1679,8 @@ body.dark .newsletter-wrapper .h-captcha {
   top: auto !important;
   left: auto !important;
   transform: none !important;
+  pointer-events: auto !important;
+  z-index: 101 !important;
 }
 
 /* Smooth transition when captcha appears */
