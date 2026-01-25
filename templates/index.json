@@ -53,6 +53,8 @@
         "slide-2": {
           "type": "slide",
           "settings": {
+            "image_light": "shopify://shop_images/day_Camera_4.webp",
+            "image_dark": "shopify://shop_images/day_Camera_4n.webp",
             "image_light_url": "https://i.ibb.co/pr91svry/2-amo-d.webp",
             "image_dark_url": "https://i.ibb.co/MD5DSRgr/2-amo-n.webp",
             "alt_text": "AMO Desk Lamp",
