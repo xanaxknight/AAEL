@@ -80,6 +80,7 @@
               <span>{% if email_error %}{{ form.errors.messages.email | default: "Please include an '@' in the email address." }}{% else %}Please include an '@' in the email address.{% endif %}</span>
             </div>
           </div>
+          
         </div>
       {%- endunless -%}
         {%- endform -%}
