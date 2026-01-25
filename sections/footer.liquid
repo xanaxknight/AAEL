@@ -35,15 +35,10 @@
       </div>
     {%- endfor -%}
 
-    {%- comment -%} Logo & Collection Block (Mobile: Row 2 Col 1, Desktop: Col 1) {%- endcomment -%}
+    {%- comment -%} Logo & Collection Block (Desktop Only) {%- endcomment -%}
     <div 
-      class="grid-block footer-block"
+      class="grid-block footer-block desktop-only"
       style="
-        --span-s: span 1;
-        --start-s: 1;
-        --row-s: 2;
-        --align-s: flex-start;
-        --text-s: left;
         --span-m: span 1;
         --start-m: 1;
         --row-m: 1;
@@ -109,12 +104,12 @@
       </div>
     {%- endfor -%}
 
-    {%- comment -%} Copyright Block (Mobile: Row 2 Col 2, Desktop: Right) {%- endcomment -%}
+    {%- comment -%} Copyright Block (Mobile: Row 2 span 2 centered, Desktop: Right) {%- endcomment -%}
     <div 
       class="grid-block footer-block"
       style="
-        --span-s: span 1;
-        --start-s: 2;
+        --span-s: span 2;
+        --start-s: 1;
         --row-s: 2;
         --align-s: center;
         --text-s: center;
@@ -140,7 +135,7 @@
           {%- if copyright_text != blank -%}
             {{ copyright_text }}
           {%- else -%}
-            ©{{ 'now' | date: '%Y' }}
+            AAEL©{{ 'now' | date: '%Y' }}
           {%- endif -%}
         </span>
       </div>
