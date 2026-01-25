@@ -879,6 +879,45 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 })();
 
+/* ========================================
+   INSTAGRAM DEEP LINK HANDLER
+   ======================================== */
+
+/**
+ * Instagram App Deep Link Handler
+ * Bypasses Instagram's broken "Open in App" web button on mobile
+ * Opens Instagram app directly, falls back to web if app not installed
+ */
+(function() {
+  document.addEventListener('DOMContentLoaded', () => {
+    const instagramLinks = document.querySelectorAll('a[href*="instagram.com"]');
+    
+    instagramLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        
+        if (isMobile) {
+          e.preventDefault();
+          
+          // Try to open Instagram app directly using deep link
+          const appUrl = 'instagram://user?username=aael.c24';
+          window.location.href = appUrl;
+          
+          // Fallback to web if app not installed
+          // Check if page still has focus after 1.5 seconds (means app didn't open)
+          setTimeout(() => {
+            if (document.hasFocus()) {
+              // App didn't open, redirect to web
+              window.location.href = 'https://www.instagram.com/aael.c24/';
+            }
+          }, 1500);
+        }
+        // Desktop users: normal link behavior (no interception)
+      });
+    });
+  });
+})();
+
 /**
  * Dynamic Logo Mark Visibility
  * Show/hide the graphic logo based on available space
