@@ -1192,13 +1192,15 @@ product-card.prelaunch {
   transition: opacity 1200ms ease, filter 800ms ease, transform 800ms ease;
 }
 
-/* Blur-up lazy loading effect */
-.product-image[loading="lazy"]:not(.loaded) {
+/* Blur-up lazy loading effect - hide until loaded */
+.product-image:not(.loaded) {
+  opacity: 0;
   filter: blur(10px);
   transform: scale(1.02);
 }
 
 .product-image.loaded {
+  opacity: 1;
   filter: blur(0);
   transform: scale(1);
 }
@@ -1872,13 +1874,15 @@ hero-card {
   transition: opacity 1200ms ease, filter 800ms ease, transform 800ms ease;
 }
 
-/* Blur-up lazy loading effect */
-.hero-image[loading="lazy"]:not(.loaded) {
+/* Blur-up lazy loading effect - hide until loaded */
+.hero-image:not(.loaded) {
+  opacity: 0;
   filter: blur(10px);
   transform: scale(1.02);
 }
 
 .hero-image.loaded {
+  opacity: 1;
   filter: blur(0);
   transform: scale(1);
 }
