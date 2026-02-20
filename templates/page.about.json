@@ -12,6 +12,7 @@
     "header": {
       "type": "header",
       "settings": {
+        "logo_width": 100,
         "logo_text": "AAEL",
         "collection_text": "C24",
         "show_bag": false,
@@ -34,14 +35,15 @@
           "type": "link",
           "settings": {
             "label": "ABOUT",
-            "link": "/pages/about"
+            "link": "/pages/about",
+            "open_new_tab": false
           }
         },
         "link-2": {
           "type": "link",
           "settings": {
             "label": "INSTA",
-            "link": "https://instagram.com",
+            "link": "https://www.instagram.com/aael.c24/",
             "open_new_tab": true
           }
         }
