@@ -29,12 +29,7 @@
   "
 >
   {%- if product != blank -%}
-    {% render 'product-card', 
-      product: product, 
-      variant: section.settings.variant,
-      timings: slide_timings,
-      max_width: section.settings.max_width | append: 'px'
-    %}
+    {% render 'product-card', product: product, variant: section.settings.variant, timings: slide_timings, max_width: section.settings.max_width, append: 'px' %}
   {%- else -%}
     <product-card 
       class="product-card {{ section.settings.variant }}"
@@ -241,3 +236,16 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'product-card', \n      product: product, \n      variant: section.settings.variant,\n
+    \     timings: slide_timings,\n      max_width: section.settings.max_width | append:
+    'px'\n    %}"
+  to: "{% render 'product-card', product: product, variant: section.settings.variant,
+    timings: slide_timings, max_width: section.settings.max_width, append: 'px' %}"
+  position: 1238..1395
+{% endcomment %}
